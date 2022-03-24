@@ -26,7 +26,7 @@ public class Controller implements Initializable {
     @FXML
     private Text currentMonthText;
 
-    boolean monthIncrease, monthReduce = false;
+    boolean monthIncrease = false, monthReduce = false;
     LocalDate currentDate;
     ObservableList listOfTexts;
 
@@ -54,22 +54,10 @@ public class Controller implements Initializable {
 
     @FXML
     void showCalendar() {
-        if (monthIncrease) {
-            int year = currentDate.getYear();
-            // Увеличенный на еденицу номер мсяца
-            int month = currentDate.getMonthValue() + 1;
-            // Получение новой даты с учетом изменения календарного месяца
-            currentDate = getCurrentDate(year, month);
-        } else if (monthReduce) {
-            int year = currentDate.getYear();
-            // Уменьшенный на еденицу номер месяца
-            int month = currentDate.getMonthValue() - 1;
-            currentDate = getCurrentDate(year, month);
-        } else {
-            currentDate = LocalDate.now();
-        }
+        currentDate = getCurrentDate();
 
         String monthTitle = getRusMonth(currentDate.getMonthValue());
+        // Вставить надпись с месяцем и годом выбранного календарного месяца
         currentMonthText.setText(monthTitle + " " + currentDate.getYear());
 
         int firstMonthDay = getDayOfWeek(currentDate);
@@ -78,27 +66,67 @@ public class Controller implements Initializable {
 
         listOfTexts = anchorPane.getChildren();
 
-        int j = 1;
         currentDay = currentDate.getDayOfMonth();
 
-        for (int i = firstMonthDay - 1; i < currentDate.lengthOfMonth() + firstMonthDay - 1; ++i) {
-            Object text = listOfTexts.get(i);
-            if (text instanceof Text) {
-                if (currentDay == j) {
-                    currentDay = i;
-//                    if (firstStartCalendar) {
-//                        highlightToday();
-//                        changeText();
-//                    }
-//                    firstStartCalendar = false;
-                }
-                ((Text) text).setText(Integer.toString(j));
-                j++;
-            }
-        }
+        createCalendar(firstMonthDay);
+
+        showToday();
 
         monthReduce = false;
         monthIncrease = false;
+    }
+
+    LocalDate getCurrentDate() {
+        if (monthIncrease) {
+            int year = currentDate.getYear();
+            // Увеличенный на еденицу номер месяца
+            int month = currentDate.getMonthValue() + 1;
+            // Получение новой даты с учетом изменения календарного месяца
+            return getCurrentDate(year, month);
+        } else if (monthReduce) {
+            int year = currentDate.getYear();
+            // Уменьшенный на еденицу номер месяца
+            int month = currentDate.getMonthValue() - 1;
+            return getCurrentDate(year, month);
+        } else {
+            return LocalDate.now();
+        }
+    }
+
+    void createCalendar(int firstMonthDay) {
+        // Расстановка чисел в текущем календарном месяце
+        int count = 1;
+        for (int i = firstMonthDay - 1; i < currentDate.lengthOfMonth() + firstMonthDay - 1; ++i) {
+            Object text = listOfTexts.get(i);
+            if (text instanceof Text) {
+                if (currentDay == count) {
+                    currentDay = i;
+                }
+                ((Text) text).setText(Integer.toString(count));
+                count++;
+            }
+        }
+    }
+
+    // Отображение в chosenDateText сегодняшней даты
+    void showToday() {
+        if (LocalDate.now().getMonthValue() == currentDate.getMonthValue() && LocalDate.now().getYear() == currentDate.getYear()) {
+            for (Node element: anchorPane.getChildren()) {
+                if (element instanceof Text && !(((Text)element).getText()).equals("") && Integer.parseInt(((Text)element).getText()) == LocalDate.now().getDayOfMonth()) {
+                    element.setStyle("-fx-underline: true; -fx-font-size: 29");
+                    boolean cellSelected = false;
+                    for (Node node: gridPane.getChildren()) {
+                        if (node.getStyle().equals("-fx-border-width: 2.5; -fx-border-color: #000000")) {
+                            cellSelected = true;
+                        }
+                    }
+                    if (!cellSelected) {
+                        System.out.println(true);
+                        chosenDateText.setText(LocalDate.now().getDayOfMonth() + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() +" г.");
+                    }
+                }
+            }
+        }
     }
 
     // Обнуление содержимого ячейки для изменения
@@ -124,9 +152,15 @@ public class Controller implements Initializable {
     }
 
     // Установка стиля выбранной ячейки по умолчанию
-    void resetStyles() {
-        for (Node node : gridPane.getChildren()) {
-            node.setStyle("-fx-border-width: 0.5; -fx-border-color: #76787a");
+    void resetStylesBorder() {
+        for (Node element: gridPane.getChildren()) {
+            element.setStyle("-fx-border-width: 0.5; -fx-border-color: #76787a");
+        }
+    }
+    // Установка стиля шрифта по умолчанию
+    void resetStylesFont() {
+        for (Node element: anchorPane.getChildren()) {
+            element.setStyle("-fx-underline: false; -fx-font-size: 25");
         }
     }
 
@@ -134,7 +168,8 @@ public class Controller implements Initializable {
     @FXML
     void increaseMonth() {
         monthIncrease = true;
-        resetStyles();
+        resetStylesBorder();
+        resetStylesFont();
         showCalendar();
     }
 
@@ -142,7 +177,8 @@ public class Controller implements Initializable {
     @FXML
     void reduceMonth() {
         monthReduce = true;
-        resetStyles();
+        resetStylesBorder();
+        resetStylesFont();
         showCalendar();
     }
 
@@ -190,35 +226,29 @@ public class Controller implements Initializable {
         return monthTitle;
     }
 
+    // Получение строки с датой выбранного календарного дня
     StringBuilder getChosenDate() {
-        int i = 0, numbOfCell = 0;
+        int count1 = 0, numbOfCell = 0;
         int chosenDay = currentDate.getDayOfMonth();
         for (Node node : gridPane.getChildren()) {
-            if (!node.getStyle().equals("-fx-border-width: 3; -fx-border-color: #000000")) {
-                i++;
+            if (!node.getStyle().equals("-fx-border-width: 2.5; -fx-border-color: #000000")) {
+                count1++;
             } else {
-                numbOfCell = i;
+                numbOfCell = count1;
             }
         }
-        int j = 0;
+        int count2 = 0;
         for (Node node : anchorPane.getChildren()) {
             if (node instanceof Text) {
-                if (numbOfCell != j || ((Text) node).getText().equals("")) {
-                    j++;
+                if (numbOfCell != count2 || ((Text) node).getText().equals("")) {
+                    count2++;
                 } else {
                     chosenDay = Integer.parseInt(((Text) node).getText());
                     break;
                 }
             }
         }
-
-        String monthString;
-        if (currentDate.getMonthValue() <= 9) {
-            monthString = "0" + currentDate.getMonthValue();
-        } else {
-            monthString = Integer.toString(currentDate.getMonthValue());
-        }
-        return new StringBuilder(chosenDay + "." + monthString + "." + currentDate.getYear() + " г.");
+        return new StringBuilder(chosenDay + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() + " г.");
     }
 
     // "Навешивание" обработчиков событий (кликов мыши) на ячейки для стилизации этих ячеек
@@ -228,8 +258,8 @@ public class Controller implements Initializable {
             Object object = listOfTexts.get(count);
             element.setOnMouseClicked(e -> {
                 if (object instanceof Text && !(((Text) object).getText().equals(""))) {
-                    resetStyles();
-                    element.setStyle("-fx-border-width: 3; -fx-border-color: #000000");
+                    resetStylesBorder();
+                    element.setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
                     changeText();
                 }
             });
@@ -245,7 +275,6 @@ public class Controller implements Initializable {
     // Метод, вызываемый автоматически при запуске программы
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Показать календарь
         showCalendar();
         setHandlers();
     }
