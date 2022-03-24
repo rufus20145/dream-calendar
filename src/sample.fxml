@@ -249,7 +249,7 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" />
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" />
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" />
+                  <Pane fx:id="id6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" />
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="1" />
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -289,7 +289,7 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <Text fill="#6e6d6d" layoutX="156.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВТ" wrappingWidth="109.60000000000002">
+      <Text fill="#6e6d6d" layoutX="157.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВТ" wrappingWidth="109.60000000000002">
          <font>
             <Font name="Impact" size="19.0" />
          </font>
@@ -309,17 +309,17 @@
             <Font name="Impact" size="19.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="594.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="СБ" wrappingWidth="109.60000000000002">
+      <Text fill="RED" layoutX="593.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="СБ" wrappingWidth="109.60000000000002">
          <font>
             <Font name="Impact" size="19.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="704.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВС" wrappingWidth="109.60000000000002">
+      <Text fill="RED" layoutX="702.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВС" wrappingWidth="109.60000000000002">
          <font>
             <Font name="Impact" size="19.0" />
          </font>
       </Text>
-      <Text fill="#6e6d6d" layoutX="47.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ПН" wrappingWidth="38.936737060546875">
+      <Text fill="#6e6d6d" layoutX="46.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ПН" wrappingWidth="38.936737060546875">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
