@@ -28,7 +28,7 @@ public class Controller implements Initializable {
 
     boolean monthIncrease = false, monthReduce = false;
     LocalDate currentDate;
-    ObservableList listOfTexts;
+    ObservableList<Node> listOfTexts;
 
     LocalDate getCurrentDate(int year, int month) {
         StringBuilder stringDate;
@@ -184,46 +184,21 @@ public class Controller implements Initializable {
 
     // Получение названия месяца на русском языке для currentMonthText
     String getRusMonth(int month) {
-        String monthTitle = null;
-        switch (month) {
-            case (1):
-                monthTitle = "ЯНВАРЬ";
-                break;
-            case (2):
-                monthTitle = "ФЕВРАЛЬ";
-                break;
-            case (3):
-                monthTitle = "МАРТ";
-                break;
-            case (4):
-                monthTitle = "АПРЕЛЬ";
-                break;
-            case (5):
-                monthTitle = "МАЙ";
-                break;
-            case (6):
-                monthTitle = "ИЮНЬ";
-                break;
-            case (7):
-                monthTitle = "ИЮЛЬ";
-                break;
-            case (8):
-                monthTitle = "АВГУСТ";
-                break;
-            case (9):
-                monthTitle = "СЕНТЯБРЬ";
-                break;
-            case (10):
-                monthTitle = "ОКТЯБРЬ";
-                break;
-            case (11):
-                monthTitle = "НОЯБРЬ";
-                break;
-            case (12):
-                monthTitle = "ДЕКАБРЬ";
-                break;
-        }
-        return monthTitle;
+        return switch (month) {
+            case (1) -> "ЯНВАРЬ";
+            case (2) -> "ФЕВРАЛЬ";
+            case (3) -> "МАРТ";
+            case (4) -> "АПРЕЛЬ";
+            case (5) -> "МАЙ";
+            case (6) -> "ИЮНЬ";
+            case (7) -> "ИЮЛЬ";
+            case (8) -> "АВГУСТ";
+            case (9) -> "СЕНТЯБРЬ";
+            case (10) -> "ОКТЯБРЬ";
+            case (11) -> "НОЯБРЬ";
+            case (12) -> "ДЕКАБРЬ";
+            default -> null;
+        };
     }
 
     // Получение строки с датой выбранного календарного дня
