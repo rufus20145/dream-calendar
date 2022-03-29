@@ -1,15 +1,26 @@
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -25,6 +36,88 @@ public class Controller implements Initializable {
 
     @FXML
     private Text currentMonthText;
+
+    @FXML
+    private TextArea notesArea;
+
+    @FXML
+    private Button addNewNote;
+
+    @FXML
+    void showCalendar() {
+        currentDate = getCurrentDate();
+
+        String monthTitle = getRusMonth(currentDate.getMonthValue());
+        // Вставить надпись с месяцем и годом выбранного календарного месяца
+        currentMonthText.setText(monthTitle + " " + currentDate.getYear());
+
+        int firstActiveCell = getDayOfWeek(currentDate);
+
+        resetDays(anchorPane);
+
+        listOfTexts = anchorPane.getChildren();
+
+        currentDay = currentDate.getDayOfMonth();
+
+        createCalendar(firstActiveCell);
+
+        showToday();
+
+        monthReduce = false;
+        monthIncrease = false;
+    }
+
+    int currentDay;
+    HashMap<String, String> notesMemory = new HashMap<>();
+
+    @FXML
+    void sendToScene2Action() throws IOException {
+        Stage stage = (Stage) addNewNote.getScene().getWindow();
+//        stage.close();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("createnote.fxml"));
+        Parent root = loader.load();
+        //Get controller of scene1
+        CNoteController scene2Controller = loader.getController();
+        //Pass whatever data you want. You can have multiple method calls here
+        if (dayWasChoose) {
+            scene2Controller.takeCurrDateForNewNote(getChosenDateString());
+        } else {
+            scene2Controller.takeCurrDateForNewNote(currentDayString);
+        }
+        //show scene1 in new stage
+        Stage stage1;
+        stage1 = new Stage();
+        stage1.getIcons().add(new Image("icons/icon_128.png"));
+        stage1.setScene(new Scene(root));
+        stage1.setTitle("Новая заметочка епта");
+        stage1.show();
+    }
+
+    public void putInformationFromNote(String currDate, String nameNote, String textNote) {
+        notesArea.setText(currDate + "\n" + nameNote + "\n" + textNote);
+        StringBuilder nameTextNoteSB = new StringBuilder();
+        if (notesMemory.containsKey(currDate)) {
+            nameTextNoteSB = nameTextNoteSB.append(notesMemory.get(currDate));
+        }
+        nameTextNoteSB = nameTextNoteSB.append(nameNote).append("\n").append(textNote).append("\n");
+        String resultNote = nameTextNoteSB.toString();
+        notesMemory.put(currDate, resultNote);
+    }
+
+//    @FXML
+//    void setNoteFieldText() {
+//        String currDate = getChosenDate().toString();
+//        String currNote = noteField.getText();
+//        if (notesMemory.containsKey(currDate)) {
+//            StringBuilder resultNote = new StringBuilder();
+//            resultNote = resultNote.append(notesMemory.get(currDate)).append("\n").append(currNote);
+//            currNote = resultNote.toString();
+//        }
+//        notesMemory.put(currDate, currNote);
+//        notesArea.setText(currDate + "\n" + currNote);
+//        noteField.clear();
+//    }
 
     boolean monthIncrease = false, monthReduce = false;
     LocalDate currentDate;
@@ -50,30 +143,8 @@ public class Controller implements Initializable {
         return currentDate;
     }
 
-    int currentDay;
-
-    @FXML
-    void showCalendar() {
-        currentDate = getCurrentDate();
-
-        String monthTitle = getRusMonth(currentDate.getMonthValue());
-        // Вставить надпись с месяцем и годом выбранного календарного месяца
-        currentMonthText.setText(monthTitle + " " + currentDate.getYear());
-
-        int firstMonthDay = getDayOfWeek(currentDate);
-
-        resetDays(anchorPane);
-
-        listOfTexts = anchorPane.getChildren();
-
-        currentDay = currentDate.getDayOfMonth();
-
-        createCalendar(firstMonthDay);
-
-        showToday();
-
-        monthReduce = false;
-        monthIncrease = false;
+    public String getChosenDateString() {
+        return getChosenDate().toString();
     }
 
     LocalDate getCurrentDate() {
@@ -93,36 +164,45 @@ public class Controller implements Initializable {
         }
     }
 
-    void createCalendar(int firstMonthDay) {
+    HashMap<Integer, String> nameOfTheSelectDays = new HashMap<>();
+
+    void createCalendar(int firstActiveCell) {
         // Расстановка чисел в текущем календарном месяце
         int count = 1;
-        for (int i = firstMonthDay - 1; i < currentDate.lengthOfMonth() + firstMonthDay - 1; ++i) {
+        int numOfCell;
+        firstActiveCell--;
+        for (int i = firstActiveCell; i < currentDate.lengthOfMonth() + firstActiveCell; ++i) {
+            numOfCell = i + 1;
             Object text = listOfTexts.get(i);
             if (text instanceof Text) {
                 if (currentDay == count) {
                     currentDay = i;
                 }
                 ((Text) text).setText(Integer.toString(count));
+                nameOfTheSelectDays.put(numOfCell, ((Text) text).getText());
                 count++;
             }
         }
     }
 
     // Отображение в chosenDateText сегодняшней даты
+    String currentDayString;
     void showToday() {
         if (LocalDate.now().getMonthValue() == currentDate.getMonthValue() && LocalDate.now().getYear() == currentDate.getYear()) {
-            for (Node element: anchorPane.getChildren()) {
-                if (element instanceof Text && !(((Text)element).getText()).equals("") && Integer.parseInt(((Text)element).getText()) == LocalDate.now().getDayOfMonth()) {
+            for (Node element : anchorPane.getChildren()) {
+                if (element instanceof Text && !(((Text) element).getText()).equals("") && Integer.parseInt(((Text) element).getText()) == LocalDate.now().getDayOfMonth()) {
                     element.setStyle("-fx-underline: true; -fx-font-size: 29");
                     boolean cellSelected = false;
-                    for (Node node: gridPane.getChildren()) {
+                    for (Node node : gridPane.getChildren()) {
                         if (node.getStyle().equals("-fx-border-width: 2.5; -fx-border-color: #000000")) {
                             cellSelected = true;
                         }
                     }
                     if (!cellSelected) {
-                        System.out.println(true);
-                        chosenDateText.setText(LocalDate.now().getDayOfMonth() + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() +" г.");
+//                        System.out.println(true);
+                        chosenDateText.setText(LocalDate.now().getDayOfMonth() + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() + " г.");
+                        currentDayString = LocalDate.now().getDayOfMonth() + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() + " г.";
+//                        System.out.println(currentDayString);
                     }
                 }
             }
@@ -145,7 +225,8 @@ public class Controller implements Initializable {
         if (date.getMonthValue() < 10) {
             correctMonth = "0" + date.getMonthValue();
         } else {
-            correctMonth = Integer.toString(date.getMonthValue());
+//            correctMonth = Integer.toString(date.getMonthValue());
+            correctMonth = "" + date.getMonthValue();
         }
         DayOfWeek dow = LocalDate.parse("01-" + correctMonth + "-" + date.getYear(), DateTimeFormatter.ofPattern("dd-MM-yyyy")).getDayOfWeek();
         return dow.getValue();
@@ -153,13 +234,14 @@ public class Controller implements Initializable {
 
     // Установка стиля выбранной ячейки по умолчанию
     void resetStylesBorder() {
-        for (Node element: gridPane.getChildren()) {
+        for (Node element : gridPane.getChildren()) {
             element.setStyle("-fx-border-width: 0.5; -fx-border-color: #76787a");
         }
     }
+
     // Установка стиля шрифта по умолчанию
     void resetStylesFont() {
-        for (Node element: anchorPane.getChildren()) {
+        for (Node element : anchorPane.getChildren()) {
             element.setStyle("-fx-underline: false; -fx-font-size: 25");
         }
     }
@@ -184,27 +266,51 @@ public class Controller implements Initializable {
 
     // Получение названия месяца на русском языке для currentMonthText
     String getRusMonth(int month) {
-        return switch (month) {
-            case (1) -> "ЯНВАРЬ";
-            case (2) -> "ФЕВРАЛЬ";
-            case (3) -> "МАРТ";
-            case (4) -> "АПРЕЛЬ";
-            case (5) -> "МАЙ";
-            case (6) -> "ИЮНЬ";
-            case (7) -> "ИЮЛЬ";
-            case (8) -> "АВГУСТ";
-            case (9) -> "СЕНТЯБРЬ";
-            case (10) -> "ОКТЯБРЬ";
-            case (11) -> "НОЯБРЬ";
-            case (12) -> "ДЕКАБРЬ";
-            default -> null;
-        };
+        String monthTitle = null;
+        switch (month) {
+            case (1):
+                monthTitle = "ЯНВАРЬ";
+                break;
+            case (2):
+                monthTitle = "ФЕВРАЛЬ";
+                break;
+            case (3):
+                monthTitle = "МАРТ";
+                break;
+            case (4):
+                monthTitle = "АПРЕЛЬ";
+                break;
+            case (5):
+                monthTitle = "МАЙ";
+                break;
+            case (6):
+                monthTitle = "ИЮНЬ";
+                break;
+            case (7):
+                monthTitle = "ИЮЛЬ";
+                break;
+            case (8):
+                monthTitle = "АВГУСТ";
+                break;
+            case (9):
+                monthTitle = "СЕНТЯБРЬ";
+                break;
+            case (10):
+                monthTitle = "ОКТЯБРЬ";
+                break;
+            case (11):
+                monthTitle = "НОЯБРЬ";
+                break;
+            case (12):
+                monthTitle = "ДЕКАБРЬ";
+                break;
+        }
+        return monthTitle;
     }
 
     // Получение строки с датой выбранного календарного дня
     StringBuilder getChosenDate() {
-        int count1 = 0, numbOfCell = 0;
-        int chosenDay = currentDate.getDayOfMonth();
+        int count1 = 1, numbOfCell = 0;
         for (Node node : gridPane.getChildren()) {
             if (!node.getStyle().equals("-fx-border-width: 2.5; -fx-border-color: #000000")) {
                 count1++;
@@ -212,21 +318,12 @@ public class Controller implements Initializable {
                 numbOfCell = count1;
             }
         }
-        int count2 = 0;
-        for (Node node : anchorPane.getChildren()) {
-            if (node instanceof Text) {
-                if (numbOfCell != count2 || ((Text) node).getText().equals("")) {
-                    count2++;
-                } else {
-                    chosenDay = Integer.parseInt(((Text) node).getText());
-                    break;
-                }
-            }
-        }
-        return new StringBuilder(chosenDay + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() + " г.");
+        String day = nameOfTheSelectDays.get(numbOfCell);
+        return new StringBuilder(day + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() + " г.");
     }
 
     // "Навешивание" обработчиков событий (кликов мыши) на ячейки для стилизации этих ячеек
+    boolean dayWasChoose = false;
     void setHandlers() {
         int count = 0;
         for (Node element : gridPane.getChildren()) {
@@ -236,6 +333,7 @@ public class Controller implements Initializable {
                     resetStylesBorder();
                     element.setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
                     changeText();
+                    dayWasChoose = true;
                 }
             });
             count++;
