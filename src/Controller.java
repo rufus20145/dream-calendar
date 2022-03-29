@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
@@ -24,6 +25,8 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+    public static HashMap<String, String> notesMemory = new HashMap<>();
 
     @FXML
     private AnchorPane anchorPane;
@@ -68,13 +71,9 @@ public class Controller implements Initializable {
     }
 
     int currentDay;
-    HashMap<String, String> notesMemory = new HashMap<>();
 
     @FXML
     void sendToScene2Action() throws IOException {
-        Stage stage = (Stage) addNewNote.getScene().getWindow();
-//        stage.close();
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("createnote.fxml"));
         Parent root = loader.load();
         //Get controller of scene1
@@ -86,16 +85,23 @@ public class Controller implements Initializable {
             scene2Controller.takeCurrDateForNewNote(currentDayString);
         }
         //show scene1 in new stage
-        Stage stage1;
-        stage1 = new Stage();
+        Stage stage1 = new Stage();
+        Stage stage = (Stage) addNewNote.getScene().getWindow();
+        stage1.initOwner(stage);
+        stage1.initModality(Modality.WINDOW_MODAL);
         stage1.getIcons().add(new Image("icons/icon_128.png"));
         stage1.setScene(new Scene(root));
         stage1.setTitle("Новая заметочка епта");
-        stage1.show();
+        stage1.showAndWait();
+        System.out.println(notesMemory.containsKey(getChosenDateString()));
+        System.out.println(notesMemory);
+        if (notesMemory.containsKey(getChosenDateString())) {
+            notesArea.setText(notesMemory.get(getChosenDateString()));
+            System.out.println(notesMemory.get(getChosenDateString()));
+        }
     }
 
     public void putInformationFromNote(String currDate, String nameNote, String textNote) {
-        notesArea.setText(currDate + "\n" + nameNote + "\n" + textNote);
         StringBuilder nameTextNoteSB = new StringBuilder();
         if (notesMemory.containsKey(currDate)) {
             nameTextNoteSB = nameTextNoteSB.append(notesMemory.get(currDate));
@@ -104,20 +110,6 @@ public class Controller implements Initializable {
         String resultNote = nameTextNoteSB.toString();
         notesMemory.put(currDate, resultNote);
     }
-
-//    @FXML
-//    void setNoteFieldText() {
-//        String currDate = getChosenDate().toString();
-//        String currNote = noteField.getText();
-//        if (notesMemory.containsKey(currDate)) {
-//            StringBuilder resultNote = new StringBuilder();
-//            resultNote = resultNote.append(notesMemory.get(currDate)).append("\n").append(currNote);
-//            currNote = resultNote.toString();
-//        }
-//        notesMemory.put(currDate, currNote);
-//        notesArea.setText(currDate + "\n" + currNote);
-//        noteField.clear();
-//    }
 
     boolean monthIncrease = false, monthReduce = false;
     LocalDate currentDate;
@@ -199,10 +191,8 @@ public class Controller implements Initializable {
                         }
                     }
                     if (!cellSelected) {
-//                        System.out.println(true);
                         chosenDateText.setText(LocalDate.now().getDayOfMonth() + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() + " г.");
                         currentDayString = LocalDate.now().getDayOfMonth() + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() + " г.";
-//                        System.out.println(currentDayString);
                     }
                 }
             }
@@ -225,7 +215,6 @@ public class Controller implements Initializable {
         if (date.getMonthValue() < 10) {
             correctMonth = "0" + date.getMonthValue();
         } else {
-//            correctMonth = Integer.toString(date.getMonthValue());
             correctMonth = "" + date.getMonthValue();
         }
         DayOfWeek dow = LocalDate.parse("01-" + correctMonth + "-" + date.getYear(), DateTimeFormatter.ofPattern("dd-MM-yyyy")).getDayOfWeek();

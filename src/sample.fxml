@@ -347,6 +347,6 @@
          </font>
       </Text>
       <Button fx:id="addNewNote" layoutX="877.0" layoutY="119.0" mnemonicParsing="false" onAction="#sendToScene2Action" prefHeight="26.0" prefWidth="250.0" text="ADD NEW NOTE" />
-      <TextArea fx:id="notesArea" disable="true" layoutX="878.0" layoutY="166.0" prefHeight="462.0" prefWidth="250.0" />
+      <TextArea fx:id="notesArea" layoutX="878.0" layoutY="166.0" prefHeight="462.0" prefWidth="250.0" />
    </children>
 </AnchorPane>

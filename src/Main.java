@@ -27,24 +27,6 @@ public class Main extends Application {
         }
     }
 
-//    public void changeScene(String fxml) throws IOException {
-//        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-//        stg.getIcons().add(new Image("icons/icon_128.png"));
-//        stg.setTitle("Новая заметка");
-//        stg.setScene(new Scene(pane, 600, 400));
-//        stg.show();
-//        stg.setResizable(false);
-//    }
-//
-//    public void startScene(String fxml) throws IOException {
-//        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-//        stg.getIcons().add(new Image("icons/icon_128.png"));
-//        stg.setTitle("Календарь");
-//        stg.setScene(new Scene(pane, 1160, 680));
-//        stg.show();
-//        stg.setResizable(false);
-//    }
-
     public static void main(String[] args) {
         launch(args);
     }
