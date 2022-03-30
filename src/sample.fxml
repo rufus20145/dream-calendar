@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -348,5 +349,6 @@
       </Text>
       <Button fx:id="addNewNote" layoutX="877.0" layoutY="119.0" mnemonicParsing="false" onAction="#sendToScene2Action" prefHeight="26.0" prefWidth="250.0" text="ADD NEW NOTE" />
       <TextArea fx:id="notesArea" layoutX="878.0" layoutY="166.0" prefHeight="462.0" prefWidth="250.0" />
+      <ListView fx:id="listViewTest" layoutX="902.0" layoutY="252.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

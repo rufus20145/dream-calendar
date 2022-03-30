@@ -1,3 +1,4 @@
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -45,6 +47,9 @@ public class Controller implements Initializable {
 
     @FXML
     private Button addNewNote;
+
+    @FXML
+    private ListView listViewTest;
 
     @FXML
     void showCalendar() {
@@ -99,6 +104,9 @@ public class Controller implements Initializable {
             notesArea.setText(notesMemory.get(getChosenDateString()));
             System.out.println(notesMemory.get(getChosenDateString()));
         }
+        //Testing ListView for best note method
+        ObservableList<String> langs = FXCollections.observableArrayList("Java", "JavaScript", "C#", "Python", "C#", "C#", "C#", "C#", "C#", "C#", "C#", "C#", "C#");
+        listViewTest.setItems(langs);
     }
 
     public void putInformationFromNote(String currDate, String nameNote, String textNote) {
