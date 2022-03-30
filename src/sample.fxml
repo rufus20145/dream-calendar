@@ -348,7 +348,7 @@
          </font>
       </Text>
       <ListView fx:id="listNotes" layoutX="839.0" layoutY="120.0" prefHeight="364.0" prefWidth="290.0" AnchorPane.leftAnchor="839.0" AnchorPane.rightAnchor="15.0" />
-      <TextField fx:id="textFieldNote" alignment="TOP_LEFT" layoutX="839.0" layoutY="496.0" prefHeight="152.0" prefWidth="290.0" promptText="Текст" />
+      <TextField fx:id="textFieldNote" alignment="TOP_LEFT" editable="false" layoutX="839.0" layoutY="496.0" prefHeight="152.0" prefWidth="290.0" promptText="Текст" />
       <TextField fx:id="nameNote" layoutX="839.0" layoutY="85.0" prefHeight="26.0" prefWidth="161.0" promptText="Название" />
       <Button fx:id="addNewNoteButton" disable="true" layoutX="1007.0" layoutY="85.0" mnemonicParsing="false" onAction="#addNewNote" prefHeight="2.0" prefWidth="35.0" text="+" />
       <Button fx:id="deleteChooseNoteButton" disable="true" layoutX="1049.0" layoutY="85.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="35.0" text="-" />

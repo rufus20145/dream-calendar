@@ -1,4 +1,5 @@
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -6,10 +7,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+
+import javafx.beans.value.ChangeListener;
 
 import java.net.URL;
 import java.time.DayOfWeek;
@@ -24,6 +28,8 @@ public class Controller implements Initializable {
     public static HashMap<Integer, Event> notesMemory = new HashMap<>();
     public static ObservableList<String> notesNames = FXCollections.observableArrayList();
     public static int numberEvent = 0;
+    // модель выбора элементов
+    public static MultipleSelectionModel<String> listViewSelectionModel;
 
     @FXML
     private Button addNewNoteButton;
@@ -94,18 +100,44 @@ public class Controller implements Initializable {
     @FXML
     void addNewNote() {
         if (dayIsChosen) {
+            Event newEvent;
+            if (textFieldIsNoExist()) {
+                newEvent = new Event(getChosenDate(), nameNote.getText(), numberEvent);
+            } else {
+                newEvent = new Event(getChosenDate(), nameNote.getText(), textFieldNote.getText(), numberEvent);
+            }
+            int keyNotesMemory = getChosenDayOfMonth(getChosenDate()) * 100 + numberEvent;
             numberEvent++;
-            Event newEvent = new Event(getChosenDate(), nameNote.getText(), numberEvent);
-            notesMemory.put(numberEvent, newEvent);
-//          System.out.println(notesMemory);
-//          System.out.println(notesMemory.get(numberEvent).getTitleEvent());
+            notesMemory.put(keyNotesMemory, newEvent);
 
             // Добавляем в ListView название события
             notesNames.add(nameNote.getText());
             listNotes.setItems(notesNames);
-        } else {
-            System.out.println("Сори, ты не выбрал день");
+
+            // Очистка полей после создания нового события
+            nameNote.clear();
+            textFieldNote.clear();
         }
+    }
+
+    // Отображение описания события при выборе его кликом мыши
+    public void selectedTextEventListener() {
+        // получаем модель выбора элементов
+        listViewSelectionModel = listNotes.getSelectionModel();
+        // устанавливаем слушатель для отслеживания изменений
+        listViewSelectionModel.selectedItemProperty().addListener(
+                (changed, oldValue, newValue) ->
+//                textFieldNote.setText(notesMemory.get().getTextEvent());
+//                textFieldNote.setText(listViewSelectionModel.selectedIndexProperty().toString()));
+                        System.out.println(listViewSelectionModel.getSelectedIndex())
+        );
+    }
+
+    public Integer getChosenDayOfMonth(String chosenDate) {
+        char[] chosenDateInChar = chosenDate.toCharArray();
+        String chosenDayInString = "" + chosenDateInChar[0] + chosenDateInChar[1];
+        int chosenDay = Integer.parseInt(chosenDayInString);
+        return chosenDay;
     }
 
     // получение текущей даты с помощью LocalDate
@@ -308,21 +340,25 @@ public class Controller implements Initializable {
                 if (object instanceof Text && !(((Text) object).getText().isEmpty())) {
                     resetStylesBorder();
                     element.setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
-//                    System.out.println(getChosenDate());
                     changeText();
                     dayIsChosen = true;
 
                     // Очистка ListView при выборе другого дня
-//                    notesNames.clear();
                     listNotes.getItems().clear();
+                    numberEvent = 0;
 
-                    for (int i = 1; i <= notesMemory.size(); i++) {
-                        if (notesMemory.get(i).dateMatch(getChosenDate())) {
-//                            System.out.println(notesMemory.get(i));
-//                            System.out.println(getChosenDate());
-//                            System.out.println(notesMemory.get(i).getTitleEvent() + " 123");
-                            notesNames.add(notesMemory.get(i).getTitleEvent());
+                    // Заполнение ListView для выбранного дня с помощью HashMap
+                    int chosenDayKeys = getChosenDayOfMonth(getChosenDate()) * 100;
+                    System.out.println(chosenDayKeys + "CK");
+                    int i = 0;
+                    for (Integer key : notesMemory.keySet()) {
+                        int sum = chosenDayKeys + i;
+                        if (sum == key) {
+                            System.out.println(key);
+                            numberEvent++;
+                            notesNames.add(notesMemory.get(sum).getTitleEvent());
                             listNotes.setItems(notesNames);
+                            i++;
                         }
                     }
                 }
@@ -334,14 +370,23 @@ public class Controller implements Initializable {
     // Делать кнопку addNewNoteButton активной, если день выбран и поле nameNote заполнено, в ином случае - неактивной
     public void addListener() {
         nameNote.textProperty().addListener((observable, oldValue, newValue) -> {
-//            System.out.println("Проверка");
-            if (dayIsChosen && !nameNote.getText().isEmpty()) {
-                addNewNoteButton.setDisable(false);
-            } else {
-                addNewNoteButton.setDisable(true);
-            }
+            addNewNoteButton.setDisable(!dayIsChosen || nameNoteIsNoExist());
         });
+    }
 
+    // Делать поле описания для заметки редактируемым только, если введено название заметки
+    public void textFieldListener() {
+        nameNote.textProperty().addListener((observable, oldValue, newValue) -> {
+            textFieldNote.setEditable(!nameNoteIsNoExist());
+        });
+    }
+
+    public boolean textFieldIsNoExist() {
+        return textFieldNote.getText().isEmpty();
+    }
+
+    public boolean nameNoteIsNoExist() {
+        return nameNote.getText().isEmpty();
     }
 
     // Изменения даты в текстовом представлении в верхней части календаря
@@ -355,5 +400,7 @@ public class Controller implements Initializable {
         showCalendar();
         setHandlers();
         addListener();
+        textFieldListener();
+        selectedTextEventListener();
     }
 }
