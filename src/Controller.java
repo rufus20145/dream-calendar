@@ -43,13 +43,13 @@ public class Controller implements Initializable {
     private Text currentMonthText;
 
     @FXML
-    private TextArea notesArea;
+    private TextArea textAreaNotes;
 
     @FXML
     private Button addNewNote;
 
     @FXML
-    private ListView listViewTest;
+    private ListView listNotes;
 
     @FXML
     void showCalendar() {
@@ -101,12 +101,12 @@ public class Controller implements Initializable {
         System.out.println(notesMemory.containsKey(getChosenDateString()));
         System.out.println(notesMemory);
         if (notesMemory.containsKey(getChosenDateString())) {
-            notesArea.setText(notesMemory.get(getChosenDateString()));
+//            notesArea.setText(notesMemory.get(getChosenDateString()));
             System.out.println(notesMemory.get(getChosenDateString()));
         }
         //Testing ListView for best note method
         ObservableList<String> langs = FXCollections.observableArrayList("Java", "JavaScript", "C#", "Python", "C#", "C#", "C#", "C#", "C#", "C#", "C#", "C#", "C#");
-        listViewTest.setItems(langs);
+//        listViewTest.setItems(langs);
     }
 
     public void putInformationFromNote(String currDate, String nameNote, String textNote) {
@@ -199,8 +199,24 @@ public class Controller implements Initializable {
                         }
                     }
                     if (!cellSelected) {
-                        chosenDateText.setText(LocalDate.now().getDayOfMonth() + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() + " г.");
-                        currentDayString = LocalDate.now().getDayOfMonth() + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() + " г.";
+                        String getMonthValueWithZero;
+                        if (currentDate.getMonthValue() < 10) {
+                            getMonthValueWithZero = "0" + currentDate.getMonthValue();
+                        } else {
+                            getMonthValueWithZero = "" + currentDate.getMonthValue();
+                        }
+                        chosenDateText.setText(LocalDate.now().getDayOfMonth() +
+                                "." +
+                                getMonthValueWithZero +
+                                "." +
+                                currentDate.getYear() +
+                                " г.");
+                        currentDayString = LocalDate.now().getDayOfMonth() +
+                                "." +
+                                getMonthValueWithZero +
+                                "." +
+                                currentDate.getYear() +
+                                " г.";
                     }
                 }
             }
@@ -316,7 +332,19 @@ public class Controller implements Initializable {
             }
         }
         String day = nameOfTheSelectDays.get(numbOfCell);
-        return new StringBuilder(day + "-" + currentDate.getMonthValue() + "-" + currentDate.getYear() + " г.");
+        String getMonthValueWithZero;
+        if (currentDate.getMonthValue() < 10) {
+            getMonthValueWithZero = "0" + currentDate.getMonthValue();
+        } else {
+            getMonthValueWithZero = "" + currentDate.getMonthValue();
+        }
+        int getDay = Integer.parseInt(day);
+        if (getDay < 10) {
+            day = "0" + getDay;
+        } else {
+            day = "" + getDay;
+        }
+        return new StringBuilder(day + "." + getMonthValueWithZero + "." + currentDate.getYear() + " г.");
     }
 
     // "Навешивание" обработчиков событий (кликов мыши) на ячейки для стилизации этих ячеек
