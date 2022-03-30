@@ -106,7 +106,7 @@ public class Controller implements Initializable {
             } else {
                 newEvent = new Event(getChosenDate(), nameNote.getText(), textFieldNote.getText(), numberEvent);
             }
-            int keyNotesMemory = getChosenDayOfMonth(getChosenDate()) * 100 + numberEvent;
+            int keyNotesMemory = getKeyForChosenDay() + numberEvent;
             numberEvent++;
             notesMemory.put(keyNotesMemory, newEvent);
 
@@ -127,9 +127,9 @@ public class Controller implements Initializable {
         // устанавливаем слушатель для отслеживания изменений
         listViewSelectionModel.selectedItemProperty().addListener(
                 (changed, oldValue, newValue) ->
-//                textFieldNote.setText(notesMemory.get().getTextEvent());
-//                textFieldNote.setText(listViewSelectionModel.selectedIndexProperty().toString()));
-                        System.out.println(listViewSelectionModel.getSelectedIndex())
+                textFieldNote.setText(
+                        notesMemory.get(getKeyForChosenDay() + listViewSelectionModel.getSelectedIndex()).getTextEvent()
+                )
         );
     }
 
@@ -138,6 +138,10 @@ public class Controller implements Initializable {
         String chosenDayInString = "" + chosenDateInChar[0] + chosenDateInChar[1];
         int chosenDay = Integer.parseInt(chosenDayInString);
         return chosenDay;
+    }
+
+    public Integer getKeyForChosenDay() {
+        return getChosenDayOfMonth(getChosenDate()) * 100;
     }
 
     // получение текущей даты с помощью LocalDate
@@ -346,9 +350,10 @@ public class Controller implements Initializable {
                     // Очистка ListView при выборе другого дня
                     listNotes.getItems().clear();
                     numberEvent = 0;
+                    textFieldNote.clear();
 
                     // Заполнение ListView для выбранного дня с помощью HashMap
-                    int chosenDayKeys = getChosenDayOfMonth(getChosenDate()) * 100;
+                    int chosenDayKeys = getKeyForChosenDay();
                     System.out.println(chosenDayKeys + "CK");
                     int i = 0;
                     for (Integer key : notesMemory.keySet()) {
@@ -361,6 +366,9 @@ public class Controller implements Initializable {
                             i++;
                         }
                     }
+//                    if (notesMemory.containsKey(getKeyForChosenDay())) {
+                        selectedTextEventListener();
+//                    }
                 }
             });
             count++;
@@ -401,6 +409,5 @@ public class Controller implements Initializable {
         setHandlers();
         addListener();
         textFieldListener();
-        selectedTextEventListener();
     }
 }
