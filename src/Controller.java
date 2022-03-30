@@ -1,3 +1,4 @@
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,16 +9,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+
 import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    public static HashMap<String, String> notesMemory = new HashMap<>();
+//    public static ArrayList<String> notesTitleArray = new ArrayList<>();
+    public static HashMap<String, String> notesTitleMemory = new HashMap<>();
+    public static HashMap<String, String> notesTextMemory = new HashMap<>();
+    public static ObservableList<String> notesNames = FXCollections.observableArrayList();
 
     @FXML
     private Button addNewNoteButton;
@@ -59,6 +65,7 @@ public class Controller implements Initializable {
     ObservableList<Node> listOfTexts;
     HashMap<Integer, String> nameOfTheSelectDays = new HashMap<>();
     String currentDayString; // Дата текущего дня в String
+    boolean dayWasChoose = false; // Ты нажал на какой то день?
 
     @FXML
     void showCalendar() {
@@ -84,47 +91,27 @@ public class Controller implements Initializable {
         monthIncrease = false;
     }
 
-//    @FXML
-//    void sendToScene2Action() throws IOException {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("createnote.fxml"));
-//        Parent root = loader.load();
-//        //Get controller of scene1
-//        CNoteController scene2Controller = loader.getController();
-//        //Pass whatever data you want. You can have multiple method calls here
-//        if (dayWasChoose) {
-//            scene2Controller.takeCurrDateForNewNote(getChosenDateString());
-//        } else {
-//            scene2Controller.takeCurrDateForNewNote(currentDayString);
-//        }
-//        //show scene1 in new stage
-//        Stage stage1 = new Stage();
-////        Stage stage = (Stage) addNewNote.getScene().getWindow();
-//        stage1.initOwner(stage);
-//        stage1.initModality(Modality.WINDOW_MODAL);
-//        stage1.getIcons().add(new Image("icons/icon_128.png"));
-//        stage1.setScene(new Scene(root));
-//        stage1.setTitle("Новая заметочка епта");
-//        stage1.showAndWait();
-//        System.out.println(notesMemory.containsKey(getChosenDateString()));
-//        System.out.println(notesMemory);
-//        if (notesMemory.containsKey(getChosenDateString())) {
-////            notesArea.setText(notesMemory.get(getChosenDateString()));
-//            System.out.println(notesMemory.get(getChosenDateString()));
-//        }
-//        //Testing ListView for best note method
-//        ObservableList<String> langs = FXCollections.observableArrayList("Java", "JavaScript", "C#", "Python", "C#", "C#", "C#", "C#", "C#", "C#", "C#", "C#", "C#");
-////        listViewTest.setItems(langs);
-//    }
+    @FXML
+    void addNewNote() {
+        if (dayWasChoose) {
+            if (nameNote.getText().equals("")) {
+                System.out.println("Пустое название события");
+            } else {
+                // Добавляем в ListView название события
+                notesNames.add(nameNote.getText());
+                listNotes.setItems(notesNames);
 
-//    public void putInformationFromNote(String currDate, String nameNote, String textNote) {
-//        StringBuilder nameTextNoteSB = new StringBuilder();
-//        if (notesMemory.containsKey(currDate)) {
-//            nameTextNoteSB = nameTextNoteSB.append(notesMemory.get(currDate));
-//        }
-//        nameTextNoteSB = nameTextNoteSB.append(nameNote).append("\n").append(textNote).append("\n");
-//        String resultNote = nameTextNoteSB.toString();
-//        notesMemory.put(currDate, resultNote);
-//    }
+                notesTitleMemory.put(getChosenDateToString(), nameNote.getText());
+                System.out.println(notesTitleMemory);
+            }
+        } else {
+            System.out.println("Сори, ты не выбрал день");
+        }
+    }
+
+    public String getChosenDateToString() {
+        return getChosenDate().toString();
+    }
 
     // получение текущей даты с помощью LocalDate
     LocalDate getCurrentDate(int year, int month) {
@@ -256,6 +243,7 @@ public class Controller implements Initializable {
     @FXML
     void increaseMonth() {
         monthIncrease = true;
+        dayWasChoose = false;
         resetStylesBorder();
         resetStylesFont();
         showCalendar();
@@ -265,6 +253,7 @@ public class Controller implements Initializable {
     @FXML
     void reduceMonth() {
         monthReduce = true;
+        dayWasChoose = false;
         resetStylesBorder();
         resetStylesFont();
         showCalendar();
@@ -341,7 +330,6 @@ public class Controller implements Initializable {
     }
 
     // "Навешивание" обработчиков событий (кликов мыши) на ячейки для стилизации этих ячеек
-    boolean dayWasChoose = false;
     void setHandlers() {
         int count = 0;
         for (Node element : gridPane.getChildren()) {
@@ -352,6 +340,10 @@ public class Controller implements Initializable {
                     element.setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
                     changeText();
                     dayWasChoose = true;
+
+                    // Очистка ListView при выборе другого дня
+                    notesNames.clear();
+                    listNotes.getItems().clear();
                 }
             });
             count++;

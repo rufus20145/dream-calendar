@@ -350,7 +350,7 @@
       <ListView fx:id="listNotes" layoutX="865.0" layoutY="120.0" prefHeight="364.0" prefWidth="276.0" />
       <TextField fx:id="textFieldNote" alignment="TOP_LEFT" layoutX="865.0" layoutY="496.0" prefHeight="152.0" prefWidth="276.0" promptText="Текст" />
       <TextField fx:id="nameNote" layoutX="865.0" layoutY="85.0" promptText="Название" />
-      <Button fx:id="addNewNoteButton" layoutX="1020.0" layoutY="85.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="35.0" text="+" />
+      <Button fx:id="addNewNoteButton" layoutX="1020.0" layoutY="85.0" mnemonicParsing="false" onAction="#addNewNote" prefHeight="2.0" prefWidth="35.0" text="+" />
       <Button fx:id="deleteChooseNoteButton" disable="true" layoutX="1060.0" layoutY="85.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="35.0" text="-" />
       <Button fx:id="editChooseNoteButton" disable="true" layoutX="1100.0" layoutY="85.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="39.0" text="edit" />
       <Text fx:id="currentMonthTextConst" fill="#1371b4" layoutX="47.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="138.13665008544922">
