@@ -1,3 +1,4 @@
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -64,7 +65,7 @@ public class Controller implements Initializable {
     ObservableList<Node> listOfTexts;
     HashMap<Integer, String> nameOfTheSelectDays = new HashMap<>(); // Числа по номерам ячеек на выбранный месяц
     String currentDayString; // Дата текущего дня в String
-    boolean dayWasChoose = false; // Ты нажал на какой то день?
+    boolean dayIsChosen = false; // Ты нажал на какой то день?
 
     @FXML
     void showCalendar() {
@@ -92,26 +93,19 @@ public class Controller implements Initializable {
 
     @FXML
     void addNewNote() {
-        if (dayWasChoose) {
-            if (nameNote.getText().equals("")) {
-                System.out.println("Пустое название события");
-            } else {
-                numberEvent++;
-                Event newEvent = new Event(getChosenDateToString(), nameNote.getText(), numberEvent);
-                notesMemory.put(numberEvent, newEvent);
-                System.out.println(notesMemory.get(numberEvent).getTextEvent() + "456");
+        if (dayIsChosen) {
+            numberEvent++;
+            Event newEvent = new Event(getChosenDate(), nameNote.getText(), numberEvent);
+            notesMemory.put(numberEvent, newEvent);
+//          System.out.println(notesMemory);
+//          System.out.println(notesMemory.get(numberEvent).getTitleEvent());
 
-                // Добавляем в ListView название события
-                notesNames.add(nameNote.getText());
-                listNotes.setItems(notesNames);
-            }
+            // Добавляем в ListView название события
+            notesNames.add(nameNote.getText());
+            listNotes.setItems(notesNames);
         } else {
             System.out.println("Сори, ты не выбрал день");
         }
-    }
-
-    public String getChosenDateToString() {
-        return getChosenDate().toString();
     }
 
     // получение текущей даты с помощью LocalDate
@@ -244,7 +238,7 @@ public class Controller implements Initializable {
     @FXML
     void increaseMonth() {
         monthIncrease = true;
-        dayWasChoose = false;
+        dayIsChosen = false;
         resetStylesBorder();
         resetStylesFont();
         showCalendar();
@@ -254,7 +248,7 @@ public class Controller implements Initializable {
     @FXML
     void reduceMonth() {
         monthReduce = true;
-        dayWasChoose = false;
+        dayIsChosen = false;
         resetStylesBorder();
         resetStylesFont();
         showCalendar();
@@ -262,50 +256,25 @@ public class Controller implements Initializable {
 
     // Получение названия месяца на русском языке для currentMonthText
     String getRusMonth(int month) {
-        String monthTitle = null;
-        switch (month) {
-            case (1):
-                monthTitle = "ЯНВАРЬ";
-                break;
-            case (2):
-                monthTitle = "ФЕВРАЛЬ";
-                break;
-            case (3):
-                monthTitle = "МАРТ";
-                break;
-            case (4):
-                monthTitle = "АПРЕЛЬ";
-                break;
-            case (5):
-                monthTitle = "МАЙ";
-                break;
-            case (6):
-                monthTitle = "ИЮНЬ";
-                break;
-            case (7):
-                monthTitle = "ИЮЛЬ";
-                break;
-            case (8):
-                monthTitle = "АВГУСТ";
-                break;
-            case (9):
-                monthTitle = "СЕНТЯБРЬ";
-                break;
-            case (10):
-                monthTitle = "ОКТЯБРЬ";
-                break;
-            case (11):
-                monthTitle = "НОЯБРЬ";
-                break;
-            case (12):
-                monthTitle = "ДЕКАБРЬ";
-                break;
-        }
-        return monthTitle;
+        return switch (month) {
+            case (1) -> "ЯНВАРЬ";
+            case (2) -> "ФЕВРАЛЬ";
+            case (3) -> "МАРТ";
+            case (4) -> "АПРЕЛЬ";
+            case (5) -> "МАЙ";
+            case (6) -> "ИЮНЬ";
+            case (7) -> "ИЮЛЬ";
+            case (8) -> "АВГУСТ";
+            case (9) -> "СЕНТЯБРЬ";
+            case (10) -> "ОКТЯБРЬ";
+            case (11) -> "НОЯБРЬ";
+            case (12) -> "ДЕКАБРЬ";
+            default -> null;
+        };
     }
 
     // Получение строки с датой выбранного календарного дня
-    StringBuilder getChosenDate() {
+    String getChosenDate() {
         int count1 = 1, numbOfCell = 0;
         for (Node node : gridPane.getChildren()) {
             if (!node.getStyle().equals("-fx-border-width: 2.5; -fx-border-color: #000000")) {
@@ -327,7 +296,7 @@ public class Controller implements Initializable {
         } else {
             day = "" + getDay;
         }
-        return new StringBuilder(day + "." + getMonthValueWithZero + "." + currentDate.getYear() + " г.");
+        return day + "." + getMonthValueWithZero + "." + currentDate.getYear() + " г.";
     }
 
     // "Навешивание" обработчиков событий (кликов мыши) на ячейки для стилизации этих ячеек
@@ -336,20 +305,23 @@ public class Controller implements Initializable {
         for (Node element : gridPane.getChildren()) {
             Object object = listOfTexts.get(count);
             element.setOnMouseClicked(e -> {
-                if (object instanceof Text && !(((Text) object).getText().equals(""))) {
+                if (object instanceof Text && !(((Text) object).getText().isEmpty())) {
                     resetStylesBorder();
                     element.setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
+//                    System.out.println(getChosenDate());
                     changeText();
-                    dayWasChoose = true;
+                    dayIsChosen = true;
 
                     // Очистка ListView при выборе другого дня
-                    notesNames.clear();
+//                    notesNames.clear();
                     listNotes.getItems().clear();
 
                     for (int i = 1; i <= notesMemory.size(); i++) {
-                        if (notesMemory.get(i).dateMatch(getChosenDateToString())) {
-                            System.out.println(notesMemory.get(i).getTextEvent() + "123");
-                            notesNames.add(notesMemory.get(i).getTextEvent());
+                        if (notesMemory.get(i).dateMatch(getChosenDate())) {
+//                            System.out.println(notesMemory.get(i));
+//                            System.out.println(getChosenDate());
+//                            System.out.println(notesMemory.get(i).getTitleEvent() + " 123");
+                            notesNames.add(notesMemory.get(i).getTitleEvent());
                             listNotes.setItems(notesNames);
                         }
                     }
@@ -359,9 +331,22 @@ public class Controller implements Initializable {
         }
     }
 
+    // Делать кнопку addNewNoteButton активной, если день выбран и поле nameNote заполнено, в ином случае - неактивной
+    public void addListener() {
+        nameNote.textProperty().addListener((observable, oldValue, newValue) -> {
+//            System.out.println("Проверка");
+            if (dayIsChosen && !nameNote.getText().isEmpty()) {
+                addNewNoteButton.setDisable(false);
+            } else {
+                addNewNoteButton.setDisable(true);
+            }
+        });
+
+    }
+
     // Изменения даты в текстовом представлении в верхней части календаря
     void changeText() {
-        chosenDateText.setText(getChosenDate().toString());
+        chosenDateText.setText(getChosenDate());
     }
 
     // Метод, вызываемый автоматически при запуске программы
@@ -369,5 +354,6 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showCalendar();
         setHandlers();
+        addListener();
     }
 }

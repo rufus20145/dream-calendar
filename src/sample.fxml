@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="0.0" maxWidth="0.0" minHeight="680.0" minWidth="1160.0" prefHeight="0.0" prefWidth="0.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="680.0" maxWidth="1144.0" minHeight="680.0" minWidth="1140.0" prefHeight="680.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <AnchorPane fx:id="anchorPane" layoutX="47.0" layoutY="120.0" prefHeight="543.0" prefWidth="760.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a; -fx-background-color: #dff5f8;">
+      <AnchorPane fx:id="anchorPane" layoutX="38.0" layoutY="120.0" prefHeight="543.0" prefWidth="760.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a; -fx-background-color: #dff5f8;">
          <children>
             <Text layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
                <font>
@@ -292,68 +292,68 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <Text fill="#6e6d6d" layoutX="157.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВТ" wrappingWidth="109.60000000000002">
+      <Text fill="#6e6d6d" layoutX="148.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВТ" wrappingWidth="109.60000000000002">
          <font>
             <Font name="Impact" size="19.0" />
          </font>
       </Text>
-      <Text fill="#6e6d6d" layoutX="266.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="СР" wrappingWidth="109.60000000000002">
+      <Text fill="#6e6d6d" layoutX="257.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="СР" wrappingWidth="109.60000000000002">
          <font>
             <Font name="Impact" size="19.0" />
          </font>
       </Text>
-      <Text fill="#6e6d6d" layoutX="374.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ЧТ" wrappingWidth="109.60000000000002">
+      <Text fill="#6e6d6d" layoutX="365.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ЧТ" wrappingWidth="109.60000000000002">
          <font>
             <Font name="Impact" size="19.0" />
          </font>
       </Text>
-      <Text fill="#6e6d6d" layoutX="484.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ПТ" wrappingWidth="109.60000000000002">
+      <Text fill="#6e6d6d" layoutX="474.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ПТ" wrappingWidth="109.60000000000002">
          <font>
             <Font name="Impact" size="19.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="593.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="СБ" wrappingWidth="109.60000000000002">
+      <Text fill="RED" layoutX="584.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="СБ" wrappingWidth="109.60000000000002">
          <font>
             <Font name="Impact" size="19.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="702.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВС" wrappingWidth="109.60000000000002">
+      <Text fill="RED" layoutX="693.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВС" wrappingWidth="109.60000000000002">
          <font>
             <Font name="Impact" size="19.0" />
          </font>
       </Text>
-      <Text fill="#6e6d6d" layoutX="46.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ПН" wrappingWidth="38.936737060546875">
+      <Text fill="#6e6d6d" layoutX="37.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ПН" wrappingWidth="38.936737060546875">
          <font>
             <Font name="Impact" size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="6.0" layoutY="375.0" onMouseClicked="#reduceMonth" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="1.0" layoutY="375.0" onMouseClicked="#reduceMonth" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons/back_arrow.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="819.0" layoutY="375.0" onMouseClicked="#increaseMonth" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="804.0" layoutY="375.0" onMouseClicked="#increaseMonth" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons/forward_arrow.png" />
          </image>
       </ImageView>
-      <Text fx:id="chosenDateText" fill="#ff5e5e" layoutX="263.0" layoutY="46.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="332.53680419921864">
+      <Text fx:id="chosenDateText" fill="#ff5e5e" layoutX="254.0" layoutY="45.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="332.53680419921864">
          <font>
             <Font name="Impact" size="39.0" />
          </font>
       </Text>
-      <Text fx:id="currentMonthText" fill="#434242" layoutX="47.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.5366439819336">
+      <Text fx:id="currentMonthText" fill="#434242" layoutX="37.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.5366439819336">
          <font>
             <Font name="Impact" size="24.0" />
          </font>
       </Text>
-      <ListView fx:id="listNotes" layoutX="865.0" layoutY="120.0" prefHeight="364.0" prefWidth="276.0" />
-      <TextField fx:id="textFieldNote" alignment="TOP_LEFT" layoutX="865.0" layoutY="496.0" prefHeight="152.0" prefWidth="276.0" promptText="Текст" />
-      <TextField fx:id="nameNote" layoutX="865.0" layoutY="85.0" promptText="Название" />
-      <Button fx:id="addNewNoteButton" layoutX="1020.0" layoutY="85.0" mnemonicParsing="false" onAction="#addNewNote" prefHeight="2.0" prefWidth="35.0" text="+" />
-      <Button fx:id="deleteChooseNoteButton" disable="true" layoutX="1060.0" layoutY="85.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="35.0" text="-" />
-      <Button fx:id="editChooseNoteButton" disable="true" layoutX="1100.0" layoutY="85.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="39.0" text="edit" />
-      <Text fx:id="currentMonthTextConst" fill="#1371b4" layoutX="47.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="138.13665008544922">
+      <ListView fx:id="listNotes" layoutX="839.0" layoutY="120.0" prefHeight="364.0" prefWidth="290.0" AnchorPane.leftAnchor="839.0" AnchorPane.rightAnchor="15.0" />
+      <TextField fx:id="textFieldNote" alignment="TOP_LEFT" layoutX="839.0" layoutY="496.0" prefHeight="152.0" prefWidth="290.0" promptText="Текст" />
+      <TextField fx:id="nameNote" layoutX="839.0" layoutY="85.0" prefHeight="26.0" prefWidth="161.0" promptText="Название" />
+      <Button fx:id="addNewNoteButton" disable="true" layoutX="1007.0" layoutY="85.0" mnemonicParsing="false" onAction="#addNewNote" prefHeight="2.0" prefWidth="35.0" text="+" />
+      <Button fx:id="deleteChooseNoteButton" disable="true" layoutX="1049.0" layoutY="85.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="35.0" text="-" />
+      <Button fx:id="editChooseNoteButton" disable="true" layoutX="1077.8000000000002" layoutY="85.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="39.0" text="edit" AnchorPane.rightAnchor="15.0" />
+      <Text fx:id="currentMonthTextConst" fill="#1371b4" layoutX="37.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="138.13665008544922">
          <font>
             <Font name="Impact" size="21.0" />
          </font>
