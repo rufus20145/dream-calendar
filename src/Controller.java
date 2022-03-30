@@ -20,10 +20,9 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-//    public static ArrayList<String> notesTitleArray = new ArrayList<>();
-    public static HashMap<String, String> notesTitleMemory = new HashMap<>();
-    public static HashMap<String, String> notesTextMemory = new HashMap<>();
+    public static HashMap<Integer, Event> notesMemory = new HashMap<>();
     public static ObservableList<String> notesNames = FXCollections.observableArrayList();
+    public static int numberEvent = 0;
 
     @FXML
     private Button addNewNoteButton;
@@ -63,7 +62,7 @@ public class Controller implements Initializable {
     boolean monthIncrease = false, monthReduce = false;
     LocalDate currentDate;
     ObservableList<Node> listOfTexts;
-    HashMap<Integer, String> nameOfTheSelectDays = new HashMap<>();
+    HashMap<Integer, String> nameOfTheSelectDays = new HashMap<>(); // Числа по номерам ячеек на выбранный месяц
     String currentDayString; // Дата текущего дня в String
     boolean dayWasChoose = false; // Ты нажал на какой то день?
 
@@ -97,12 +96,14 @@ public class Controller implements Initializable {
             if (nameNote.getText().equals("")) {
                 System.out.println("Пустое название события");
             } else {
+                numberEvent++;
+                Event newEvent = new Event(getChosenDateToString(), nameNote.getText(), numberEvent);
+                notesMemory.put(numberEvent, newEvent);
+                System.out.println(notesMemory.get(numberEvent).getTextEvent() + "456");
+
                 // Добавляем в ListView название события
                 notesNames.add(nameNote.getText());
                 listNotes.setItems(notesNames);
-
-                notesTitleMemory.put(getChosenDateToString(), nameNote.getText());
-                System.out.println(notesTitleMemory);
             }
         } else {
             System.out.println("Сори, ты не выбрал день");
@@ -344,6 +345,14 @@ public class Controller implements Initializable {
                     // Очистка ListView при выборе другого дня
                     notesNames.clear();
                     listNotes.getItems().clear();
+
+                    for (int i = 1; i <= notesMemory.size(); i++) {
+                        if (notesMemory.get(i).dateMatch(getChosenDateToString())) {
+                            System.out.println(notesMemory.get(i).getTextEvent() + "123");
+                            notesNames.add(notesMemory.get(i).getTextEvent());
+                            listNotes.setItems(notesNames);
+                        }
+                    }
                 }
             });
             count++;
