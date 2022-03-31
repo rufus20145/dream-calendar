@@ -108,6 +108,7 @@ public class Controller implements Initializable {
             // Добавляем в ListView название события
             notesNames.add(nameNote.getText());
             listNotes.setItems(notesNames);
+            updateHandlers();
 
             // Очистка полей после создания нового события
             nameNote.clear();
@@ -340,7 +341,7 @@ public class Controller implements Initializable {
                     listNotesToFilling();
 
                     // Вывод в TextField описания выбранного события
-                    printChosenTextEvent();
+                    updateHandlers();
                 }
             });
             count++;
@@ -348,7 +349,7 @@ public class Controller implements Initializable {
     }
 
     // Вывод в TextField описания выбранного события
-    public void printChosenTextEvent() {
+    public void updateHandlers() {
         if (!notesNames.isEmpty()) {
             listNotes.setOnMouseClicked(event -> {
                 System.out.println("clicked on " + listNotes.getSelectionModel().getSelectedItem());
@@ -358,6 +359,13 @@ public class Controller implements Initializable {
                 );
             });
         }
+    }
+
+    public void clearTextEventField() {
+        nameNote.setOnMouseClicked(event -> {
+            System.out.println("clicked on nameNote");
+            textFieldNote.clear();
+        });
     }
 
     // Заполнение ListView для выбранного дня с помощью HashMap
@@ -408,5 +416,7 @@ public class Controller implements Initializable {
         setHandlers();
         addListener();
         textFieldListener();
+
+        clearTextEventField();
     }
 }
