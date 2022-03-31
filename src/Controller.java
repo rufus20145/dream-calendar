@@ -97,9 +97,9 @@ public class Controller implements Initializable {
         if (dayIsChosen) {
             Event newEvent;
             if (textFieldIsNoExist()) {
-                newEvent = new Event(getChosenDate(), nameNote.getText(), numberEvent);
+                newEvent = new Event(getChosenDate(), nameNote.getText());
             } else {
-                newEvent = new Event(getChosenDate(), nameNote.getText(), textFieldNote.getText(), numberEvent);
+                newEvent = new Event(getChosenDate(), nameNote.getText(), textFieldNote.getText());
             }
             int keyNotesMemory = getKeyForChosenDay() + numberEvent;
             numberEvent++;
@@ -333,15 +333,15 @@ public class Controller implements Initializable {
                     dayIsChosen = true;
 
                     // Очистка ListView при выборе другого дня
-                    listNotes.getItems().clear();
-                    numberEvent = 0;
-                    textFieldNote.clear();
+                    clearListView();
 
                     // Заполнение ListView для выбранного дня с помощью HashMap
-                    listNotesToFilling();
+                    fillListView();
 
                     // Вывод в TextField описания выбранного события
                     updateHandlers();
+
+                    deleteChooseNoteButton.setDisable(true);
                 }
             });
             count++;
@@ -352,24 +352,34 @@ public class Controller implements Initializable {
     public void updateHandlers() {
         if (!notesNames.isEmpty()) {
             listNotes.setOnMouseClicked(event -> {
+                int key = getKeyForChosenDay() + listNotes.getSelectionModel().getSelectedIndex();
                 System.out.println("clicked on " + listNotes.getSelectionModel().getSelectedItem());
                 textFieldNote.setText(
-                        notesMemory.get(getKeyForChosenDay() + listNotes.getSelectionModel().getSelectedIndex())
+                        notesMemory.get(key)
                                    .getTextEvent()
                 );
+                deleteChooseNoteButton.setDisable(false);
+                deleteHandler(key);
             });
         }
+    }
+
+    public void clearListView() {
+        listNotes.getItems().clear();
+        numberEvent = 0;
+        textFieldNote.clear();
     }
 
     public void clearTextEventField() {
         nameNote.setOnMouseClicked(event -> {
             System.out.println("clicked on nameNote");
             textFieldNote.clear();
+            deleteChooseNoteButton.setDisable(true);
         });
     }
 
     // Заполнение ListView для выбранного дня с помощью HashMap
-    public void listNotesToFilling() {
+    public void fillListView() {
         int i = 0;
         for (Integer key : notesMemory.keySet()) {
             int sum = getKeyForChosenDay() + i;
@@ -386,6 +396,16 @@ public class Controller implements Initializable {
     public void addListener() {
         nameNote.textProperty().addListener((observable, oldValue, newValue) -> {
             addNewNoteButton.setDisable(!dayIsChosen || nameNoteIsNoExist());
+        });
+    }
+
+    public void deleteHandler(int key) {
+        deleteChooseNoteButton.setOnMouseClicked(event1 -> {
+            System.out.println("note will be deleted");
+            notesMemory.remove(key);
+            notesNames.remove(listNotes.getSelectionModel().getSelectedIndex());
+            clearListView();
+            fillListView();
         });
     }
 

@@ -1,29 +1,19 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
-
 public class Event {
 
     private String dateEvent;
     private String titleEvent;
     private String textEvent;
-    private int numberEvent;
+//    private int numberEvent;
 
-    public Event(String dateEvent, String titleEvent, String textEvent, int numberEvent) {
+    public Event(String dateEvent, String titleEvent, String textEvent) {
         this.dateEvent = dateEvent;
         this.titleEvent = titleEvent;
         this.textEvent = textEvent;
-        this.numberEvent = numberEvent;
     }
 
-    public Event(String dateEvent, String titleEvent, int numberEvent) {
+    public Event(String dateEvent, String titleEvent) {
         this.dateEvent = dateEvent;
         this.titleEvent = titleEvent;
-        this.numberEvent = numberEvent;
-    }
-
-    // Нашлось событие на выбранную дату
-    public boolean dateMatch(String selectDay) {
-        return selectDay.equals(dateEvent);
     }
 
     public String getDateEvent() {
@@ -38,7 +28,7 @@ public class Event {
         return textEvent;
     }
 
-    public int getNumberEvent() {
-        return numberEvent;
-    }
+//    public int getNumberEvent() {
+//        return numberEvent;
+//    }
 }
