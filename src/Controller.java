@@ -342,6 +342,7 @@ public class Controller implements Initializable {
                     updateHandlers();
 
                     deleteChooseNoteButton.setDisable(true);
+                    editChooseNoteButton.setDisable(true);
                 }
             });
             count++;
@@ -360,6 +361,7 @@ public class Controller implements Initializable {
                 );
                 deleteChooseNoteButton.setDisable(false);
                 deleteHandler(key);
+                editChooseNoteButton.setDisable(false);
             });
         }
     }
@@ -375,6 +377,7 @@ public class Controller implements Initializable {
             System.out.println("clicked on nameNote");
             textFieldNote.clear();
             deleteChooseNoteButton.setDisable(true);
+            editChooseNoteButton.setDisable(true);
         });
     }
 
@@ -383,6 +386,8 @@ public class Controller implements Initializable {
         int i = 0;
         for (Integer key : notesMemory.keySet()) {
             int sum = getKeyForChosenDay() + i;
+            System.out.println("getForChosenDay = " + getKeyForChosenDay());
+            System.out.println("key = " + key);
             if (sum == key) {
                 notesNames.add(notesMemory.get(sum).getTitleEvent());
                 listNotes.setItems(notesNames);
@@ -402,10 +407,36 @@ public class Controller implements Initializable {
     public void deleteHandler(int key) {
         deleteChooseNoteButton.setOnMouseClicked(event1 -> {
             System.out.println("note will be deleted");
-            notesMemory.remove(key);
             notesNames.remove(listNotes.getSelectionModel().getSelectedIndex());
-            clearListView();
-            fillListView();
+            System.out.println(notesNames);
+
+            // Удаление события в мапе и смещения всех остальных событий "влево"
+            notesMemory.remove(key);
+            int countKey = key + 1;
+            int keyCopy = key;
+            do {
+                notesMemory.put(keyCopy, notesMemory.get(countKey));
+                keyCopy++;
+                countKey++;
+            } while (notesMemory.containsKey(countKey));
+            notesMemory.remove(keyCopy);
+            numberEvent--;
+
+            // Проверка корректности содержимых событий в мапе после удаления
+            int count = 0;
+            for (Integer asd : notesMemory.keySet()) {
+                if (asd == getKeyForChosenDay() + count) {
+                    System.out.println(notesMemory.get(asd));
+                    count++;
+                }
+            }
+        });
+    }
+
+    public void editHandler(int key) {
+        editChooseNoteButton.setOnMouseClicked(event2 -> {
+            System.out.println("note will be edit");
+
         });
     }
 
