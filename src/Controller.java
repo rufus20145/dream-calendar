@@ -30,6 +30,7 @@ public class Controller implements Initializable {
     public static int numberEvent = 0;
     // модель выбора элементов
     public static MultipleSelectionModel<String> listViewSelectionModel;
+    public static boolean listViewControl = false;
 
     @FXML
     private Button addNewNoteButton;
@@ -123,14 +124,17 @@ public class Controller implements Initializable {
     // Отображение описания события при выборе его кликом мыши
     public void selectedTextEventListener() {
         // получаем модель выбора элементов
-        listViewSelectionModel = listNotes.getSelectionModel();
+
+        System.out.println("eventListenerStart");
         // устанавливаем слушатель для отслеживания изменений
         listViewSelectionModel.selectedItemProperty().addListener(
                 (changed, oldValue, newValue) ->
-                textFieldNote.setText(
-                        notesMemory.get(getKeyForChosenDay() + listViewSelectionModel.getSelectedIndex()).getTextEvent()
-                )
+//                        textFieldNote.setText(
+//                                notesMemory.get(getKeyForChosenDay() + listViewSelectionModel.getSelectedIndex()).getTextEvent()
+//                        )
+                        System.out.println("selected item")
         );
+        System.out.println("eventListenerStop");
     }
 
     public Integer getChosenDayOfMonth(String chosenDate) {
@@ -353,22 +357,21 @@ public class Controller implements Initializable {
                     textFieldNote.clear();
 
                     // Заполнение ListView для выбранного дня с помощью HashMap
-                    int chosenDayKeys = getKeyForChosenDay();
-                    System.out.println(chosenDayKeys + "CK");
                     int i = 0;
                     for (Integer key : notesMemory.keySet()) {
-                        int sum = chosenDayKeys + i;
+                        int sum = getKeyForChosenDay() + i;
                         if (sum == key) {
-                            System.out.println(key);
-                            numberEvent++;
                             notesNames.add(notesMemory.get(sum).getTitleEvent());
                             listNotes.setItems(notesNames);
+                            numberEvent++;
                             i++;
                         }
                     }
-//                    if (notesMemory.containsKey(getKeyForChosenDay())) {
+                    if (!notesNames.isEmpty()) {
+                        System.out.println("getSelectModel");
+                        listViewSelectionModel = listNotes.getSelectionModel();
                         selectedTextEventListener();
-//                    }
+                    }
                 }
             });
             count++;
