@@ -1,8 +1,3 @@
-// This is a personal academic project. Dear PVS-Studio, please check it.
-// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: https://pvs-studio.com
-
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -18,13 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
-import javafx.beans.value.ChangeListener;
-
 import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -33,9 +25,6 @@ public class Controller implements Initializable {
     public static HashMap<Integer, Event> notesMemory = new HashMap<>();
     public static ObservableList<String> notesNames = FXCollections.observableArrayList();
     public static int numberEvent = 0;
-    // модель выбора элементов
-    public static MultipleSelectionModel<String> listViewSelectionModel;
-    public static boolean listViewControl = false;
 
     @FXML
     private Button addNewNoteButton;
@@ -70,8 +59,6 @@ public class Controller implements Initializable {
     @FXML
     private Text currentMonthTextConst;
 
-    private static boolean modelWasCreatedBefore = false;
-
     // объявление переменных
     int currentDay;
     boolean monthIncrease = false, monthReduce = false;
@@ -80,7 +67,6 @@ public class Controller implements Initializable {
     HashMap<Integer, String> nameOfTheSelectDays = new HashMap<>(); // Числа по номерам ячеек на выбранный месяц
     String currentDayString; // Дата текущего дня в String
     boolean dayIsChosen = false; // Ты нажал на какой то день?
-
 
     @FXML
     void showCalendar() {
@@ -129,25 +115,7 @@ public class Controller implements Initializable {
         }
     }
 
-    // Отображение описания события при выборе его кликом мыши
-    public void selectedTextEventListener() {
-        // получаем модель выбора элементов
-
-        System.out.println("eventListenerStart");
-        // устанавливаем слушатель для отслеживания изменений
-        if (!modelWasCreatedBefore) {
-//            listViewSelectionModel.selectedItemProperty().addListener(
-//                    (changed, oldValue, newValue) ->
-//                          textFieldNote.setText(
-//                                  notesMemory.get(getKeyForChosenDay() + listViewSelectionModel.getSelectedIndex()).getTextEvent()
-//                           )
-//            );
-            modelWasCreatedBefore = true;
-
-        }
-        System.out.println("eventListenerStop");
-    }
-
+    // Достаем численное значение выбранного дня
     public Integer getChosenDayOfMonth(String chosenDate) {
         char[] chosenDateInChar = chosenDate.toCharArray();
         String chosenDayInString = "" + chosenDateInChar[0] + chosenDateInChar[1];
@@ -155,6 +123,7 @@ public class Controller implements Initializable {
         return chosenDay;
     }
 
+    // Генерируем ключ для первого события выбранного дня
     public Integer getKeyForChosenDay() {
         return getChosenDayOfMonth(getChosenDate()) * 100;
     }
@@ -368,33 +337,40 @@ public class Controller implements Initializable {
                     textFieldNote.clear();
 
                     // Заполнение ListView для выбранного дня с помощью HashMap
-                    int i = 0;
-                    for (Integer key : notesMemory.keySet()) {
-                        int sum = getKeyForChosenDay() + i;
-                        if (sum == key) {
-                            notesNames.add(notesMemory.get(sum).getTitleEvent());
-                            listNotes.setItems(notesNames);
-                            numberEvent++;
-                            i++;
-                        }
-                    }
-                    if (!notesNames.isEmpty()) {
-                        listNotes.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    listNotesToFilling();
 
-                            @Override
-                            public void handle(MouseEvent event) {
-                                System.out.println("clicked on " + listNotes.getSelectionModel().getSelectedItem());
-                                textFieldNote.setText(
-                                        notesMemory.get(getKeyForChosenDay() + listNotes.getSelectionModel().getSelectedIndex()).getTextEvent());
-                            }
-                        });
-//                        System.out.println("getSelectModel");
-//                        listViewSelectionModel = listNotes.getSelectionModel();
-//                        selectedTextEventListener();
-                    }
+                    // Вывод в TextField описания выбранного события
+                    printChosenTextEvent();
                 }
             });
             count++;
+        }
+    }
+
+    // Вывод в TextField описания выбранного события
+    public void printChosenTextEvent() {
+        if (!notesNames.isEmpty()) {
+            listNotes.setOnMouseClicked(event -> {
+                System.out.println("clicked on " + listNotes.getSelectionModel().getSelectedItem());
+                textFieldNote.setText(
+                        notesMemory.get(getKeyForChosenDay() + listNotes.getSelectionModel().getSelectedIndex())
+                                   .getTextEvent()
+                );
+            });
+        }
+    }
+
+    // Заполнение ListView для выбранного дня с помощью HashMap
+    public void listNotesToFilling() {
+        int i = 0;
+        for (Integer key : notesMemory.keySet()) {
+            int sum = getKeyForChosenDay() + i;
+            if (sum == key) {
+                notesNames.add(notesMemory.get(sum).getTitleEvent());
+                listNotes.setItems(notesNames);
+                numberEvent++;
+                i++;
+            }
         }
     }
 
