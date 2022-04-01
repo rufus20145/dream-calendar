@@ -1,14 +1,11 @@
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -24,7 +21,6 @@ import java.util.TreeMap;
 
 public class Controller implements Initializable {
 
-//    public static HashMap<Integer, Event> notesMemory = new HashMap<>();
     public static Map<Integer, Event> notesMemory = new TreeMap<>();
     public static ObservableList<String> notesNames = FXCollections.observableArrayList();
     public static int numberEvent = 0;
@@ -118,7 +114,7 @@ public class Controller implements Initializable {
             textFieldNote.clear();
 
             // Вывод всех ключей событий
-            printAllKeysFromNotesMemoryMap();
+//            printAllKeysFromNotesMemoryMap();
         }
     }
 
@@ -363,8 +359,8 @@ public class Controller implements Initializable {
     public void updateHandlers() {
         if (!notesNames.isEmpty()) {
             listNotes.setOnMouseClicked(event -> {
-                int key = getKeyForChosenDate(getChosenDate()) + listNotes.getSelectionModel().getSelectedIndex();
-                System.out.println("clicked on " + listNotes.getSelectionModel().getSelectedItem());
+                int key = getKeyForChosenEvent();
+//                System.out.println("clicked on " + listNotes.getSelectionModel().getSelectedItem());
                 textFieldNote.setText(
                         notesMemory.get(key)
                                    .getTextEvent()
@@ -372,6 +368,7 @@ public class Controller implements Initializable {
                 deleteChooseNoteButton.setDisable(false);
                 deleteHandler(key);
                 editChooseNoteButton.setDisable(false);
+                editHandler(getKeyForChosenEvent());
             });
         }
     }
@@ -384,7 +381,7 @@ public class Controller implements Initializable {
 
     public void clearTextEventField() {
         nameNote.setOnMouseClicked(event -> {
-            System.out.println("clicked on nameNote");
+//            System.out.println("clicked on nameNote");
             textFieldNote.clear();
             deleteChooseNoteButton.setDisable(true);
             editChooseNoteButton.setDisable(true);
@@ -396,8 +393,8 @@ public class Controller implements Initializable {
         int i = 0;
         for (Integer key : notesMemory.keySet()) {
             int sum = getKeyForChosenDate(getChosenDate()) + i;
-            System.out.println("getKeyForChosenDay = " + getKeyForChosenDate(getChosenDate()));
-            System.out.println("key = " + key);
+//            System.out.println("getKeyForChosenDay = " + getKeyForChosenDate(getChosenDate()));
+//            System.out.println("existKey = " + key);
             if (sum == key) {
                 notesNames.add(notesMemory.get(sum).getTitleEvent());
                 listNotes.setItems(notesNames);
@@ -416,19 +413,19 @@ public class Controller implements Initializable {
 
     public void deleteHandler(int key) {
         deleteChooseNoteButton.setOnMouseClicked(event1 -> {
-            System.out.println("note will be deleted");
+//            System.out.println("note will be deleted");
             notesNames.remove(listNotes.getSelectionModel().getSelectedIndex());
-            System.out.println(notesNames);
+//            System.out.println(notesNames);
 
             // Удаление события в мапе и смещения всех остальных событий "влево"
             notesMemory.remove(key);
             int countKey = key + 1;
             int keyCopy = key;
-            do {
+            while (notesMemory.containsKey(countKey)) {
                 notesMemory.put(keyCopy, notesMemory.get(countKey));
                 keyCopy++;
                 countKey++;
-            } while (notesMemory.containsKey(countKey));
+            }
             notesMemory.remove(keyCopy);
             numberEvent--;
 
@@ -440,13 +437,14 @@ public class Controller implements Initializable {
                     count++;
                 }
             }
+            System.out.println("------------------------");
         });
     }
 
     public void editHandler(int key) {
         editChooseNoteButton.setOnMouseClicked(event2 -> {
             System.out.println("note will be edit");
-
+            System.out.println(key);
         });
     }
 
@@ -470,6 +468,18 @@ public class Controller implements Initializable {
         chosenDateText.setText(getChosenDate());
     }
 
+    // Вывести все существующие ключи из TreeMap
+    public void printAllKeysFromNotesMemoryMap() {
+        for (Integer key : notesMemory.keySet()) {
+            System.out.println(key);
+        }
+    }
+
+    // Вернуть ключ для события, выбранного мышкой
+    public Integer getKeyForChosenEvent() {
+        return getKeyForChosenDate(getChosenDate()) + listNotes.getSelectionModel().getSelectedIndex();
+    }
+
     // Метод, вызываемый автоматически при запуске программы
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -477,13 +487,6 @@ public class Controller implements Initializable {
         setHandlers();
         addListener();
         textFieldListener();
-
         clearTextEventField();
-    }
-
-    public void printAllKeysFromNotesMemoryMap() {
-        for (Integer key : notesMemory.keySet()) {
-            System.out.println(key);
-        }
     }
 }
