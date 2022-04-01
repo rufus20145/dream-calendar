@@ -48,9 +48,9 @@ public class Exporter implements Serializable {
         for (Entry<Integer, Event> entry : notes.entrySet()) {
             sb.append("{\n  \"key\": \"").append(entry.getKey()).append("\",\n");
             sb.append("  \"inner_object\":");
-            sb.append("  {\n    \"date\": ").append(entry.getValue().getDateEvent()).append("\",\n");
-            sb.append("    \"title\": ").append(entry.getValue().getTitleEvent()).append("\",\n");
-            sb.append("    \"text\": ").append(entry.getValue().getTextEvent()).append("\",\n  }\n}");
+            sb.append("  {\n    \"date\": \"").append(entry.getValue().getDateEvent()).append("\",\n");
+            sb.append("    \"title\": \"").append(entry.getValue().getTitleEvent()).append("\",\n");
+            sb.append("    \"text\": \"").append(entry.getValue().getTextEvent()).append("\"\n  }\n},\n");
         }
         try (FileWriter fw = new FileWriter(file)) {
             fw.write(sb.toString());
