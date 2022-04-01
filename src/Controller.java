@@ -18,11 +18,14 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 public class Controller implements Initializable {
 
-    public static HashMap<Integer, Event> notesMemory = new HashMap<>();
+//    public static HashMap<Integer, Event> notesMemory = new HashMap<>();
+    public static Map<Integer, Event> notesMemory = new TreeMap<>();
     public static ObservableList<String> notesNames = FXCollections.observableArrayList();
     public static int numberEvent = 0;
 
@@ -201,13 +204,18 @@ public class Controller implements Initializable {
                         }
                     }
                     if (!cellSelected) {
-                        String getMonthValueWithZero;
+                        String getMonthValueWithZero, getDayValueWithZero;
                         if (currentDate.getMonthValue() < 10) {
                             getMonthValueWithZero = "0" + currentDate.getMonthValue();
                         } else {
                             getMonthValueWithZero = "" + currentDate.getMonthValue();
                         }
-                        currentDayString = LocalDate.now().getDayOfMonth() +
+                        if (currentDate.getDayOfMonth() < 10) {
+                            getDayValueWithZero = "0" + currentDate.getDayOfMonth();
+                        } else {
+                            getDayValueWithZero = "" + currentDate.getDayOfMonth();
+                        }
+                        currentDayString = getDayValueWithZero +
                                 "." +
                                 getMonthValueWithZero +
                                 "." +
