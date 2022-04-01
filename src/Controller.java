@@ -366,6 +366,8 @@ public class Controller implements Initializable {
         if (!notesNames.isEmpty()) {
             listNotes.setOnMouseClicked(event -> {
                 clearNameAndTextField();
+                saveEditHandler = false;
+                editChooseNoteButton.setText("edit");
                 int selectedIndex = listNotes.getSelectionModel().getSelectedIndex();
 //                System.out.println(selectedIndex + " selected index");
 //                System.out.println(listNotes.getSelectionModel().isSelected(selectedIndex) + " selection");
