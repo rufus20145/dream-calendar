@@ -101,7 +101,7 @@ public class Controller implements Initializable {
             } else {
                 newEvent = new Event(getChosenDate(), nameNote.getText(), textFieldNote.getText());
             }
-            int keyNotesMemory = getKeyForChosenDay() + numberEvent;
+            int keyNotesMemory = getKeyForChosenDate(getChosenDate()) + numberEvent;
             numberEvent++;
             notesMemory.put(keyNotesMemory, newEvent);
 
@@ -113,20 +113,22 @@ public class Controller implements Initializable {
             // Очистка полей после создания нового события
             nameNote.clear();
             textFieldNote.clear();
+
+            // Вывод всех ключей событий
+            printAllKeysFromNotesMemoryMap();
         }
     }
 
-    // Достаем численное значение выбранного дня
-    public Integer getChosenDayOfMonth(String chosenDate) {
+    // Генерируем ключ для первого события выбранного дня
+    public Integer getKeyForChosenDate(String chosenDate) {
         char[] chosenDateInChar = chosenDate.toCharArray();
         String chosenDayInString = "" + chosenDateInChar[0] + chosenDateInChar[1];
+        String chosenMonthInString = "" + chosenDateInChar[3] + chosenDateInChar[4];
+        String chosenYearInString = "" + chosenDateInChar[6] + chosenDateInChar[7] + chosenDateInChar[8] + chosenDateInChar[9];
         int chosenDay = Integer.parseInt(chosenDayInString);
-        return chosenDay;
-    }
-
-    // Генерируем ключ для первого события выбранного дня
-    public Integer getKeyForChosenDay() {
-        return getChosenDayOfMonth(getChosenDate()) * 100;
+        int chosenMonth= Integer.parseInt(chosenMonthInString);
+        int chosenYear= Integer.parseInt(chosenYearInString);
+        return chosenDay * chosenMonth * chosenYear * 100;
     }
 
     // получение текущей даты с помощью LocalDate
@@ -353,7 +355,7 @@ public class Controller implements Initializable {
     public void updateHandlers() {
         if (!notesNames.isEmpty()) {
             listNotes.setOnMouseClicked(event -> {
-                int key = getKeyForChosenDay() + listNotes.getSelectionModel().getSelectedIndex();
+                int key = getKeyForChosenDate(getChosenDate()) + listNotes.getSelectionModel().getSelectedIndex();
                 System.out.println("clicked on " + listNotes.getSelectionModel().getSelectedItem());
                 textFieldNote.setText(
                         notesMemory.get(key)
@@ -385,8 +387,8 @@ public class Controller implements Initializable {
     public void fillListView() {
         int i = 0;
         for (Integer key : notesMemory.keySet()) {
-            int sum = getKeyForChosenDay() + i;
-            System.out.println("getForChosenDay = " + getKeyForChosenDay());
+            int sum = getKeyForChosenDate(getChosenDate()) + i;
+            System.out.println("getKeyForChosenDay = " + getKeyForChosenDate(getChosenDate()));
             System.out.println("key = " + key);
             if (sum == key) {
                 notesNames.add(notesMemory.get(sum).getTitleEvent());
@@ -425,7 +427,7 @@ public class Controller implements Initializable {
             // Проверка корректности содержимых событий в мапе после удаления
             int count = 0;
             for (Integer asd : notesMemory.keySet()) {
-                if (asd == getKeyForChosenDay() + count) {
+                if (asd == getKeyForChosenDate(getChosenDate()) + count) {
                     System.out.println(notesMemory.get(asd));
                     count++;
                 }
@@ -469,5 +471,11 @@ public class Controller implements Initializable {
         textFieldListener();
 
         clearTextEventField();
+    }
+
+    public void printAllKeysFromNotesMemoryMap() {
+        for (Integer key : notesMemory.keySet()) {
+            System.out.println(key);
+        }
     }
 }
