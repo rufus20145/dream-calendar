@@ -14,6 +14,7 @@ public class Main extends Application {
             Scene mainScene = new Scene(root);
             primaryStage.getIcons().add(new Image("icons/icon_128.png"));
             primaryStage.setTitle("Календарь");
+            System.out.println("Тест для гита");
             primaryStage.setScene(mainScene);
             primaryStage.show();
             primaryStage.setResizable(false);
