@@ -2,6 +2,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -109,9 +110,11 @@ public class Controller implements Initializable {
             listNotes.setItems(notesNames);
             updateHandlers();
 
+            saveEditHandler = false;
+            editChooseNoteButton.setText("edit");
+
             // Очистка полей после создания нового события
-            nameNote.clear();
-            textFieldNote.clear();
+            clearNameAndTextField();
 
             // Вывод всех ключей событий
 //            printAllKeysFromNotesMemoryMap();
@@ -125,8 +128,8 @@ public class Controller implements Initializable {
         String chosenMonthInString = "" + chosenDateInChar[3] + chosenDateInChar[4];
         String chosenYearInString = "" + chosenDateInChar[6] + chosenDateInChar[7] + chosenDateInChar[8] + chosenDateInChar[9];
         int chosenDay = Integer.parseInt(chosenDayInString);
-        int chosenMonth= Integer.parseInt(chosenMonthInString);
-        int chosenYear= Integer.parseInt(chosenYearInString);
+        int chosenMonth = Integer.parseInt(chosenMonthInString);
+        int chosenYear = Integer.parseInt(chosenYearInString);
         return chosenDay * chosenMonth * chosenYear * 100;
     }
 
@@ -340,6 +343,8 @@ public class Controller implements Initializable {
 
                     // Очистка ListView при выборе другого дня
                     clearListView();
+                    nameNote.clear();
+                    textFieldNote.clear();
 
                     // Заполнение ListView для выбранного дня с помощью HashMap
                     fillListView();
@@ -349,6 +354,7 @@ public class Controller implements Initializable {
 
                     deleteChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setDisable(true);
+                    editChooseNoteButton.setText("edit");
                 }
             });
             count++;
@@ -359,16 +365,22 @@ public class Controller implements Initializable {
     public void updateHandlers() {
         if (!notesNames.isEmpty()) {
             listNotes.setOnMouseClicked(event -> {
-                int key = getKeyForChosenEvent();
+                clearNameAndTextField();
+                int selectedIndex = listNotes.getSelectionModel().getSelectedIndex();
+//                System.out.println(selectedIndex + " selected index");
+//                System.out.println(listNotes.getSelectionModel().isSelected(selectedIndex) + " selection");
+                if (listNotes.getSelectionModel().isSelected(selectedIndex)) {
+                    int key = getKeyForChosenEvent();
 //                System.out.println("clicked on " + listNotes.getSelectionModel().getSelectedItem());
-                textFieldNote.setText(
-                        notesMemory.get(key)
-                                   .getTextEvent()
-                );
-                deleteChooseNoteButton.setDisable(false);
-                deleteHandler(key);
-                editChooseNoteButton.setDisable(false);
-                editHandler(getKeyForChosenEvent());
+                    textFieldNote.setText(
+                            notesMemory.get(key)
+                                       .getTextEvent()
+                    );
+                    deleteChooseNoteButton.setDisable(false);
+                    deleteHandler(key);
+                    editChooseNoteButton.setDisable(false);
+                    editHandler(getKeyForChosenEvent());
+                }
             });
         }
     }
@@ -382,7 +394,7 @@ public class Controller implements Initializable {
     public void clearTextEventField() {
         nameNote.setOnMouseClicked(event -> {
 //            System.out.println("clicked on nameNote");
-            textFieldNote.clear();
+//            textFieldNote.clear();
             deleteChooseNoteButton.setDisable(true);
             editChooseNoteButton.setDisable(true);
         });
@@ -438,13 +450,45 @@ public class Controller implements Initializable {
                 }
             }
             System.out.println("------------------------");
+
+            clearNameAndTextField();
+            editChooseNoteButton.setDisable(true);
+            deleteChooseNoteButton.setDisable(true);
+            editChooseNoteButton.setText("edit");
         });
     }
 
+    public void clearNameAndTextField() {
+        editChooseNoteButton.setText("edit");
+        nameNote.clear();
+        textFieldNote.clear();
+    }
+
+    boolean saveEditHandler = false;
     public void editHandler(int key) {
         editChooseNoteButton.setOnMouseClicked(event2 -> {
-            System.out.println("note will be edit");
-            System.out.println(key);
+            if (!saveEditHandler) {
+                System.out.println("note will be edit");
+                System.out.println(key);
+                nameNote.setText(notesMemory.get(key).getTitleEvent());
+                editChooseNoteButton.setText("save");
+                textFieldNote.requestFocus();
+                textFieldNote.deselect();
+                deleteChooseNoteButton.setDisable(true);
+                addNewNoteButton.setDisable(true);
+                saveEditHandler = true;
+            } else {
+                int selectedIndex = listNotes.getSelectionModel().getSelectedIndex();
+                notesNames.set(selectedIndex, nameNote.getText());
+                Event newEvent;
+                if (textFieldIsNoExist()) {
+                    newEvent = new Event(getChosenDate(), nameNote.getText());
+                } else {
+                    newEvent = new Event(getChosenDate(), nameNote.getText(), textFieldNote.getText());
+                }
+                notesMemory.put(key, newEvent);
+                saveEditHandler = false;
+            }
         });
     }
 
@@ -487,6 +531,6 @@ public class Controller implements Initializable {
         setHandlers();
         addListener();
         textFieldListener();
-        clearTextEventField();
+//        clearTextEventField();
     }
 }
