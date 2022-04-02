@@ -18,9 +18,9 @@ public class Main extends Application {
             mainScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent event) {
-                    if (event.getCode().toString().equals("E") && event.isControlDown()) {
+                    if (event.getCode().toString().equalsIgnoreCase("E") && event.isControlDown()) {
                         System.out.println("Start export to file.");
-                        Exporter.exportToFile(primaryStage, Controller.notesMemory);
+                        Exporter.exportToFile(primaryStage, Controller.eventMemory);
                     }
                 }
             });
