@@ -509,6 +509,7 @@ public class Controller implements Initializable {
                 minutes.setValue("-");
             } else {
                 editChooseNoteButton.setDisable(false);
+                System.out.println("editChooseNoteButton not disable");
             }
         });
     }
