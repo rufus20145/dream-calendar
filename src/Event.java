@@ -1,34 +1,43 @@
 public class Event {
 
-    private String dateEvent;
-    private String titleEvent;
-    private String textEvent;
-//    private int numberEvent;
+    private String eventDate;
+    private String eventTitle;
+    private String eventText;
+    private String eventHours;
+    private String eventMinutes;
 
-    public Event(String dateEvent, String titleEvent, String textEvent) {
-        this.dateEvent = dateEvent;
-        this.titleEvent = titleEvent;
-        this.textEvent = textEvent;
+    public Event(String eventDate, String eventTitle, String eventText, String eventHours, String eventMinutes) {
+        this.eventDate = eventDate;
+        this.eventTitle = eventTitle;
+        this.eventText = eventText;
+        this.eventHours = eventHours;
+        this.eventMinutes = eventMinutes;
     }
 
-    public Event(String dateEvent, String titleEvent) {
-        this.dateEvent = dateEvent;
-        this.titleEvent = titleEvent;
+    public Event(String eventDate, String eventTitle, String eventHours, String eventMinutes) {
+        this.eventDate = eventDate;
+        this.eventTitle = eventTitle;
+        this.eventHours = eventHours;
+        this.eventMinutes = eventMinutes;
     }
 
-    public String getDateEvent() {
-        return dateEvent;
+    public String getEventDate() {
+        return eventDate;
     }
 
-    public String getTitleEvent() {
-        return titleEvent;
+    public String getEventTitle() {
+        return eventTitle;
     }
 
-    public String getTextEvent() {
-        return textEvent;
+    public String getEventText() {
+        return eventText;
     }
 
-//    public int getNumberEvent() {
-//        return numberEvent;
-//    }
+    public String getEventHours() {
+        return eventHours;
+    }
+
+    public String getEventMinutes() {
+        return eventMinutes;
+    }
 }

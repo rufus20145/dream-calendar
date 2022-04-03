@@ -5,13 +5,16 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
             Scene mainScene = new Scene(root);
+
             primaryStage.getIcons().add(new Image("icons/icon_128.png"));
             primaryStage.setTitle("Календарь");
             primaryStage.setScene(mainScene);
