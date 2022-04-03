@@ -15,13 +15,6 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
             Scene mainScene = new Scene(root);
 
-            mainScene.setOnKeyPressed(event -> {
-                if (event.getCode().toString().equalsIgnoreCase("E") && event.isControlDown()) {
-                    System.out.println("Start export to file.");
-                    Exporter.exportToFile(primaryStage, Controller.eventMemory);
-                }
-            });
-
             primaryStage.getIcons().add(new Image("icons/icon_128.png"));
             primaryStage.setTitle("Календарь");
             primaryStage.setScene(mainScene);
