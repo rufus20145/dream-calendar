@@ -13,10 +13,7 @@ import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Controller implements Initializable {
 
@@ -81,6 +78,7 @@ public class Controller implements Initializable {
     Node cellElementCurrentDay; // ячейка текущего дня для выделения ее "синим" цветом
     boolean currentDayLeftTopDetected = false; // текущий день слева вверху обнаружен
     String chosenDateString;
+    boolean chosenDayEventsSorted = false;
 
     @FXML
     void showCalendar() {
@@ -143,8 +141,9 @@ public class Controller implements Initializable {
 
             // Очистка полей после создания нового события
             clearNameAndTextEventField();
-            hours.setValue("-");
-            minutes.setValue("-");
+            sortEventsForChosenDay();
+            clearListView();
+            fillListView();
         }
     }
 
@@ -219,8 +218,7 @@ public class Controller implements Initializable {
 
     public void printCurrentDayLeftTopTitle() {
         if (!currentDayLeftTopDetected) {
-            String currentDayConstString = "" + currentDate.getDayOfMonth() +
-                    " " + getRusMonthInclination(currentDate.getMonthValue());
+            String currentDayConstString = "" + currentDate.getDayOfMonth() + " " + getRusMonthInclination(currentDate.getMonthValue());
             currentDayConst.setText(currentDayConstString);
             currentDayLeftTopDetected = true;
         }
@@ -425,16 +423,13 @@ public class Controller implements Initializable {
                     if (cellElementSavedDay != element) {
                         clearListView();
                         clearNameAndTextEventField();
-                        hours.setValue("-");
-                        minutes.setValue("-");
                         fillListView();
                     }
 
                     // Сохранение выбранного дня при перелистывании месяцев
                     String chosenDate = getChosenDateString();
                     char[] chosenDateChar = chosenDate.toCharArray();
-                    saveMonthYearSelectedDay = "" + chosenDateChar[3] + chosenDateChar[4] +
-                            "." + chosenDateChar[6] + chosenDateChar[7] + chosenDateChar[8] + chosenDateChar[9];
+                    saveMonthYearSelectedDay = "" + chosenDateChar[3] + chosenDateChar[4] + "." + chosenDateChar[6] + chosenDateChar[7] + chosenDateChar[8] + chosenDateChar[9];
                     cellElementSavedDay = element;
 
                     // Вывод в TextField описания выбранного события и заполнение времени
@@ -489,6 +484,20 @@ public class Controller implements Initializable {
         }
     }
 
+    public void sortEventsForChosenDay() {
+        int dayFirstKey = getKeyForChosenDate(getChosenDateString());
+        QuickSort.quickSortTreeMap(eventMemory, dayFirstKey, dayFirstKey + eventListView.getItems().size() - 1);
+        chosenDayEventsSorted = true;
+
+        System.out.println("result sort events for hours");
+        for (Integer key : eventMemory.keySet()) {
+            if (dayFirstKey == key) {
+                System.out.println(eventMemory.get(key).getEventHours());
+                dayFirstKey++;
+            }
+        }
+    }
+
     public void eventNameFieldHandlers() {
         eventNameField.setOnMouseClicked(event -> {
             deleteChooseNoteButton.setDisable(true);
@@ -505,8 +514,7 @@ public class Controller implements Initializable {
 
     // Делать кнопку addNewNoteButton активной, если день выбран и поле eventNameField заполнено, в ином случае - неактивной
     public void addListener() {
-        eventNameField.textProperty().addListener((observable, oldValue, newValue) ->
-                addNewNoteButton.setDisable(!chosenDayDetected || eventNameFieldIsNoExist()));
+        eventNameField.textProperty().addListener((observable, oldValue, newValue) -> addNewNoteButton.setDisable(!chosenDayDetected || eventNameFieldIsNoExist()));
     }
 
     public void deleteHandler(int key) {
@@ -527,8 +535,6 @@ public class Controller implements Initializable {
             clearNameAndTextEventField();
             editChooseNoteButton.setDisable(true);
             deleteChooseNoteButton.setDisable(true);
-            hours.setValue("-");
-            minutes.setValue("-");
         });
     }
 
@@ -536,6 +542,8 @@ public class Controller implements Initializable {
         editChooseNoteButton.setText(EDIT);
         eventNameField.clear();
         eventTextField.clear();
+        hours.setValue("-");
+        minutes.setValue("-");
     }
 
     void editHandler(int key) {
@@ -566,8 +574,7 @@ public class Controller implements Initializable {
 
     // Делать поле описания для заметки редактируемым только, если введено название заметки
     void textFieldListener() {
-        eventNameField.textProperty().addListener((observable, oldValue, newValue) ->
-                eventTextField.setEditable(!eventNameFieldIsNoExist()));
+        eventNameField.textProperty().addListener((observable, oldValue, newValue) -> eventTextField.setEditable(!eventNameFieldIsNoExist()));
     }
 
     public boolean textFieldIsNoExist() {
@@ -619,11 +626,19 @@ public class Controller implements Initializable {
     }
 
     String getEventHours() {
-        return (hours.getSelectionModel().getSelectedItem());
+        if (hours.getSelectionModel().getSelectedItem().equals("-")) {
+            return "00";
+        } else {
+            return (hours.getSelectionModel().getSelectedItem());
+        }
     }
 
     String getEventMinutes() {
-        return (minutes.getSelectionModel().getSelectedItem());
+        if (minutes.getSelectionModel().getSelectedItem().equals("-")) {
+            return "00";
+        } else {
+            return (minutes.getSelectionModel().getSelectedItem());
+        }
     }
 
     // Метод, вызываемый автоматически при запуске программы
