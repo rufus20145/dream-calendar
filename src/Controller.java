@@ -2,6 +2,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -442,11 +443,13 @@ public class Controller implements Initializable {
 
                     deleteChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setDisable(true);
+                    editChooseNoteButton.setText("edit");
                 }
             });
             count++;
         }
     }
+
 
     // Вывод в TextField описания выбранного события и заполнение времени
     void eventUpdateHandlers() {
