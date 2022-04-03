@@ -71,7 +71,6 @@ public class Controller implements Initializable {
     ObservableList<Node> listOfTexts;
     HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на выбранный месяц
     String currentDateString; // Дата текущего дня в String
-    boolean dayIsChosen = false; // Выбран какой-либо день
     boolean chosenDayDetected = false; // Найден выбранный ранее день
     int numberEvent = 0; // номер события для каждого отдельного дня
     boolean switchEditToSaveButton = false; // сменить кнопку edit на save
@@ -81,6 +80,7 @@ public class Controller implements Initializable {
     Node cellElementSavedDay; // ячейка выбранного ранее дня
     Node cellElementCurrentDay; // ячейка текущего дня для выделения ее "синим" цветом
     boolean currentDayLeftTopDetected = false; // текущий день слева вверху обнаружен
+    String chosenDateString;
 
     @FXML
     void showCalendar() {
@@ -97,7 +97,6 @@ public class Controller implements Initializable {
         listOfTexts = anchorPane.getChildren();
 
         currentDay = currentDate.getDayOfMonth();
-        System.out.println(currentDay + " - currentDay");
 
         createCalendar(firstActiveCell);
 
@@ -123,14 +122,14 @@ public class Controller implements Initializable {
 
     @FXML
     void addNewNote() {
-        if (dayIsChosen) {
+        if (chosenDayDetected) {
             Event newEvent;
             if (textFieldIsNoExist()) {
-                newEvent = new Event(getChosenDateString(), eventNameField.getText(), getEventHours(), getEventMinutes());
+                newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
             } else {
-                newEvent = new Event(getChosenDateString(), eventNameField.getText(), eventTextField.getText(), getEventHours(), getEventMinutes());
+                newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(), getEventMinutes());
             }
-            int keyEvent = getKeyForChosenDate(getChosenDateString()) + numberEvent;
+            int keyEvent = getKeyForChosenDate(chosenDateString) + numberEvent;
             numberEvent++;
             eventMemory.put(keyEvent, newEvent);
 
@@ -209,7 +208,6 @@ public class Controller implements Initializable {
             if (text instanceof Text) {
                 if (currentDay == count) {
                     currentDay = i;
-                    System.out.println(currentDay + " iii");
                 }
                 ((Text) text).setText(Integer.toString(count));
                 memoryNumbersByCells.put(numOfCell, ((Text) text).getText());
@@ -254,8 +252,6 @@ public class Controller implements Initializable {
                         }
                         currentDateString = getDayValueWithZero + "." + getMonthValueWithZero + "." + currentDate.getYear() + " г.";
                         chosenDateText.setText(currentDateString);
-
-                        System.out.println(currentDay + "       currentDay123");
                     }
                 }
             }
@@ -313,7 +309,6 @@ public class Controller implements Initializable {
     @FXML
     void increaseMonth() {
         monthIncrease = true;
-        dayIsChosen = false;
         resetStylesBorder();
         resetStylesFont();
         showCalendar();
@@ -323,7 +318,6 @@ public class Controller implements Initializable {
     @FXML
     void reduceMonth() {
         monthReduce = true;
-        dayIsChosen = false;
         resetStylesBorder();
         resetStylesFont();
         showCalendar();
@@ -332,14 +326,12 @@ public class Controller implements Initializable {
     public void checkOnEqualsMonth() {
         if (saveMonthYearSelectedDay.equalsIgnoreCase(currentMonthYearString())) {
             cellElementSavedDay.setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
-            System.out.println("equal search");
         }
     }
 
     public void fillStyleForCurrentDay() {
         if (saveCurrentMonth.equalsIgnoreCase(currentMonthYearString())) {
             cellElementCurrentDay.setStyle(("-fx-fill: #0000ff"));
-            System.out.println("current day was filling");
         }
     }
 
@@ -350,7 +342,6 @@ public class Controller implements Initializable {
         } else {
             currentMonthYear = "" + currentDate.getMonthValue() + "." + currentDate.getYear();
         }
-        System.out.println(currentMonthYear);
         return currentMonthYear;
     }
 
@@ -428,7 +419,7 @@ public class Controller implements Initializable {
                     element.setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
                     changeText();
 
-                    dayIsChosen = true;
+                    chosenDateString = getChosenDateString();
                     chosenDayDetected = true;
 
                     if (cellElementSavedDay != element) {
@@ -444,7 +435,6 @@ public class Controller implements Initializable {
                     char[] chosenDateChar = chosenDate.toCharArray();
                     saveMonthYearSelectedDay = "" + chosenDateChar[3] + chosenDateChar[4] +
                             "." + chosenDateChar[6] + chosenDateChar[7] + chosenDateChar[8] + chosenDateChar[9];
-                    System.out.println(saveMonthYearSelectedDay);
                     cellElementSavedDay = element;
 
                     // Вывод в TextField описания выбранного события и заполнение времени
@@ -509,7 +499,6 @@ public class Controller implements Initializable {
                 minutes.setValue("-");
             } else {
                 editChooseNoteButton.setDisable(false);
-                System.out.println("editChooseNoteButton not disable");
             }
         });
     }
@@ -564,9 +553,9 @@ public class Controller implements Initializable {
                 eventNames.set(selectedIndex, eventNameField.getText());
                 Event newEvent;
                 if (textFieldIsNoExist()) {
-                    newEvent = new Event(getChosenDateString(), eventNameField.getText(), getEventHours(), getEventMinutes());
+                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
                 } else {
-                    newEvent = new Event(getChosenDateString(), eventNameField.getText(), eventTextField.getText(), getEventHours(), getEventMinutes());
+                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(), getEventMinutes());
                 }
                 eventMemory.put(key, newEvent);
                 switchEditToSaveButton = false;
@@ -596,7 +585,7 @@ public class Controller implements Initializable {
 
     // Вернуть ключ для события, выбранного мышкой
     Integer getKeyForChosenEvent() {
-        return getKeyForChosenDate(getChosenDateString()) + eventListView.getSelectionModel().getSelectedIndex();
+        return getKeyForChosenDate(chosenDateString) + eventListView.getSelectionModel().getSelectedIndex();
     }
 
     // Заполнить ComboBox hours часами от 00 до 23 в выпадающем списке

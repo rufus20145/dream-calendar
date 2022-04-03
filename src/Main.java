@@ -1,27 +1,24 @@
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
             Scene mainScene = new Scene(root);
 
-            mainScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent event) {
-                    if (event.getCode().toString().equalsIgnoreCase("E") && event.isControlDown()) {
-                        System.out.println("Start export to file.");
-                        Exporter.exportToFile(primaryStage, Controller.eventMemory);
-                    }
+            mainScene.setOnKeyPressed(event -> {
+                if (event.getCode().toString().equalsIgnoreCase("E") && event.isControlDown()) {
+                    System.out.println("Start export to file.");
+                    Exporter.exportToFile(primaryStage, Controller.eventMemory);
                 }
             });
 
