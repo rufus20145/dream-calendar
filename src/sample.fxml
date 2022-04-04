@@ -339,12 +339,12 @@
             <Image url="@icons/forward_arrow.png" />
          </image>
       </ImageView>
-      <Text fx:id="chosenDateText" fill="#ff5e5e" layoutX="254.0" layoutY="45.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="332.53680419921864">
+      <Text fx:id="chosenDateText" fill="#ff5e5e" layoutX="254.0" layoutY="62.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="332.53680419921864">
          <font>
             <Font name="Impact" size="39.0" />
          </font>
       </Text>
-      <Text fx:id="currentMonthText" fill="#434242" layoutX="37.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.5366439819336">
+      <Text fx:id="currentMonthText" fill="#434242" layoutX="599.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="204.5366439819336">
          <font>
             <Font name="Impact" size="24.0" />
          </font>
@@ -354,7 +354,7 @@
       <Button fx:id="addNewNoteButton" disable="true" layoutX="999.0" layoutY="60.0" mnemonicParsing="false" onAction="#addNewNote" prefHeight="2.0" prefWidth="35.0" text="+" />
       <Button fx:id="deleteChooseNoteButton" disable="true" layoutX="1039.0" layoutY="60.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="35.0" text="-" />
       <Button fx:id="editChooseNoteButton" disable="true" layoutX="1075.0" layoutY="60.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" text="edit" AnchorPane.rightAnchor="15.400000000000091" />
-      <Text fx:id="currentDayConst" fill="BLUE" layoutX="37.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="138.13665008544922">
+      <Text fx:id="currentDayConst" fill="BLUE" layoutX="37.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="138.13665008544922">
          <font>
             <Font name="Impact" size="21.0" />
          </font>
