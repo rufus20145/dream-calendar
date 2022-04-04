@@ -492,14 +492,6 @@ public class Controller implements Initializable {
         int dayFirstKey = getKeyForChosenDate(getChosenDateString());
         QuickSort.quickSortTreeMap(eventMemory, dayFirstKey, dayFirstKey + eventListView.getItems().size() - 1);
         chosenDayEventsSorted = true;
-
-        System.out.println("result sort events for hours");
-        for (Integer key : eventMemory.keySet()) {
-            if (dayFirstKey == key) {
-                System.out.println(eventMemory.get(key).getEventHours());
-                dayFirstKey++;
-            }
-        }
     }
 
     public void eventNameFieldHandlers() {
