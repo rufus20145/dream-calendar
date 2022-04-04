@@ -51,16 +51,17 @@ public class QuickSort {
 
         // выбрать опорный элемент
         int middle = lowKey + (highKey - lowKey) / 2;
-        int opora = Integer.parseInt(eventMemory.get(middle).getEventHours());
+        int opora = Integer.parseInt(eventMemory.get(middle).getEventHours()) * 60;
+        opora = opora + Integer.parseInt(eventMemory.get(middle).getEventMinutes());
 
         // разделить на подмассивы, который больше и меньше опорного элемента
         int i = lowKey, j = highKey;
         while (i <= j) {
-            while (Integer.parseInt(eventMemory.get(i).getEventHours()) < opora) {
+            while (spawnTime(i, eventMemory) < opora) {
                 i++;
             }
 
-            while (Integer.parseInt(eventMemory.get(j).getEventHours()) > opora) {
+            while (spawnTime(j, eventMemory) > opora) {
                 j--;
             }
 
@@ -79,6 +80,10 @@ public class QuickSort {
 
         if (highKey > i)
             quickSortTreeMap(eventMemory, i, highKey);
+    }
+
+    public static int spawnTime(int i, Map<Integer, Event> eventMemory) {
+        return Integer.parseInt(eventMemory.get(i).getEventHours()) * 60 + Integer.parseInt(eventMemory.get(i).getEventMinutes());
     }
 
 //    public static void main(String[] args) {

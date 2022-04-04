@@ -121,29 +121,33 @@ public class Controller implements Initializable {
     @FXML
     void addNewNote() {
         if (chosenDayDetected) {
-            Event newEvent;
-            if (textFieldIsNoExist()) {
-                newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
+            if (hours.getSelectionModel().isEmpty() && minutes.getSelectionModel().isEmpty()) {
+                hours.requestFocus();
             } else {
-                newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(), getEventMinutes());
+                Event newEvent;
+                if (textFieldIsNoExist()) {
+                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
+                } else {
+                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(), getEventMinutes());
+                }
+                int keyEvent = getKeyForChosenDate(chosenDateString) + numberEvent;
+                numberEvent++;
+                eventMemory.put(keyEvent, newEvent);
+
+                // Добавляем в ListView название события
+                eventNames.add(eventNameField.getText());
+                eventListView.setItems(eventNames);
+                eventUpdateHandlers();
+
+                switchEditToSaveButton = false;
+                editChooseNoteButton.setText(EDIT);
+
+                // Очистка полей после создания нового события
+                clearNameAndTextEventField();
+                sortEventsForChosenDay();
+                clearListView();
+                fillListView();
             }
-            int keyEvent = getKeyForChosenDate(chosenDateString) + numberEvent;
-            numberEvent++;
-            eventMemory.put(keyEvent, newEvent);
-
-            // Добавляем в ListView название события
-            eventNames.add(eventNameField.getText());
-            eventListView.setItems(eventNames);
-            eventUpdateHandlers();
-
-            switchEditToSaveButton = false;
-            editChooseNoteButton.setText(EDIT);
-
-            // Очистка полей после создания нового события
-            clearNameAndTextEventField();
-            sortEventsForChosenDay();
-            clearListView();
-            fillListView();
         }
     }
 
@@ -504,8 +508,8 @@ public class Controller implements Initializable {
             editChooseNoteButton.setDisable(true);
             if (eventNameField.getText().trim().isEmpty()) {
                 eventTextField.clear();
-                hours.setValue("-");
-                minutes.setValue("-");
+                hours.setValue("");
+                minutes.setValue("");
             } else {
                 editChooseNoteButton.setDisable(false);
             }
@@ -542,8 +546,8 @@ public class Controller implements Initializable {
         editChooseNoteButton.setText(EDIT);
         eventNameField.clear();
         eventTextField.clear();
-        hours.setValue("-");
-        minutes.setValue("-");
+        hours.setValue("");
+        minutes.setValue("");
     }
 
     void editHandler(int key) {
@@ -578,11 +582,11 @@ public class Controller implements Initializable {
     }
 
     public boolean textFieldIsNoExist() {
-        return eventTextField.getText().isEmpty();
+        return eventTextField == null;
     }
 
     public boolean eventNameFieldIsNoExist() {
-        return eventNameField.getText().isEmpty();
+        return eventNameField == null;
     }
 
     // Изменения даты в текстовом представлении в верхней части календаря
@@ -599,7 +603,7 @@ public class Controller implements Initializable {
     @FXML
     void showAllHours(MouseEvent event) {
         ObservableList<String> hoursList = FXCollections.observableArrayList();
-        hoursList.add("-");
+//        hoursList.add("-");
         for (int i = 0; i <= 23; ++i) {
             if (i <= 9) {
                 hoursList.add("0" + i);
@@ -614,7 +618,7 @@ public class Controller implements Initializable {
     @FXML
     void showAllMinutes(MouseEvent event) {
         ObservableList<String> minutesList = FXCollections.observableArrayList();
-        minutesList.add("-");
+//        minutesList.add("-");
         for (int i = 0; i <= 59; ++i) {
             if (i <= 9) {
                 minutesList.add("0" + i);
@@ -626,7 +630,7 @@ public class Controller implements Initializable {
     }
 
     String getEventHours() {
-        if (hours.getSelectionModel().getSelectedItem().equals("-")) {
+        if (hours.getSelectionModel().getSelectedItem().equals("")) {
             return "00";
         } else {
             return (hours.getSelectionModel().getSelectedItem());
@@ -634,7 +638,7 @@ public class Controller implements Initializable {
     }
 
     String getEventMinutes() {
-        if (minutes.getSelectionModel().getSelectedItem().equals("-")) {
+        if (minutes.getSelectionModel().getSelectedItem().equals("")) {
             return "00";
         } else {
             return (minutes.getSelectionModel().getSelectedItem());
