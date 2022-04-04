@@ -27,6 +27,8 @@ public class Main extends Application {
             primaryStage.setScene(mainScene);
             primaryStage.show();
             primaryStage.setResizable(false);
+
+            primaryStage.setOnCloseRequest(windowEvent -> Controller.stopShowTime = true);
         } catch (Exception e) {
             e.printStackTrace();
         }

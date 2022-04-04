@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,9 +23,13 @@ public class Controller implements Initializable {
     private static ObservableList<String> eventNames = FXCollections.observableArrayList();
     private static final String EDIT = "edit";
     private static final String SAVE = "save";
+    public static volatile boolean stopShowTime = false;
 
     @FXML
     private Button addNewNoteButton;
+
+    @FXML
+    private Label currentTime;
 
     @FXML
     private AnchorPane anchorPane;
@@ -637,6 +643,22 @@ public class Controller implements Initializable {
         }
     }
 
+    public void printTimeNow() {
+        Thread thread = new Thread(() -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            while (!stopShowTime) {
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                final String timeNow = sdf.format(new Date());
+                Platform.runLater(() -> currentTime.setText(timeNow));
+            }
+        });
+        thread.start();
+    }
+
     // Метод, вызываемый автоматически при запуске программы
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -644,5 +666,6 @@ public class Controller implements Initializable {
         mouseClickedHandlers();
         addListener();
         textFieldListener();
+        printTimeNow();
     }
 }

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -372,5 +373,10 @@
          </font>
       </Text>
       <TextArea fx:id="eventTextField" editable="false" layoutX="839.0" layoutY="511.0" prefHeight="138.0" prefWidth="290.0" promptText="Текст" />
+      <Label fx:id="currentTime" layoutX="37.0" layoutY="14.0" prefHeight="35.0" prefWidth="138.0">
+         <font>
+            <Font name="Impact" size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
