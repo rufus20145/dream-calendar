@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="680.0" maxWidth="1144.0" minHeight="680.0" minWidth="1140.0" prefHeight="680.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="680.0" maxWidth="1144.0" minHeight="680.0" minWidth="1140.0" prefHeight="680.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <AnchorPane fx:id="anchorPane" layoutX="38.0" layoutY="120.0" prefHeight="543.0" prefWidth="760.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a; -fx-background-color: #dff5f8;">
          <children>
@@ -360,8 +360,8 @@
             <Font name="Impact" size="21.0" />
          </font>
       </Text>
-      <ComboBox fx:id="hours" layoutX="927.0" layoutY="95.0" onMouseClicked="#showAllHours" prefHeight="30.0" prefWidth="88.0" promptText="-" />
-      <ComboBox fx:id="minutes" layoutX="1027.0" layoutY="95.0" onMouseClicked="#showAllMinutes" prefHeight="30.0" prefWidth="88.0" promptText="-" />
+      <ComboBox fx:id="hours" disable="true" layoutX="927.0" layoutY="95.0" onMouseClicked="#showAllHours" prefHeight="30.0" prefWidth="88.0" promptText="-" />
+      <ComboBox fx:id="minutes" disable="true" layoutX="1027.0" layoutY="95.0" onMouseClicked="#showAllMinutes" prefHeight="30.0" prefWidth="88.0" promptText="-" />
       <Text layoutX="839.0" layoutY="116.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Время:" wrappingWidth="88.0">
          <font>
             <Font name="Arial" size="23.0" />
