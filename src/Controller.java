@@ -138,13 +138,14 @@ public class Controller implements Initializable {
         for (int i = 0; i < NUM_OF_ALL_CELLS; ++i) {
             Object text = listOfTexts.get(i);
             if (text instanceof Text) {
+                System.out.println(firstActiveCell);
                 if (i < firstActiveCell && ((currentDate.getMonthValue() == 1 && currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue()
                         && currentDateLD.getYear() == currentDate.minusYears(1).getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
                         || (currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.getYear()
                         && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))))) {
                     listOfPane.get(i).setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
                     break;
-                } else if (i < firstActiveCell + currentDate.lengthOfMonth() && currentDateLD.getMonthValue() == currentDate.getMonthValue()
+                } else if (i >= firstActiveCell && i < firstActiveCell + currentDate.lengthOfMonth() && currentDateLD.getMonthValue() == currentDate.getMonthValue()
                         && currentDateLD.getYear() == currentDate.getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))) {
                     listOfPane.get(i).setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
                     break;
