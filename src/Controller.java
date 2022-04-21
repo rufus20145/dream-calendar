@@ -1,21 +1,3 @@
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
-
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -28,6 +10,23 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
+
 public class Controller implements Initializable {
     // Объявление констант
     private static final int NUM_OF_ALL_CELLS = 42;
@@ -35,6 +34,7 @@ public class Controller implements Initializable {
     private static final int MILLIS_OF_SLEEP = 1000;
     private static final String EDIT = "edit";
     private static final String SAVE = "save";
+    private static final String CHOSEN_CELL_STYLE = "-fx-border-width: 2.5; -fx-border-color: #000000";
 
     // Объявление переменных
     public static Map<Integer, Event> eventMemory = new TreeMap<>();
@@ -45,7 +45,8 @@ public class Controller implements Initializable {
     private static LocalDate currentDate;
     public static ObservableList<Node> listOfTexts;
     public static ObservableList<Node> listOfPane;
-    private static HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на выбранный месяц
+    private static HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на
+                                                                                    // выбранный месяц
     private static String currentDateString; // Дата текущего дня в String
     private static LocalDate currentDateLD; // Дата текущего дня в LD
     private static boolean chosenDayDetected = false; // Найден выбранный ранее день
@@ -133,28 +134,39 @@ public class Controller implements Initializable {
         }
     }
 
-    // Выделение ячейки с ранее выбранным днем, если таковой есть на текущей развертке календаря
+    // Выделение ячейки с ранее выбранным днем, если таковой есть на текущей
+    // развертке календаря
     void showChosenDay(int firstActiveCell) {
         firstActiveCell--;
         for (int i = 0; i < NUM_OF_ALL_CELLS; ++i) {
             Object text = listOfTexts.get(i);
             if (text instanceof Text) {
                 System.out.println(firstActiveCell);
-                if (i < firstActiveCell && ((currentDate.getMonthValue() == 1 && currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue()
-                        && currentDateLD.getYear() == currentDate.minusYears(1).getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
-                        || (currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.getYear()
-                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))))) {
-                    listOfPane.get(i).setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
+                if (i < firstActiveCell && ((currentDate.getMonthValue() == 1
+                        && currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue()
+                        && currentDateLD.getYear() == currentDate.minusYears(1).getYear()
+                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
+                        || (currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue()
+                                && currentDateLD.getYear() == currentDate.getYear()
+                                && Objects.equals(((Text) text).getText(),
+                                        Integer.toString(currentDateLD.getDayOfMonth()))))) {
+                    listOfPane.get(i).setStyle(CHOSEN_CELL_STYLE);
                     break;
-                } else if (i >= firstActiveCell && i < firstActiveCell + currentDate.lengthOfMonth() && currentDateLD.getMonthValue() == currentDate.getMonthValue()
-                        && currentDateLD.getYear() == currentDate.getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))) {
-                    listOfPane.get(i).setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
+                } else if (i >= firstActiveCell && i < firstActiveCell + currentDate.lengthOfMonth()
+                        && currentDateLD.getMonthValue() == currentDate.getMonthValue()
+                        && currentDateLD.getYear() == currentDate.getYear()
+                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))) {
+                    listOfPane.get(i).setStyle(CHOSEN_CELL_STYLE);
                     break;
-                } else if (i >= firstActiveCell + currentDate.lengthOfMonth() && ((currentDate.getMonthValue() == 12 && currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue()
-                        && currentDateLD.getYear() == currentDate.plusYears(1).getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
-                        || ((currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.getYear()
-                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))))) {
-                    listOfPane.get(i).setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
+                } else if (i >= firstActiveCell + currentDate.lengthOfMonth() && ((currentDate.getMonthValue() == 12
+                        && currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue()
+                        && currentDateLD.getYear() == currentDate.plusYears(1).getYear()
+                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
+                        || ((currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue()
+                                && currentDateLD.getYear() == currentDate.getYear()
+                                && Objects.equals(((Text) text).getText(),
+                                        Integer.toString(currentDateLD.getDayOfMonth())))))) {
+                    listOfPane.get(i).setStyle(CHOSEN_CELL_STYLE);
                     break;
                 }
             }
@@ -169,9 +181,11 @@ public class Controller implements Initializable {
             } else {
                 Event newEvent;
                 if (eventNameField.getText().isEmpty()) {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
+                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
+                            getEventMinutes());
                 } else {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(), getEventMinutes());
+                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
+                            getEventHours(), getEventMinutes());
                 }
                 int keyEvent = getKeyForChosenDate(chosenDateString) + numberEvent;
                 numberEvent++;
@@ -199,14 +213,16 @@ public class Controller implements Initializable {
         char[] chosenDateInChar = chosenDateString.toCharArray();
         String chosenDayInString = "" + chosenDateInChar[0] + chosenDateInChar[1];
         String chosenMonthInString = "" + chosenDateInChar[3] + chosenDateInChar[4];
-        String chosenYearInString = "" + chosenDateInChar[6] + chosenDateInChar[7] + chosenDateInChar[8] + chosenDateInChar[9];
+        String chosenYearInString = "" + chosenDateInChar[6] + chosenDateInChar[7] + chosenDateInChar[8]
+                + chosenDateInChar[9];
         int chosenDay = Integer.parseInt(chosenDayInString);
         int chosenMonth = Integer.parseInt(chosenMonthInString);
         int chosenYear = Integer.parseInt(chosenYearInString);
         return chosenDay * chosenMonth * chosenYear * KEY_GENERATION_COEFF;
     }
 
-    // Получения даты первого дня текущего месяца вместе с годом для дальнейшего использования в проверках
+    // Получения даты первого дня текущего месяца вместе с годом для дальнейшего
+    // использования в проверках
     LocalDate getCurrentDateWithFirstDay(int month, int year) {
         StringBuilder stringDate;
         if (month == 0) {
@@ -292,7 +308,8 @@ public class Controller implements Initializable {
     // Вывод сегодняшней даты в виде: число + название месяца
     public void printCurrentDayLeftTopTitle() {
         if (!currentDayLeftTopDetected) {
-            String currentDayConstString = "" + currentDate.getDayOfMonth() + " " + getRusMonthInclination(currentDate.getMonthValue());
+            String currentDayConstString = "" + currentDate.getDayOfMonth() + " "
+                    + getRusMonthInclination(currentDate.getMonthValue());
             currentDayConst.setText(currentDayConstString);
             currentDayLeftTopDetected = true;
         }
@@ -300,12 +317,14 @@ public class Controller implements Initializable {
 
     // Отображение в chosenDateText сегодняшней даты
     void showCurrentDate() {
-        if (LocalDate.now().getMonthValue() == currentDate.getMonthValue() && LocalDate.now().getYear() == currentDate.getYear()) {
+        if (LocalDate.now().getMonthValue() == currentDate.getMonthValue()
+                && LocalDate.now().getYear() == currentDate.getYear()) {
             for (Node element : anchorPane.getChildren()) {
-                if (element instanceof Text && !(((Text) element).getText()).isEmpty() && Integer.parseInt(((Text) element).getText()) == LocalDate.now().getDayOfMonth()) {
+                if (element instanceof Text && !(((Text) element).getText()).isEmpty()
+                        && Integer.parseInt(((Text) element).getText()) == LocalDate.now().getDayOfMonth()) {
                     cellElementCurrentDay = element;
                     for (Node node : gridPane.getChildren()) {
-                        if (node.getStyle().equals("-fx-border-width: 2.5; -fx-border-color: #000000")) {
+                        if (node.getStyle().equals(CHOSEN_CELL_STYLE)) {
                             cellSelected = true;
                         }
                     }
@@ -321,7 +340,8 @@ public class Controller implements Initializable {
                         } else {
                             getDayValueWithZero = "" + currentDateLD.getDayOfMonth();
                         }
-                        currentDateString = getDayValueWithZero + "." + getMonthValueWithZero + "." + currentDateLD.getYear() + " г.";
+                        currentDateString = getDayValueWithZero + "." + getMonthValueWithZero + "."
+                                + currentDateLD.getYear() + " г.";
                         chosenDateText.setText(currentDateString);
                     }
                 }
@@ -338,7 +358,8 @@ public class Controller implements Initializable {
         }
     }
 
-    // Получение номера ячейки, с которой начинается первое число текущего месяца, для корректной расстановки дней месяца в ячейках
+    // Получение номера ячейки, с которой начинается первое число текущего месяца,
+    // для корректной расстановки дней месяца в ячейках
     int getCellNumberFirstDayMonth(LocalDate date) {
         String correctMonth;
 
@@ -347,7 +368,9 @@ public class Controller implements Initializable {
         } else {
             correctMonth = "" + date.getMonthValue();
         }
-        DayOfWeek dow = LocalDate.parse("01-" + correctMonth + "-" + date.getYear(), DateTimeFormatter.ofPattern("dd-MM-yyyy")).getDayOfWeek();
+        DayOfWeek dow = LocalDate
+                .parse("01-" + correctMonth + "-" + date.getYear(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                .getDayOfWeek();
         return dow.getValue();
     }
 
@@ -396,8 +419,10 @@ public class Controller implements Initializable {
 
     // Выделение сегодняшнего числа в ячейке цветом
     public void highlightToday() {
-        if (currentDate.getMonthValue() == LocalDate.now().getMonthValue() && currentDate.getYear() == LocalDate.now().getYear())
+        if (currentDate.getMonthValue() == LocalDate.now().getMonthValue()
+                && currentDate.getYear() == LocalDate.now().getYear()) {
             cellElementCurrentDay.setStyle(("-fx-fill: #0000ff"));
+        }
     }
 
     // Получение названия месяца на русском языке в им. падеже для currentMonthText
@@ -442,7 +467,7 @@ public class Controller implements Initializable {
     String getChosenDateString() {
         int count1 = 1;
         for (Node node : gridPane.getChildren()) {
-            if (!node.getStyle().equals("-fx-border-width: 2.5; -fx-border-color: #000000")) {
+            if (!node.getStyle().equals(CHOSEN_CELL_STYLE)) {
                 count1++;
             } else {
                 numbOfCell = count1;
@@ -481,7 +506,8 @@ public class Controller implements Initializable {
         }
     }
 
-    // "Навешивание" обработчиков событий (кликов мыши) на ячейки для стилизации этих ячеек и не только
+    // "Навешивание" обработчиков событий (кликов мыши) на ячейки для стилизации
+    // этих ячеек и не только
     void mouseClickedHandlers() {
         int count = 0;
         for (Node element : gridPane.getChildren()) {
@@ -489,7 +515,7 @@ public class Controller implements Initializable {
             element.setOnMouseClicked(e -> {
                 if (object instanceof Text) {
                     resetStylesBorder();
-                    element.setStyle("-fx-border-width: 2.5; -fx-border-color: #000000");
+                    element.setStyle(CHOSEN_CELL_STYLE);
                     changeText();
 
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
@@ -515,7 +541,6 @@ public class Controller implements Initializable {
             count++;
         }
     }
-
 
     // Вывод в TextField описания выбранного события и заполнение времени
     void eventUpdateHandlers() {
@@ -578,9 +603,11 @@ public class Controller implements Initializable {
         });
     }
 
-    // Становление кнопки addNewNoteButton активной, если день выбран и поле eventNameField заполнено, в ином случае - неактивной
+    // Становление кнопки addNewNoteButton активной, если день выбран и поле
+    // eventNameField заполнено, в ином случае - неактивной
     public void addListener() {
-        eventNameField.textProperty().addListener((observable, oldValue, newValue) -> addNewNoteButton.setDisable(!cellSelected || eventNameField.getText().isEmpty() || editingIsActive));
+        eventNameField.textProperty().addListener((observable, oldValue, newValue) -> addNewNoteButton
+                .setDisable(!cellSelected || eventNameField.getText().isEmpty() || editingIsActive));
     }
 
     public void deleteHandler(int key) {
@@ -628,9 +655,11 @@ public class Controller implements Initializable {
                 eventNames.set(selectedIndex, eventNameField.getText());
                 Event newEvent;
                 if (eventNameField.getText().isEmpty()) {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
+                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
+                            getEventMinutes());
                 } else {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(), getEventMinutes());
+                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
+                            getEventHours(), getEventMinutes());
                 }
                 eventMemory.put(key, newEvent);
                 switchEditToSaveButton = false;
@@ -642,9 +671,11 @@ public class Controller implements Initializable {
         editingIsActive = false;
     }
 
-    // Делать поле описания для заметки редактируемым только, если введено название заметки
+    // Делать поле описания для заметки редактируемым только, если введено название
+    // заметки
     void textFieldListener() {
-        eventNameField.textProperty().addListener((observable, oldValue, newValue) -> eventTextField.setEditable(!eventNameField.getText().isEmpty()));
+        eventNameField.textProperty().addListener(
+                (observable, oldValue, newValue) -> eventTextField.setEditable(!eventNameField.getText().isEmpty()));
     }
 
     // Изменения даты в текстовом представлении в верхней части календаря
@@ -708,7 +739,8 @@ public class Controller implements Initializable {
             while (!stopShowTime) {
                 try {
                     Thread.sleep(MILLIS_OF_SLEEP);
-                } catch (Exception e) {
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                     System.out.println("Error.");
                 }
                 final String timeNow = sdf.format(new Date());

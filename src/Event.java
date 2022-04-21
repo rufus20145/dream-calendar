@@ -15,10 +15,7 @@ public class Event {
     }
 
     public Event(String eventDate, String eventTitle, String eventHours, String eventMinutes) {
-        this.eventDate = eventDate;
-        this.eventTitle = eventTitle;
-        this.eventHours = eventHours;
-        this.eventMinutes = eventMinutes;
+        this(eventDate, eventTitle, "", eventHours, eventMinutes);
     }
 
     public String getEventDate() {

@@ -3,6 +3,9 @@ import java.util.Map;
 public class QuickSort {
     private static final int COEFF_RATE_IN_MINUTES = 60;
 
+    private QuickSort() {
+    };
+
     public static void quickSortTreeMap(Map<Integer, Event> eventMemory, int lowKey, int highKey) {
         if (eventMemory.size() == 0)
             return; // Завершение выполнения, если длина массива равна 0
@@ -44,6 +47,7 @@ public class QuickSort {
     }
 
     public static int spawnTime(int i, Map<Integer, Event> eventMemory) {
-        return Integer.parseInt(eventMemory.get(i).getEventHours()) * COEFF_RATE_IN_MINUTES + Integer.parseInt(eventMemory.get(i).getEventMinutes());
+        return Integer.parseInt(eventMemory.get(i).getEventHours()) * COEFF_RATE_IN_MINUTES
+                + Integer.parseInt(eventMemory.get(i).getEventMinutes());
     }
 }
