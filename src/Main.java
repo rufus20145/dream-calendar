@@ -5,16 +5,24 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.getIcons().add(new Image("icons/icon_128.png"));
-        primaryStage.setTitle("Календарь");
-        primaryStage.setScene(new Scene(root, 860, 680));
-        primaryStage.show();
-        primaryStage.setResizable(false);
+    public void start(Stage primaryStage) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
+            Scene mainScene = new Scene(root);
+
+            primaryStage.getIcons().add(new Image("icons/icon_128.png"));
+            primaryStage.setTitle("Календарь");
+            primaryStage.setScene(mainScene);
+            primaryStage.show();
+            primaryStage.setResizable(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
