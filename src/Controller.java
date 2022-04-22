@@ -102,7 +102,7 @@ public class Controller implements Initializable {
     private ComboBox<String> minutes;
 
     @FXML
-    void showCalendar() {
+    private void showCalendar() {
         currentDate = getCurrentDate();
 
         String monthTitle = getRusMonth(currentDate.getMonthValue());
@@ -136,7 +136,7 @@ public class Controller implements Initializable {
 
     // Выделение ячейки с ранее выбранным днем, если таковой есть на текущей
     // развертке календаря
-    void showChosenDay(int firstActiveCell) {
+    private void showChosenDay(int firstActiveCell) {
         firstActiveCell--;
         for (int i = 0; i < NUM_OF_ALL_CELLS; ++i) {
             Object text = listOfTexts.get(i);
@@ -150,20 +150,20 @@ public class Controller implements Initializable {
         }
     }
 
-    boolean showChosenDayFirstIf(int firstActiveCell, int i, Object text) {
+    private boolean showChosenDayFirstIf(int firstActiveCell, int i, Object text) {
         return i < firstActiveCell && ((currentDate.getMonthValue() == 1 && currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.minusYears(1).getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))) || (currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))));
     }
 
-    boolean showChosenDaySecondIf(int firstActiveCell, int i, Object text) {
+    private boolean showChosenDaySecondIf(int firstActiveCell, int i, Object text) {
         return i >= firstActiveCell && i < firstActiveCell + currentDate.lengthOfMonth() && currentDateLD.getMonthValue() == currentDate.getMonthValue() && currentDateLD.getYear() == currentDate.getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()));
     }
 
-    boolean showChosenDayThirdIf(int firstActiveCell, int i, Object text) {
+    private boolean showChosenDayThirdIf(int firstActiveCell, int i, Object text) {
         return i >= firstActiveCell + currentDate.lengthOfMonth() && ((currentDate.getMonthValue() == 12 && currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.plusYears(1).getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))) || ((currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))));
     }
 
     @FXML
-    void addNewNote() {
+    private void addNewNote() {
         if (chosenDayDetected) {
             if (hours.getSelectionModel().isEmpty() && minutes.getSelectionModel().isEmpty()) {
                 hours.requestFocus();
@@ -196,7 +196,7 @@ public class Controller implements Initializable {
     }
 
     // Генерация ключа для первого события выбранного дня
-    public Integer getKeyForChosenDate(String chosenDateString) {
+    private Integer getKeyForChosenDate(String chosenDateString) {
         char[] chosenDateInChar = chosenDateString.toCharArray();
         String chosenDayInString = "" + chosenDateInChar[0] + chosenDateInChar[1];
         String chosenMonthInString = "" + chosenDateInChar[3] + chosenDateInChar[4];
@@ -209,7 +209,7 @@ public class Controller implements Initializable {
 
     // Получения даты первого дня текущего месяца вместе с годом для дальнейшего
     // использования в проверках
-    LocalDate getCurrentDateWithFirstDay(int month, int year) {
+    private LocalDate getCurrentDateWithFirstDay(int month, int year) {
         StringBuilder stringDate;
         if (month == 0) {
             year--;
@@ -229,7 +229,7 @@ public class Controller implements Initializable {
     }
 
     // Получение полной даты текущего дня
-    LocalDate getCurrentDate() {
+    private LocalDate getCurrentDate() {
         if (monthIncrease) {
             // Увеличенный на еденицу номер месяца
             int month = currentDate.getMonthValue() + 1;
@@ -247,7 +247,7 @@ public class Controller implements Initializable {
     }
 
     // Расстановка чисел в текущем календарном месяце
-    void createActiveCalendar(int firstActiveCell) {
+    private void createActiveCalendar(int firstActiveCell) {
         int count = 1;
         firstActiveCell--;
         for (int i = firstActiveCell; i < currentDate.lengthOfMonth() + firstActiveCell; ++i) {
@@ -265,7 +265,7 @@ public class Controller implements Initializable {
     }
 
     // Расстановка чисел в предыдущем и последующем календарных месяцах
-    public void createPassiveCalendar(int firstActiveCell) {
+    private void createPassiveCalendar(int firstActiveCell) {
         firstActiveCell -= 2;
 
         int numDaysLastMonth = currentDate.minusMonths(1).lengthOfMonth();
@@ -292,7 +292,7 @@ public class Controller implements Initializable {
     }
 
     // Вывод сегодняшней даты в виде: число + название месяца
-    public void printCurrentDayLeftTopTitle() {
+    private void printCurrentDayLeftTopTitle() {
         if (!currentDayLeftTopDetected) {
             String currentDayConstString = "" + currentDate.getDayOfMonth() + " " + getRusMonthInclination(currentDate.getMonthValue());
             currentDayConst.setText(currentDayConstString);
@@ -301,7 +301,7 @@ public class Controller implements Initializable {
     }
 
     // Отображение в chosenDateText сегодняшней даты
-    void showCurrentDate() {
+    private void showCurrentDate() {
         if (LocalDate.now().getMonthValue() == currentDate.getMonthValue() && LocalDate.now().getYear() == currentDate.getYear()) {
             for (Node element : anchorPane.getChildren()) {
                 if (element instanceof Text && !(((Text) element).getText()).isEmpty() && Integer.parseInt(((Text) element).getText()) == LocalDate.now().getDayOfMonth()) {
@@ -332,7 +332,7 @@ public class Controller implements Initializable {
     }
 
     // Обнуление содержимого ячейки для изменения
-    void resetCells(AnchorPane anchorPane) {
+    private void resetCells(AnchorPane anchorPane) {
         for (Node node : anchorPane.getChildren()) {
             if (node instanceof Text) {
                 ((Text) node).setText("");
@@ -342,7 +342,7 @@ public class Controller implements Initializable {
 
     // Получение номера ячейки, с которой начинается первое число текущего месяца,
     // для корректной расстановки дней месяца в ячейках
-    int getCellNumberFirstDayMonth(LocalDate date) {
+    private int getCellNumberFirstDayMonth(LocalDate date) {
         String correctMonth;
 
         if (date.getMonthValue() < 10) {
@@ -355,14 +355,14 @@ public class Controller implements Initializable {
     }
 
     // Установка стиля выбранной ячейки по умолчанию
-    void resetStylesBorder() {
+    private void resetStylesBorder() {
         for (Node element : gridPane.getChildren()) {
             element.setStyle("-fx-border-width: 0.5; -fx-border-color: #76787a");
         }
     }
 
     // Установка цветов шрифта по умолчанию для чисел в ячейках
-    void resetStylesFont() {
+    private void resetStylesFont() {
         // Для субботы
         for (int i = 5; i < anchorPane.getChildren().size(); i += 7) {
             anchorPane.getChildren().get(i).setStyle(("-fx-fill: #ff0000"));
@@ -381,7 +381,7 @@ public class Controller implements Initializable {
 
     // Изменение календарного месяца при нажатии стрелки "вправо"
     @FXML
-    void increaseMonth() {
+    private void increaseMonth() {
         monthIncrease = true;
         resetStylesBorder();
         resetStylesFont();
@@ -390,7 +390,7 @@ public class Controller implements Initializable {
 
     // Изменение календарного месяца при нажатии стрелки "влево"
     @FXML
-    void reduceMonth() {
+    private void reduceMonth() {
         monthReduce = true;
         resetStylesBorder();
         resetStylesFont();
@@ -398,14 +398,14 @@ public class Controller implements Initializable {
     }
 
     // Выделение сегодняшнего числа в ячейке цветом
-    public void highlightToday() {
+    private void highlightToday() {
         if (currentDate.getMonthValue() == LocalDate.now().getMonthValue() && currentDate.getYear() == LocalDate.now().getYear()) {
             cellElementCurrentDay.setStyle(("-fx-fill: #0000ff"));
         }
     }
 
     // Получение названия месяца на русском языке в им. падеже для currentMonthText
-    String getRusMonth(int month) {
+    private String getRusMonth(int month) {
         return switch (month) {
             case (1) -> "ЯНВАРЬ";
             case (2) -> "ФЕВРАЛЬ";
@@ -424,7 +424,7 @@ public class Controller implements Initializable {
     }
 
     // Получение названия месяца на русском языке в род. падеже для currentMonthText
-    String getRusMonthInclination(int month) {
+    private String getRusMonthInclination(int month) {
         return switch (month) {
             case (1) -> "ЯНВАРЯ";
             case (2) -> "ФЕВРАЛЯ";
@@ -443,7 +443,7 @@ public class Controller implements Initializable {
     }
 
     // Получение строки с датой выбранного календарного дня
-    String getChosenDateString() {
+    private String getChosenDateString() {
         int count1 = 1;
         for (Node node : gridPane.getChildren()) {
             if (!node.getStyle().equals(CHOSEN_CELL_STYLE)) {
@@ -477,7 +477,7 @@ public class Controller implements Initializable {
     }
 
     // Получение номера месяца с нулем, если он - однозначное число, и наоборот
-    String getMonthValueWithZero(LocalDate date) {
+    private String getMonthValueWithZero(LocalDate date) {
         if (date.getMonthValue() < 10) {
             return "0" + date.getMonthValue();
         } else {
@@ -487,7 +487,7 @@ public class Controller implements Initializable {
 
     // "Навешивание" обработчиков событий (кликов мыши) на ячейки для стилизации
     // этих ячеек и не только
-    void mouseClickedHandlers() {
+    private void mouseClickedHandlers() {
         int count = 0;
         for (Node element : gridPane.getChildren()) {
             Object object = listOfTexts.get(count);
@@ -522,7 +522,7 @@ public class Controller implements Initializable {
     }
 
     // Вывод в TextField описания выбранного события и заполнение времени
-    void eventUpdateHandlers() {
+    private void eventUpdateHandlers() {
         if (!eventNames.isEmpty()) {
             eventListView.setOnMouseClicked(event -> {
                 clearNameAndTextEventField();
@@ -542,14 +542,14 @@ public class Controller implements Initializable {
         }
     }
 
-    public void clearListView() {
+    private void clearListView() {
         eventListView.getItems().clear();
         numberEvent = 0;
         eventTextField.clear();
     }
 
     // Заполнение ListView для выбранного дня с помощью HashMap
-    public void fillListView() {
+    private void fillListView() {
         int count = 0;
         for (Integer key : eventMemory.keySet()) {
             int sum = getKeyForChosenDate(getChosenDateString()) + count;
@@ -563,7 +563,7 @@ public class Controller implements Initializable {
     }
 
     // Сортировка событий по времени
-    public void sortEventsForChosenDay() {
+    private void sortEventsForChosenDay() {
         int dayFirstKey = getKeyForChosenDate(getChosenDateString());
         QuickSort.quickSortTreeMap(eventMemory, dayFirstKey, dayFirstKey + eventListView.getItems().size() - 1);
     }
@@ -584,11 +584,11 @@ public class Controller implements Initializable {
 
     // Становление кнопки addNewNoteButton активной, если день выбран и поле
     // eventNameField заполнено, в ином случае - неактивной
-    public void addListener() {
+    private void addListener() {
         eventNameField.textProperty().addListener((observable, oldValue, newValue) -> addNewNoteButton.setDisable(!cellSelected || eventNameField.getText().isEmpty() || editingIsActive));
     }
 
-    public void deleteHandler(int key) {
+    private void deleteHandler(int key) {
         deleteChooseNoteButton.setOnMouseClicked(event -> {
             eventNames.remove(eventListView.getSelectionModel().getSelectedIndex());
             // Удаление события в мапе и смещения всех остальных событий "влево"
@@ -609,7 +609,7 @@ public class Controller implements Initializable {
         });
     }
 
-    void clearNameAndTextEventField() {
+    private void clearNameAndTextEventField() {
         editChooseNoteButton.setText(EDIT);
         eventNameField.clear();
         eventTextField.clear();
@@ -617,7 +617,7 @@ public class Controller implements Initializable {
         minutes.setValue("");
     }
 
-    void editHandler(int key) {
+    private void editHandler(int key) {
         editChooseNoteButton.setOnMouseClicked(event2 -> {
             editingIsActive = true;
             if (!switchEditToSaveButton) {
@@ -649,24 +649,24 @@ public class Controller implements Initializable {
 
     // Делать поле описания для заметки редактируемым только, если введено название
     // заметки
-    void textFieldListener() {
+    private void textFieldListener() {
         eventNameField.textProperty().addListener((observable, oldValue, newValue) -> eventTextField.setEditable(!eventNameField.getText().isEmpty()));
     }
 
     // Изменения даты в текстовом представлении в верхней части календаря
-    void changeText() {
+    private void changeText() {
         chosenDateText.setText(getChosenDateString() + " г.");
         currentDateString = getChosenDateString();
     }
 
     // Вернуть ключ для события, выбранного мышкой
-    Integer getKeyForChosenEvent() {
+    private Integer getKeyForChosenEvent() {
         return getKeyForChosenDate(chosenDateString) + eventListView.getSelectionModel().getSelectedIndex();
     }
 
     // Заполнить ComboBox hours часами от 00 до 23 в выпадающем списке
     @FXML
-    void showAllHours(MouseEvent event) {
+    private void showAllHours(MouseEvent event) {
         ObservableList<String> hoursList = FXCollections.observableArrayList();
         for (int i = 0; i <= 23; ++i) {
             if (i <= 9) {
@@ -680,7 +680,7 @@ public class Controller implements Initializable {
 
     // Заполнить ComboBox minutes минутами от 00 до 59 в выпадающем списке
     @FXML
-    void showAllMinutes(MouseEvent event) {
+    private void showAllMinutes(MouseEvent event) {
         ObservableList<String> minutesList = FXCollections.observableArrayList();
         for (int i = 0; i <= 59; ++i) {
             if (i <= 9) {
@@ -692,7 +692,7 @@ public class Controller implements Initializable {
         minutes.setItems(minutesList);
     }
 
-    String getEventHours() {
+    private String getEventHours() {
         if (hours.getSelectionModel().getSelectedItem().isEmpty()) {
             return "00";
         } else {
@@ -700,7 +700,7 @@ public class Controller implements Initializable {
         }
     }
 
-    String getEventMinutes() {
+    private String getEventMinutes() {
         if (minutes.getSelectionModel().getSelectedItem().isEmpty()) {
             return "00";
         } else {
