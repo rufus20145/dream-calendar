@@ -14,23 +14,14 @@ public class Main extends Application {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
             Scene mainScene = new Scene(root);
-
-            mainScene.setOnKeyPressed(event -> {
-                if (event.getCode().toString().equalsIgnoreCase("E") && event.isControlDown()) {
-                    System.out.println("Start export to file.");
-                    Exporter.exportToFile(primaryStage, Controller.eventMemory);
-                }
-            });
-
             primaryStage.getIcons().add(new Image("icons/icon_128.png"));
             primaryStage.setTitle("Календарь");
             primaryStage.setScene(mainScene);
             primaryStage.show();
             primaryStage.setResizable(false);
-
             primaryStage.setOnCloseRequest(windowEvent -> Controller.stopShowTime = true);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error.");
         }
     }
 
