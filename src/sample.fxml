@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="680.0" maxWidth="1144.0" minHeight="680.0" minWidth="1140.0" prefHeight="680.0" prefWidth="1144.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="680.0" maxWidth="1144.0" minHeight="680.0" minWidth="1140.0" prefHeight="680.0" prefWidth="1144.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <AnchorPane fx:id="anchorPane" layoutX="38.0" layoutY="120.0" prefHeight="543.0" prefWidth="760.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a; -fx-background-color: #dff5f8;">
          <children>
@@ -345,13 +345,13 @@
             <Font name="Impact" size="39.0" />
          </font>
       </Text>
-      <Text fx:id="currentMonthText" fill="#434242" layoutX="599.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="204.5366439819336">
+      <Text fx:id="currentMonthText" fill="#434242" layoutX="648.0" layoutY="78.0" onMouseClicked="#quickJumpToDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" textAlignment="RIGHT" wrappingWidth="155.20000000000005">
          <font>
             <Font name="Impact" size="24.0" />
          </font>
       </Text>
       <ListView fx:id="eventListView" layoutX="839.0" layoutY="134.0" prefHeight="364.0" prefWidth="290.0" AnchorPane.leftAnchor="839.0" AnchorPane.rightAnchor="15.0" />
-      <TextField fx:id="eventNameField" layoutX="839.0" layoutY="60.0" onMouseClicked="#eventNameFieldHandlers" prefHeight="26.0" prefWidth="155.0" promptText="Название" />
+      <TextField fx:id="eventNameField" layoutX="839.0" layoutY="60.0" prefHeight="26.0" prefWidth="155.0" promptText="Название" />
       <Button fx:id="addNewNoteButton" disable="true" layoutX="999.0" layoutY="60.0" mnemonicParsing="false" onAction="#addNewNote" prefHeight="2.0" prefWidth="35.0" text="+" />
       <Button fx:id="deleteChooseNoteButton" disable="true" layoutX="1039.0" layoutY="60.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="35.0" text="-" />
       <Button fx:id="editChooseNoteButton" disable="true" layoutX="1075.0" layoutY="60.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" text="edit" AnchorPane.rightAnchor="15.400000000000091" />
@@ -378,5 +378,21 @@
             <Font name="Impact" size="30.0" />
          </font>
       </Label>
+      <Pane fx:id="quickDatePane" layoutX="602.0" layoutY="41.0" prefHeight="54.0" prefWidth="205.0" style="-fx-background-color: #c8c8c8;" visible="false">
+         <children>
+            <ComboBox fx:id="monthOfQuickDate" focusTraversable="false" layoutX="4.0" layoutY="22.0" onMouseClicked="#showMonth" prefHeight="28.0" prefWidth="118.0" visibleRowCount="6" />
+            <ComboBox fx:id="yearOfQuickDate" focusTraversable="false" layoutX="123.0" layoutY="22.0" onMouseClicked="#showYear" prefHeight="28.0" prefWidth="80.0" visibleRowCount="6" />
+            <Text layoutX="37.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Месяц" wrappingWidth="52.21913146972656">
+               <font>
+                  <Font name="Alef Regular" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="147.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Год" wrappingWidth="30.61908721923828">
+               <font>
+                  <Font name="Alef Regular" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
