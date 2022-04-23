@@ -651,10 +651,14 @@ public class Controller implements Initializable {
 
     /**
      * Становление кнопки addNewNoteButton активной, если день выбран и поле eventNameField заполнено, в ином случае - неактивной
+     * и
+     * становление кнопки editChooseNoteButton активной, если запущен режим редактирования события и поле eventNameField заполнено
      */
-    private void addListener() {
+    private void addEventNameFieldListener() {
         eventNameField.textProperty().addListener((observable, oldValue, newValue) -> addNewNoteButton.setDisable(!cellSelected || eventNameField.getText().isEmpty() || editingIsActive));
+        eventNameField.textProperty().addListener((observable, oldValue, newValue) -> editChooseNoteButton.setDisable(eventNameField.getText().isEmpty() || !editingIsActive));
     }
+
 
     /**
      * Удаление события в мапе и смещения всех остальных событий "влево"
@@ -694,7 +698,7 @@ public class Controller implements Initializable {
      * Логика редактирования событий при нажатии на соответствующую кнопку
      */
     private void editHandler(int key) {
-        editChooseNoteButton.setOnMouseClicked(event2 -> {
+        editChooseNoteButton.setOnMouseClicked(event -> {
             editingIsActive = true;
             if (!switchEditToSaveButton) {
                 eventNameField.setText(eventMemory.get(key).getEventTitle());
@@ -947,7 +951,7 @@ public class Controller implements Initializable {
         addMonthComboBoxListener();
         addYearComboBoxListener();
         mouseClickedHandlers();
-        addListener();
+        addEventNameFieldListener();
         textFieldListener();
         printTimeNow();
     }
