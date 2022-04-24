@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-public class Main extends Application {
+public class FxmlLoader extends Application {
 
     @Override
     public void start(Stage primaryStage) {
