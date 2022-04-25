@@ -9,13 +9,7 @@ import com.google.gson.Gson;
 
 public class EventSaver {
 
-    /**
-     *
-     */
     private static final String FOLDERNAME = "\\dream-calendar\\";
-    /**
-     *
-     */
     private static final String DEFAULT_FILENAME = "eventsData.json";
     private Map<Integer, Event> events;
 
