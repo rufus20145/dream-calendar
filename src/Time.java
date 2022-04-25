@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Time extends Controller {
-    private final int MILLIS_OF_SLEEP = 1000;
+    private static final int MILLIS_OF_SLEEP = 1000;
 
     public Time(Label currentTime) {
         this.currentTime = currentTime;
