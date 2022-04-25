@@ -378,7 +378,7 @@
             <Font name="Impact" size="30.0" />
          </font>
       </Label>
-      <Pane fx:id="quickDatePane" layoutX="602.0" layoutY="41.0" prefHeight="54.0" prefWidth="205.0" style="-fx-background-color: #c8c8c8;" visible="false">
+      <Pane fx:id="quickDatePane" layoutX="602.0" layoutY="40.0" prefHeight="54.0" prefWidth="205.0" style="-fx-background-color: #c8c8c8;" visible="false">
          <children>
             <ComboBox fx:id="monthOfQuickDate" focusTraversable="false" layoutX="4.0" layoutY="22.0" onMouseClicked="#showMonth" prefHeight="28.0" prefWidth="118.0" visibleRowCount="6" />
             <ComboBox fx:id="yearOfQuickDate" focusTraversable="false" layoutX="123.0" layoutY="22.0" onMouseClicked="#showYear" prefHeight="28.0" prefWidth="80.0" visibleRowCount="6" />
