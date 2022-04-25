@@ -1,4 +1,3 @@
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,11 +17,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -37,14 +34,14 @@ public class Controller implements Initializable {
     private final int MILLIS_OF_SLEEP = 1000;
     private final String EDIT = "edit";
     private final String SAVE = "save";
-    private final String CHOSEN_CELL_STYLE = "-fx-border-width: 2.5; -fx-border-color: #000000";
+    public final String CHOSEN_CELL_STYLE = "-fx-border-width: 2.5; -fx-border-color: #000000";
 
     /**
      * Объявление переменных
      */
-    private String currentDateString; // Дата текущего дня в String
+    public String currentDateString; // Дата текущего дня в String
     private String chosenDateString;
-    private int currentDay;
+    public int currentDay;
     private int numberEvent = 0; // Номер события для каждого отдельного дня
     private int numbOfCell;
     private int quickMonth;
@@ -52,34 +49,38 @@ public class Controller implements Initializable {
     public static volatile boolean stopShowTime = false;
     private boolean chosenDayDetected = false; // Найден выбранный ранее день
     private boolean switchEditToSaveButton = false; // Сменить кнопку edit на save
-    private boolean currentDayLeftTopDetected = false; // Текущий день слева вверху обнаружен
+    public boolean currentDayLeftTopDetected = false; // Текущий день слева вверху обнаружен
     private boolean monthIncrease = false, monthReduce = false;
-    private boolean cellSelected = false;
+    public boolean cellSelected = false;
     private boolean editingIsActive = false;
-    private boolean dateIsQuick = false;
+    public boolean dateIsQuick = false;
     private Map<Integer, Event> eventMemory = new TreeMap<>();
     private HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на выбранный месяц
     private Node cellElementCurrentDay; // Ячейка текущего дня для выделения ее "синим" цветом
-    private LocalDate currentDateLD; // Дата текущего дня в LD
-    private LocalDate currentDate;
+    public LocalDate currentDateLD; // Дата текущего дня в LD
+    public LocalDate currentDate;
     private ObservableList<String> eventNames = FXCollections.observableArrayList();
     private ObservableList<Node> listOfTexts;
     private ObservableList<Node> listOfPane;
+
+    CurrMonthAndYear currMonthAndYear;
+    ChosenDate chosenDate;
+    QuickDate quickDate;
 
     @FXML
     private Button addNewNoteButton;
 
     @FXML
-    private Label currentTime;
+    public Label currentTime;
 
     @FXML
-    private AnchorPane anchorPane;
+    public AnchorPane anchorPane;
 
     @FXML
-    private Text chosenDateText;
+    public Text chosenDateText;
 
     @FXML
-    private Text currentMonthText;
+    public Text currentMonthText;
 
     @FXML
     private Button deleteChooseNoteButton;
@@ -88,7 +89,7 @@ public class Controller implements Initializable {
     private Button editChooseNoteButton;
 
     @FXML
-    private GridPane gridPane;
+    public GridPane gridPane;
 
     @FXML
     private ListView<String> eventListView;
@@ -100,7 +101,7 @@ public class Controller implements Initializable {
     private TextArea eventTextField;
 
     @FXML
-    private Text currentDayConst;
+    public Text currentDayConst;
 
     @FXML
     private ComboBox<String> hours;
@@ -109,20 +110,22 @@ public class Controller implements Initializable {
     private ComboBox<String> minutes;
 
     @FXML
-    private Pane quickDatePane;
+    public Pane quickDatePane;
 
     @FXML
-    private ComboBox<String> monthOfQuickDate;
+    public ComboBox<String> monthOfQuickDate;
 
     @FXML
-    private ComboBox<Integer> yearOfQuickDate;
+    public ComboBox<Integer> yearOfQuickDate;
 
     @FXML
     private void showCalendar() {
         currentDate = getCurrentDate();
-        String monthTitle = getRusMonth(currentDate.getMonthValue());
 
-        currentMonthText.setText(monthTitle + " " + currentDate.getYear());
+        currMonthAndYear = new CurrMonthAndYear(currentMonthText, currentDate);
+
+        currMonthAndYear.setCurrentMonthText();
+        quickDate = new QuickDate(monthOfQuickDate, yearOfQuickDate, currMonthAndYear, gridPane, anchorPane, currentMonthText, quickDatePane);
 
         int firstActiveCell = getCellNumberFirstDayMonth(currentDate);
 
@@ -137,7 +140,9 @@ public class Controller implements Initializable {
         createActiveCalendar(firstActiveCell);
         createPassiveCalendar(firstActiveCell);
 
-        showCurrentDate();
+        chosenDate = new ChosenDate(chosenDateText, currentDate, anchorPane, gridPane);
+        chosenDate.showCurrentDate();
+        cellElementCurrentDay = chosenDate.getCellElementCurrentDay();
 
         monthReduce = false;
         monthIncrease = false;
@@ -305,7 +310,7 @@ public class Controller implements Initializable {
                 count++;
             }
         }
-        printCurrentDayLeftTopTitle();
+//        printCurrentDayLeftTopTitle();
     }
 
     /**
@@ -333,50 +338,6 @@ public class Controller implements Initializable {
                 ((Text) text).setStyle("-fx-opacity: 0.25");
                 memoryNumbersByCells.put(i + 1, ((Text) text).getText());
                 numOfDay++;
-            }
-        }
-    }
-
-    /**
-     * Вывод сегодняшней даты в виде: число + название месяца
-     */
-    private void printCurrentDayLeftTopTitle() {
-        if (!currentDayLeftTopDetected) {
-            String currentDayConstString = "" + currentDate.getDayOfMonth() + " " + getRusMonthInclination(currentDate.getMonthValue());
-            currentDayConst.setText(currentDayConstString);
-            currentDayLeftTopDetected = true;
-        }
-    }
-
-    /**
-     * Отображение в chosenDateText сегодняшней даты
-     */
-    private void showCurrentDate() {
-        if (LocalDate.now().getMonthValue() == currentDate.getMonthValue() && LocalDate.now().getYear() == currentDate.getYear()) {
-            for (Node element : anchorPane.getChildren()) {
-                if (element instanceof Text && !(((Text) element).getText()).isEmpty() && Integer.parseInt(((Text) element).getText()) == LocalDate.now().getDayOfMonth()) {
-                    cellElementCurrentDay = element;
-                    for (Node node : gridPane.getChildren()) {
-                        if (node.getStyle().equals(CHOSEN_CELL_STYLE)) {
-                            cellSelected = true;
-                        }
-                    }
-                    if (cellSelected) {
-                        String getMonthValueWithZero, getDayValueWithZero;
-                        if (currentDateLD.getMonthValue() < 10) {
-                            getMonthValueWithZero = "0" + currentDateLD.getMonthValue();
-                        } else {
-                            getMonthValueWithZero = "" + currentDateLD.getMonthValue();
-                        }
-                        if (currentDateLD.getDayOfMonth() < 10) {
-                            getDayValueWithZero = "0" + currentDateLD.getDayOfMonth();
-                        } else {
-                            getDayValueWithZero = "" + currentDateLD.getDayOfMonth();
-                        }
-                        currentDateString = getDayValueWithZero + "." + getMonthValueWithZero + "." + currentDateLD.getYear() + " г.";
-                        chosenDateText.setText(currentDateString);
-                    }
-                }
             }
         }
     }
@@ -442,9 +403,10 @@ public class Controller implements Initializable {
     @FXML
     private void increaseMonth() {
         monthIncrease = true;
-        quickDatePane.setVisible(false);
+//        quickDatePane.setVisible(false);
         resetStylesBorder();
         resetStylesFont();
+        quickDatePane.setVisible(false);
         showCalendar();
     }
 
@@ -454,9 +416,10 @@ public class Controller implements Initializable {
     @FXML
     private void reduceMonth() {
         monthReduce = true;
-        quickDatePane.setVisible(false);
+//        quickDatePane.setVisible(false);
         resetStylesBorder();
         resetStylesFont();
+        quickDatePane.setVisible(false);
         showCalendar();
     }
 
@@ -466,48 +429,6 @@ public class Controller implements Initializable {
     private void highlightToday() {
         if (currentDate.getMonthValue() == LocalDate.now().getMonthValue() && currentDate.getYear() == LocalDate.now().getYear())
             cellElementCurrentDay.setStyle(("-fx-fill: #0000ff"));
-    }
-
-    /**
-     * Получение названия месяца на русском языке в им. падеже для currentMonthText
-     */
-    private String getRusMonth(int month) {
-        return switch (month) {
-            case (1) -> "ЯНВАРЬ";
-            case (2) -> "ФЕВРАЛЬ";
-            case (3) -> "МАРТ";
-            case (4) -> "АПРЕЛЬ";
-            case (5) -> "МАЙ";
-            case (6) -> "ИЮНЬ";
-            case (7) -> "ИЮЛЬ";
-            case (8) -> "АВГУСТ";
-            case (9) -> "СЕНТЯБРЬ";
-            case (10) -> "ОКТЯБРЬ";
-            case (11) -> "НОЯБРЬ";
-            case (12) -> "ДЕКАБРЬ";
-            default -> null;
-        };
-    }
-
-    /**
-     * Получение названия месяца на русском языке в род. падеже для currentMonthText
-     */
-    private String getRusMonthInclination(int month) {
-        return switch (month) {
-            case (1) -> "ЯНВАРЯ";
-            case (2) -> "ФЕВРАЛЯ";
-            case (3) -> "МАРТА";
-            case (4) -> "АПРЕЛЯ";
-            case (5) -> "МАЯ";
-            case (6) -> "ИЮНЯ";
-            case (7) -> "ИЮЛЯ";
-            case (8) -> "АВГУСТА";
-            case (9) -> "СЕНТЯБРЯ";
-            case (10) -> "ОКТЯБРЯ";
-            case (11) -> "НОЯБРЯ";
-            case (12) -> "ДЕКАБРЯ";
-            default -> null;
-        };
     }
 
     /**
@@ -651,8 +572,7 @@ public class Controller implements Initializable {
 
     /**
      * Становление кнопки addNewNoteButton активной, если день выбран и поле eventNameField заполнено, в ином случае - неактивной
-     * и
-     * становление кнопки editChooseNoteButton активной, если запущен режим редактирования события и поле eventNameField заполнено
+     * и становление кнопки editChooseNoteButton активной, если запущен режим редактирования события и поле eventNameField заполнено
      */
     private void addEventNameFieldListener() {
         eventNameField.textProperty().addListener((observable, oldValue, newValue) -> addNewNoteButton.setDisable(!cellSelected || eventNameField.getText().isEmpty() || editingIsActive));
@@ -754,8 +674,8 @@ public class Controller implements Initializable {
      */
     @FXML
     private void quickJumpToDate(MouseEvent event) {
-        setMonth();
-        setYear();
+        quickDate.setMonth(currentDate);
+        quickDate.setYear(currentDate);
     }
 
     /**
@@ -810,25 +730,6 @@ public class Controller implements Initializable {
         } else {
             return (minutes.getSelectionModel().getSelectedItem());
         }
-    }
-
-    /**
-     * Отображение текущего времени
-     */
-    private void printTimeNow() {
-        Thread thread = new Thread(() -> {
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-            while (!stopShowTime) {
-                try {
-                    Thread.sleep(MILLIS_OF_SLEEP);
-                } catch (Exception e) {
-                    System.out.println("Error.");
-                }
-                final String timeNow = sdf.format(new Date());
-                Platform.runLater(() -> currentTime.setText(timeNow));
-            }
-        });
-        thread.start();
     }
 
     /**
@@ -894,29 +795,6 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Заполнение выпадающего списка monthOfQuickDate названиями всех месяцев
-     */
-    private void fillAllMonth() {
-        ObservableList<String> monthList = FXCollections.observableArrayList();
-        for (int i = 1; i <= 12; ++i) {
-            monthList.add(getRusMonth(i));
-        }
-        monthOfQuickDate.setItems(monthList);
-    }
-
-    /**
-     * Заполнение выпадающего списка yearOfQuickDate годами диапозоном [текущий год - 100; текущий год - 100]
-     */
-    private void fillAllYears() {
-        ObservableList<Integer> yearsList = FXCollections.observableArrayList();
-        int RANGE_OF_YEARS = 100;
-        for (int i = currentDate.getYear() - RANGE_OF_YEARS; i <= currentDate.getYear() + RANGE_OF_YEARS; ++i) {
-            yearsList.add(i);
-        }
-        yearOfQuickDate.setItems(yearsList);
-    }
-
-    /**
      * Прокручивание выпадающего списка к выбранному месяцу или году
      */
     private void automaticScroll(ComboBox<?> comboBox, int index) {
@@ -925,34 +803,21 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Применение текущего месяца к значению monthOfQuickDate
-     */
-    private void setMonth() {
-        monthOfQuickDate.setValue(getRusMonth(currentDate.getMonthValue()));
-        quickDatePane.setVisible(true);
-    }
-
-    /**
-     * Применение текущего года к значению yearOfQuickDate
-     */
-    private void setYear() {
-        yearOfQuickDate.setValue(currentDate.getYear());
-        quickDatePane.setVisible(true);
-    }
-
-    /**
      * Метод, вызываемый автоматически при запуске программы
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showCalendar();
-        fillAllMonth();
-        fillAllYears();
+        quickDate.fillAllMonth();
+        quickDate.fillAllYears(currentDate);
         addMonthComboBoxListener();
         addYearComboBoxListener();
         mouseClickedHandlers();
         addEventNameFieldListener();
         textFieldListener();
-        printTimeNow();
+        Time time = new Time(currentTime);
+        time.printTimeNow();
+        ConstCurrentDate constCurrentDate = new ConstCurrentDate(currentDayConst, currentDate);
+        constCurrentDate.printCurrentDayLeftTopTitle();
     }
 }
