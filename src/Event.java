@@ -1,4 +1,4 @@
-public class Event {
+public class Event extends Controller {
 
     private String eventDate;
     private String eventTitle;

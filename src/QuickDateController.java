@@ -8,8 +8,8 @@ import javafx.scene.text.Text;
 
 import java.time.LocalDate;
 
-public class QuickDate extends Controller {
-    public QuickDate(ComboBox<String> monthOfQuickDate, ComboBox<Integer> yearOfQuickDate, CurrMonthAndYear currMonthAndYear, GridPane gridPane, AnchorPane anchorPane, Text currentMonthText, Pane quickDatePane) {
+public class QuickDateController extends Controller {
+    public QuickDateController(ComboBox<String> monthOfQuickDate, ComboBox<Integer> yearOfQuickDate, CurrMonthAndYear currMonthAndYear, GridPane gridPane, AnchorPane anchorPane, Text currentMonthText, Pane quickDatePane, LocalDate currentDate) {
         this.monthOfQuickDate = monthOfQuickDate;
         this.yearOfQuickDate = yearOfQuickDate;
         this.currMonthAndYear = currMonthAndYear;
@@ -17,6 +17,7 @@ public class QuickDate extends Controller {
         this.anchorPane = anchorPane;
         this.currentMonthText = currentMonthText;
         this.quickDatePane = quickDatePane;
+        this.currentDate = currentDate;
     }
 
     /**
@@ -56,5 +57,29 @@ public class QuickDate extends Controller {
     public void setYear(LocalDate currentDate) {
         yearOfQuickDate.setValue(currentDate.getYear());
         quickDatePane.setVisible(true);
+    }
+
+    public void showMonthControl() {
+        int count = 0;
+        for (String month : monthOfQuickDate.getItems()) {
+            if (month.equals(monthOfQuickDate.getValue())) {
+                monthOfQuickDate.getSelectionModel().select(count);
+                automaticScroll(monthOfQuickDate, count);
+                break;
+            }
+            count++;
+        }
+    }
+
+    public void showYearControl() {
+        int count = 0;
+        for (Integer year : yearOfQuickDate.getItems()) {
+            if (year.equals(yearOfQuickDate.getValue())) {
+                yearOfQuickDate.getSelectionModel().select(count);
+                automaticScroll(yearOfQuickDate, count);
+                break;
+            }
+            count++;
+        }
     }
 }

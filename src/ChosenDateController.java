@@ -5,15 +5,14 @@ import javafx.scene.text.Text;
 
 import java.time.LocalDate;
 
-public class ChosenDate extends Controller {
+public class ChosenDateController extends Controller {
     private Node cellElementCurrentDay;
 
-    public ChosenDate(Text chosenDateText, LocalDate currentDate, AnchorPane anchorPane, GridPane gridPane) {
+    public ChosenDateController(Text chosenDateText, LocalDate currentDate, AnchorPane anchorPane, GridPane gridPane) {
         this.chosenDateText = chosenDateText;
         this.currentDate = currentDate;
         this.anchorPane = anchorPane;
         this.gridPane = gridPane;
-//        this.currentDateLD = currentDateLD;
     }
 
     /**

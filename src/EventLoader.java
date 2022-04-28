@@ -6,7 +6,6 @@ import java.lang.reflect.Type;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Logger;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -14,7 +13,7 @@ import com.google.gson.reflect.TypeToken;
 public class EventLoader {
     private static final String DEFAULT_FILEPATH = System.getenv("APPDATA") + "\\dream-calendar\\eventsData.json";
 
-    protected EventLoader() {
+    private EventLoader() {
     };
 
     public static SortedMap<Integer, Event> loadEventsFromFile() {
