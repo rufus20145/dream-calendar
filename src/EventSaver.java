@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class EventSaver {
 
@@ -35,7 +36,7 @@ public class EventSaver {
             }
         }
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
         try (FileWriter fWriter = new FileWriter(file); BufferedWriter bWriter = new BufferedWriter(fWriter)) {
             bWriter.write(gson.toJson(events, events.getClass()));
         } catch (IOException e) {
