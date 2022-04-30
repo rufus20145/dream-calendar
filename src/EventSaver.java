@@ -36,7 +36,7 @@ public class EventSaver {
             }
         }
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
         try (FileWriter fWriter = new FileWriter(file); BufferedWriter bWriter = new BufferedWriter(fWriter)) {
             bWriter.write(gson.toJson(events, events.getClass()));
         } catch (IOException e) {
