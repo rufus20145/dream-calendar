@@ -26,7 +26,7 @@ public class EventLoader {
         SortedMap<Integer, Event> eventsFromFile = null;
         Type type = new TypeToken<TreeMap<Integer, Event>>() {
         }.getType();
-        Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
+        Gson gson = new Gson();
         if (file.exists()) {
             try (FileReader fReader = new FileReader(file); BufferedReader bReader = new BufferedReader(fReader)) {
                 eventsFromFile = gson.fromJson(bReader.readLine(), type);
