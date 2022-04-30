@@ -7,6 +7,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,7 +26,7 @@ public class EventLoader {
         SortedMap<Integer, Event> eventsFromFile = null;
         Type type = new TypeToken<TreeMap<Integer, Event>>() {
         }.getType();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
         if (file.exists()) {
             try (FileReader fReader = new FileReader(file); BufferedReader bReader = new BufferedReader(fReader)) {
                 eventsFromFile = gson.fromJson(bReader.readLine(), type);
