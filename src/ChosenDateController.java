@@ -19,7 +19,6 @@ public class ChosenDateController extends Controller {
      * Отображение в chosenDateText сегодняшней даты
      */
     public void showCurrentDate() {
-//        System.out.println(currentDateLD);
         if (LocalDate.now().getMonthValue() == currentDate.getMonthValue() && LocalDate.now().getYear() == currentDate.getYear()) {
             for (Node element : anchorPane.getChildren()) {
                 if (element instanceof Text && !(((Text) element).getText()).isEmpty() && Integer.parseInt(((Text) element).getText()) == LocalDate.now().getDayOfMonth()) {
@@ -44,6 +43,7 @@ public class ChosenDateController extends Controller {
                         currentDateString = getDayValueWithZero + "." + getMonthValueWithZero + "." + currentDateLD.getYear() + " г.";
                         chosenDateText.setText(currentDateString);
                     }
+                    break; // Выход из цикла, если ячейка найдена
                 }
             }
         }
