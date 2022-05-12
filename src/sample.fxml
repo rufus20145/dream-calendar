@@ -330,12 +330,12 @@
             <Font name="Impact" size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="1.0" layoutY="375.0" onMouseClicked="#reduceMonth" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="6.0" layoutY="375.0" onMouseClicked="#reduceMonth" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@icons/back_arrow.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="804.0" layoutY="375.0" onMouseClicked="#increaseMonth" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="800.0" layoutY="375.0" onMouseClicked="#increaseMonth" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@icons/forward_arrow.png" />
          </image>
