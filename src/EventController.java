@@ -6,6 +6,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 import java.time.LocalDate;
 import java.util.SortedMap;
@@ -116,7 +117,6 @@ public class EventController extends Controller {
             }
         }
     }
-//
 
     /**
      * Генерация ключа для первого события выбранного дня
@@ -133,7 +133,6 @@ public class EventController extends Controller {
         int KEY_GENERATION_COEFF = 100;
         return chosenDay * chosenMonth * chosenYear * KEY_GENERATION_COEFF;
     }
-//
 
     /**
      * Вывод в TextField описания выбранного события и заполнение времени
@@ -173,7 +172,7 @@ public class EventController extends Controller {
     public void fillListView() {
         int count = 0;
         for (Integer key : eventMemory.keySet()) {
-            int sum = getKeyForChosenDate(getChosenDateString(gridPane, currentDate)) + count;
+            int sum = getKeyForChosenDate(getChosenDateString(0, gridPane, currentDate)) + count;
             if (sum == key) {
                 eventNames.add(eventMemory.get(sum).getEventTitle());
                 eventListView.setItems(eventNames);
@@ -187,7 +186,7 @@ public class EventController extends Controller {
      * Сортировка событий по времени
      */
     private void sortEventsForChosenDay() {
-        int dayFirstKey = getKeyForChosenDate(getChosenDateString(gridPane, currentDate));
+        int dayFirstKey = getKeyForChosenDate(getChosenDateString(0, gridPane, currentDate));
 
         quickSort = new QuickSort();
         quickSort.quickSortTreeMap(eventMemory, dayFirstKey, dayFirstKey + eventListView.getItems().size() - 1);
@@ -222,13 +221,15 @@ public class EventController extends Controller {
             }
             eventMemory.remove(keyCopy);
             numberEvent--;
+            if (numberEvent == 0) {
+                ((Pane) Controller.chosenCell).getChildren().get(0).setVisible(false);
+            }
 
             clearNameAndTextEventField();
             editChooseNoteButton.setDisable(true);
             deleteChooseNoteButton.setDisable(true);
         });
     }
-//
 
     /**
      * Очистка полей eventNameField и eventTextField
@@ -240,7 +241,6 @@ public class EventController extends Controller {
         hours.setValue("");
         minutes.setValue("");
     }
-//
 
     /**
      * Логика редактирования событий при нажатии на соответствующую кнопку

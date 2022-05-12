@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Objects;
 
 public class FxmlLoader extends Application {
@@ -13,9 +12,9 @@ public class FxmlLoader extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            Controller.setEvents(EventLoader.loadEventsFromFile());
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
             Scene mainScene = new Scene(root);
-            Controller.setEvents(EventLoader.loadEventsFromFile());
             primaryStage.getIcons().add(new Image("icons/icon_128.png"));
             primaryStage.setTitle("Календарь");
             primaryStage.setScene(mainScene);

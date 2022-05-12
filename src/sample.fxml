@@ -249,48 +249,342 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" />
-                  <Pane fx:id="id6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="4" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="5" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane fx:id="id6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="1">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="2">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="3">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="4">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="5">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="5">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children></Pane>
                </children>
             </GridPane>
          </children>

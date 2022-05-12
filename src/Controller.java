@@ -48,6 +48,7 @@ public class Controller implements Initializable {
     private boolean monthIncrease = false, monthReduce = false;
     public boolean cellSelected = false;
     private boolean dateIsQuick = false;
+    private boolean checkNotes = false;
     private static HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на выбранный месяц
     private Node cellElementCurrentDay; // Ячейка текущего дня для выделения ее "синим" цветом
     public LocalDate currentDateLD; // Дата текущего дня в LD
@@ -142,6 +143,7 @@ public class Controller implements Initializable {
         if (cellSelected) {
             showChosenDay(firstActiveCell);
         }
+        setNotesIcons();
     }
 
     /**
@@ -204,6 +206,7 @@ public class Controller implements Initializable {
     @FXML
     private void addNewNote() {
         eventController.addNewNoteMethod(chosenDateString, chosenDayDetected);
+        setNotesIcons();
     }
 
     /**
@@ -360,6 +363,7 @@ public class Controller implements Initializable {
         resetStylesBorder();
         resetStylesFont();
         quickDatePane.setVisible(false);
+        resetNotesIcons();
         showCalendar();
     }
 
@@ -372,6 +376,7 @@ public class Controller implements Initializable {
         resetStylesBorder();
         resetStylesFont();
         quickDatePane.setVisible(false);
+        resetNotesIcons();
         showCalendar();
     }
 
@@ -386,14 +391,18 @@ public class Controller implements Initializable {
     /**
      * Получение строки с датой выбранного календарного дня
      */
-    String getChosenDateString(GridPane gridPane, LocalDate currentDate) {
-        int count1 = 1;
-        for (Node node : gridPane.getChildren()) {
-            if (!node.getStyle().equals(CHOSEN_CELL_STYLE)) {
-                count1++;
-            } else {
-                numbOfCell = count1;
+    String getChosenDateString(int count, GridPane gridPane, LocalDate currentDate) {
+        if (!checkNotes) {
+            int count1 = 1;
+            for (Node node : gridPane.getChildren()) {
+                if (!node.getStyle().equals(CHOSEN_CELL_STYLE)) {
+                    count1++;
+                } else {
+                    numbOfCell = count1;
+                }
             }
+        } else {
+            numbOfCell = count;
         }
 
         String monthValueWithZero;
@@ -430,6 +439,8 @@ public class Controller implements Initializable {
         }
     }
 
+    public static Node chosenCell;
+
     /**
      * "Навешивание" обработчиков событий (кликов мыши) на ячейки для стилизации
      * этих ячеек и не только
@@ -442,10 +453,11 @@ public class Controller implements Initializable {
                 if (object instanceof Text) {
                     resetStylesBorder();
                     element.setStyle(CHOSEN_CELL_STYLE);
+                    chosenCell = element;
                     changeText();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
-                    currentDateLD = LocalDate.parse(getChosenDateString(gridPane, currentDate), formatter);
-                    chosenDateString = getChosenDateString(gridPane, currentDate) + " г.";
+                    currentDateLD = LocalDate.parse(getChosenDateString(0, gridPane, currentDate), formatter);
+                    chosenDateString = getChosenDateString(0, gridPane, currentDate) + " г.";
                     eventController.setChosenDateString(chosenDateString);
                     chosenDayDetected = true;
                     cellSelected = true;
@@ -464,11 +476,38 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Добавление иконок для дней с событиями
+     */
+    public void setNotesIcons() {
+        checkNotes = true;
+        for (int i = 0; i < NUM_OF_ALL_CELLS; ++i) {
+            String noteDateString = getChosenDateString(i + 1, gridPane, currentDate) + " г.";
+            for (Map.Entry<Integer, Event> event: EventController.eventMemory.entrySet())
+            {
+                if (noteDateString.equals(event.getValue().getEventDate())) {
+                   Node element = ((Pane) listOfPane.get(i)).getChildren().get(0);
+                   element.setVisible(true);
+                }
+            }
+        }
+        checkNotes = false;
+    }
+
+    /**
+     * Удаление иконок событий у всех ячеек
+     */
+    private void resetNotesIcons() {
+        for (Node node : listOfPane) {
+            ((Pane) node).getChildren().get(0).setVisible(false);
+        }
+    }
+
+    /**
      * Изменение даты в текстовом представлении в верхней части календаря
      */
     private void changeText() {
-        chosenDateText.setText(getChosenDateString(gridPane, currentDate) + " г.");
-        currentDateString = getChosenDateString(gridPane, currentDate);
+        chosenDateText.setText(getChosenDateString(0, gridPane, currentDate) + " г.");
+        currentDateString = getChosenDateString(0, gridPane, currentDate);
     }
 
     /**
