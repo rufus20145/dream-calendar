@@ -607,7 +607,7 @@ public class Controller implements Initializable {
         });
     }
 
-    public static Map<Integer, Event> getEvents() {
+    public static SortedMap<Integer, Event> getEvents() {
         return EventController.eventMemory;
     }
 

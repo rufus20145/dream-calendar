@@ -93,9 +93,11 @@ public class EventController extends Controller {
             } else {
                 Event newEvent;
                 if (eventNameField.getText().isEmpty()) {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
+                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
+                            getEventMinutes());
                 } else {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(), getEventMinutes());
+                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
+                            getEventHours(), getEventMinutes());
                 }
                 int keyEvent = getKeyForChosenDate(chosenDateString) + numberEvent;
                 numberEvent++;
@@ -121,7 +123,7 @@ public class EventController extends Controller {
     /**
      * Генерация ключа для первого события выбранного дня
      */
-    private Integer getKeyForChosenDate(String chosenDateString) {
+    Integer getKeyForChosenDate(String chosenDateString) {
         char[] chosenDateInChar = chosenDateString.toCharArray();
         String chosenDayInString = "" + chosenDateInChar[0] + chosenDateInChar[1];
         String chosenMonthInString = "" + chosenDateInChar[3] + chosenDateInChar[4];
