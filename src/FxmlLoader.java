@@ -9,13 +9,18 @@ import java.util.Objects;
 
 public class FxmlLoader extends Application {
 
+    /**
+     *
+     */
+    private static final String APPLICATION_ICON = "icons/icon_128.png";
+
     @Override
     public void start(Stage primaryStage) {
         try {
             Controller.setEvents(EventLoader.loadEventsFromFile());
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
             Scene mainScene = new Scene(root);
-            primaryStage.getIcons().add(new Image("icons/icon_128.png"));
+            primaryStage.getIcons().add(new Image(APPLICATION_ICON));
             primaryStage.setTitle("Календарь");
             primaryStage.setScene(mainScene);
             primaryStage.show();
@@ -24,6 +29,8 @@ public class FxmlLoader extends Application {
         } catch (Exception e) {
             System.out.println("Произошла ошибка " + e.getMessage());
         }
+        Notificator notificator = new Notificator(APPLICATION_ICON);
+        notificator.sendDailyNotification();
     }
 
     /**
