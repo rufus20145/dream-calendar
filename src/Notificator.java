@@ -42,18 +42,17 @@ public class Notificator {
             List<String> todayEventsTitles = new ArrayList<>();
             EventController ec = new EventController();
             Calendar currDate = new GregorianCalendar();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
             for (Entry<Integer, Event> entryElem : set) {
                 if (Objects.equals(entryElem.getKey() / 100,
                         ec.getKeyForChosenDate(sdf.format(currDate.getTime())) / 100)) {
                     todayEventsTitles.add(entryElem.getValue().getEventTitle());
                 }
             }
-            // StringBuilder title = new StringBuilder();
             String titleString = "Ваши события на сегодня";
             StringBuilder messageText = new StringBuilder("Общее количество событий: ");
             messageText.append(todayEventsTitles.size()).append("\n");
-            if (0 == todayEventsTitles.size()) {
+            if (todayEventsTitles.isEmpty()) {
                 messageText.append("Событий нет. \nМожно отдыхать!\n");
             } else if (todayEventsTitles.size() < 4) {
                 for (int index = 0; index < todayEventsTitles.size(); index++) {
@@ -74,14 +73,15 @@ public class Notificator {
 
     /**
      * метод для инициализации иконки приложения в трее, если данная
-     * функциональность поддеривается операционной системой
+     * функциональность поддерживается операционной системой
      * 
      * @return созданная иконка либо
      */
     private TrayIcon initTrayIcon() {
-        TrayIcon trayIcon = new TrayIcon(this.trayIconImage, "Dream Calendar");
-        trayIcon.setImageAutoSize(true);
-        return trayIcon;
+        TrayIcon newTrayIcon = new TrayIcon(this.trayIconImage, "Dream Calendar");
+        newTrayIcon.setImageAutoSize(true);
+
+        return newTrayIcon;
     }
 
     /**
