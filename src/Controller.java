@@ -49,7 +49,8 @@ public class Controller implements Initializable {
     public boolean cellSelected = false;
     private boolean dateIsQuick = false;
     private boolean checkNotes = false;
-    private static HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на выбранный месяц
+    private static HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на
+                                                                                    // выбранный месяц
     private Node cellElementCurrentDay; // Ячейка текущего дня для выделения ее "синим" цветом
     public LocalDate currentDateLD; // Дата текущего дня в LD
     public LocalDate currentDate;
@@ -112,7 +113,7 @@ public class Controller implements Initializable {
     public ComboBox<Integer> yearOfQuickDate;
 
     @FXML
-    void showCalendar() {
+    private void showCalendar() {
         currentDate = getCurrentDate();
         eventController.setCurrentDate(currentDate);
         currMonthAndYear = new CurrMonthAndYear(currentMonthText, currentDate);
@@ -173,8 +174,8 @@ public class Controller implements Initializable {
                 && currentDateLD.getYear() == currentDate.minusYears(1).getYear()
                 && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
                 || (currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue()
-                && currentDateLD.getYear() == currentDate.getYear()
-                && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))));
+                        && currentDateLD.getYear() == currentDate.getYear()
+                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))));
     }
 
     /**
@@ -196,8 +197,8 @@ public class Controller implements Initializable {
                 && currentDateLD.getYear() == currentDate.plusYears(1).getYear()
                 && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
                 || ((currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue()
-                && currentDateLD.getYear() == currentDate.getYear()
-                && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))));
+                        && currentDateLD.getYear() == currentDate.getYear()
+                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))));
     }
 
     /**
@@ -210,7 +211,8 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Получение даты первого дня текущего месяца вместе с годом для дальнейшего использования в проверках
+     * Получение даты первого дня текущего месяца вместе с годом для дальнейшего
+     * использования в проверках
      */
     private LocalDate getCurrentDateWithFirstDay(int month, int year) {
         StringBuilder stringDate;
@@ -239,11 +241,13 @@ public class Controller implements Initializable {
         if (monthIncrease) {
             month = currentDate.getMonthValue() + 1;
             year = currentDate.getYear();
-            return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного месяца
+            return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного
+                                                            // месяца
         } else if (monthReduce) {
             month = currentDate.getMonthValue() - 1;
             year = currentDate.getYear();
-            return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного месяца
+            return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного
+                                                            // месяца
         } else if (dateIsQuick) {
             resetStylesBorder();
             resetStylesFont();
@@ -311,7 +315,8 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Получение номера ячейки, с которой начинается первое число текущего месяца, для корректной расстановки дней месяца в ячейках
+     * Получение номера ячейки, с которой начинается первое число текущего месяца,
+     * для корректной расстановки дней месяца в ячейках
      */
     private int getCellNumberFirstDayMonth(LocalDate date) {
         String correctMonth;
@@ -321,7 +326,9 @@ public class Controller implements Initializable {
         } else {
             correctMonth = "" + date.getMonthValue();
         }
-        DayOfWeek dow = LocalDate.parse("01-" + correctMonth + "-" + date.getYear(), DateTimeFormatter.ofPattern("dd-MM-yyyy")).getDayOfWeek();
+        DayOfWeek dow = LocalDate
+                .parse("01-" + correctMonth + "-" + date.getYear(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                .getDayOfWeek();
         return dow.getValue();
     }
 
@@ -384,7 +391,8 @@ public class Controller implements Initializable {
      * Выделение сегодняшнего числа в ячейке цветом
      */
     private void highlightToday() {
-        if (currentDate.getMonthValue() == LocalDate.now().getMonthValue() && currentDate.getYear() == LocalDate.now().getYear())
+        if (currentDate.getMonthValue() == LocalDate.now().getMonthValue()
+                && currentDate.getYear() == LocalDate.now().getYear())
             cellElementCurrentDay.setStyle(("-fx-fill: #0000ff"));
     }
 
@@ -466,9 +474,11 @@ public class Controller implements Initializable {
                     eventController.clearListView();
                     eventController.clearNameAndTextEventField();
                     eventController.fillListView();
-                    eventController.eventUpdateHandlers();  // Вывод в TextField описания выбранного события и заполнение времени
+                    eventController.eventUpdateHandlers(); // Вывод в TextField описания выбранного события и заполнение
+                                                           // времени
                     deleteChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setDisable(true);
+                    editChooseNoteButton.setText("edit");
                 }
             });
             count++;
@@ -482,11 +492,10 @@ public class Controller implements Initializable {
         checkNotes = true;
         for (int i = 0; i < NUM_OF_ALL_CELLS; ++i) {
             String noteDateString = getChosenDateString(i + 1, gridPane, currentDate) + " г.";
-            for (Map.Entry<Integer, Event> event: EventController.eventMemory.entrySet())
-            {
+            for (Map.Entry<Integer, Event> event : EventController.eventMemory.entrySet()) {
                 if (noteDateString.equals(event.getValue().getEventDate())) {
-                   Node element = ((Pane) listOfPane.get(i)).getChildren().get(0);
-                   element.setVisible(true);
+                    Node element = ((Pane) listOfPane.get(i)).getChildren().get(0);
+                    element.setVisible(true);
                 }
             }
         }

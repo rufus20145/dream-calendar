@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -7,10 +11,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
-import java.time.LocalDate;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 public class EventController extends Controller {
     private final String EDIT = "edit";

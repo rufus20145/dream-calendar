@@ -44,6 +44,7 @@ public class QuickSort extends EventController {
     }
 
     public int spawnTime(int i, Map<Integer, Event> eventMemory) {
-        return Integer.parseInt(eventMemory.get(i).getEventHours()) * COEFF_RATE_IN_MINUTES + Integer.parseInt(eventMemory.get(i).getEventMinutes());
+        return Integer.parseInt(eventMemory.get(i).getEventHours()) * COEFF_RATE_IN_MINUTES
+                + Integer.parseInt(eventMemory.get(i).getEventMinutes());
     }
 }
