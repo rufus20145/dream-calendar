@@ -40,6 +40,7 @@ public class FxmlLoader extends Application {
     public void stop() {
         EventSaver eSaver = new EventSaver(Controller.getEvents());
         eSaver.saveEvents();
+        Notificator.removeTrayIcon();
     }
 
     public static void main(String[] args) {

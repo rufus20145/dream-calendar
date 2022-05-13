@@ -18,11 +18,12 @@ import java.util.logging.Logger;
  * Класс, реализующий функциональность получения уведомлений
  */
 public class Notificator {
-    private SystemTray tray;
+    private static TrayIcon trayIcon;
+    private static SystemTray tray;
     private Image trayIconImage;
 
     public Notificator(String trayIconSource) {
-        this.tray = SystemTray.getSystemTray();
+        tray = SystemTray.getSystemTray();
         this.trayIconImage = Toolkit.getDefaultToolkit().createImage(trayIconSource);
     }
 
@@ -35,7 +36,7 @@ public class Notificator {
                     .warning("Системный трей не поддерживается. Уведомление не было выведено.");
         }
         try {
-            TrayIcon trayIcon = initTrayIcon();
+            trayIcon = initTrayIcon();
             tray.add(trayIcon);
             Set<Entry<Integer, Event>> set = Controller.getEvents().entrySet();
             List<String> todayEventsTitles = new ArrayList<>();
@@ -65,7 +66,6 @@ public class Notificator {
 
             trayIcon.displayMessage(titleString, messageText.toString().substring(0, messageText.length() - 1),
                     MessageType.INFO);
-            tray.remove(trayIcon);
         } catch (AWTException e) {
             Logger.getLogger(Notificator.class.getName())
                     .warning("При добавлении иконки в трей произошла ошибка. " + e.getMessage());
@@ -79,9 +79,16 @@ public class Notificator {
      * @return созданная иконка либо
      */
     private TrayIcon initTrayIcon() {
-        TrayIcon trayIcon = new TrayIcon(this.trayIconImage, "Tray Demo");
+        TrayIcon trayIcon = new TrayIcon(this.trayIconImage, "Dream Calendar");
         trayIcon.setImageAutoSize(true);
-        trayIcon.setToolTip("System tray icon demo");
         return trayIcon;
     }
+
+    /**
+     * удаление иконки приложения из системного трея
+     */
+    public static void removeTrayIcon() {
+        tray.remove(trayIcon);
+    }
+
 }
