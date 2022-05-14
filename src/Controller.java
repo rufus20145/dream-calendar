@@ -1,3 +1,4 @@
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -112,6 +113,8 @@ public class Controller implements Initializable {
     @FXML
     public ComboBox<Integer> yearOfQuickDate;
 
+    public ComboBox<EventTypes> categoryComboBox;
+
     @FXML
     private void showCalendar() {
         currentDate = getCurrentDate();
@@ -144,6 +147,8 @@ public class Controller implements Initializable {
         if (cellSelected) {
             showChosenDay(firstActiveCell);
         }
+
+        categoryComboBox.setItems(FXCollections.observableArrayList(EventTypes.values()));
         setNotesIcons();
     }
 
@@ -479,6 +484,7 @@ public class Controller implements Initializable {
                     deleteChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setText("edit");
+
                 }
             });
             count++;
@@ -639,6 +645,7 @@ public class Controller implements Initializable {
         eventController.setEventListView(eventListView);
         eventController.setDeleteChooseNoteButton(deleteChooseNoteButton);
         eventController.textFieldListener();
+        eventController.setCategoryComboBox(categoryComboBox);
         Time time = new Time(currentTime);
         time.printTimeNow();
         ConstCurrentDate constCurrentDate = new ConstCurrentDate(currentDayConst, currentDate);

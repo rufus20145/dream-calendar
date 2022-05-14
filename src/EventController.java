@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -13,8 +14,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class EventController extends Controller {
-    private final String EDIT = "edit";
-    private final String SAVE = "save";
+    private static final int KEY_GENERATION_COEFF = 100;
+    private static final String EDIT = "edit";
+    private static final String SAVE = "save";
 
     private ListView<String> eventListView;
     private boolean editingIsActive = false;
@@ -28,12 +30,12 @@ public class EventController extends Controller {
     private TextArea eventTextField;
     private Button deleteChooseNoteButton;
     private ComboBox<String> hours;
+    private ComboBox<EventTypes> categoryComboBox;
     private ComboBox<String> minutes;
     private LocalDate currentDate;
     private TextField eventNameField;
     private GridPane gridPane;
     private String chosenDateString;
-    public QuickSort quickSort;
 
     public void setEventListView(ListView<String> eventListView) {
         this.eventListView = eventListView;
@@ -61,6 +63,10 @@ public class EventController extends Controller {
 
     public void setHours(ComboBox<String> hours) {
         this.hours = hours;
+    }
+
+    public void setCategoryComboBox(ComboBox<EventTypes> categoryComboBox) {
+        this.categoryComboBox = categoryComboBox;
     }
 
     public void setMinutes(ComboBox<String> minutes) {
@@ -91,13 +97,24 @@ public class EventController extends Controller {
             if (hours.getSelectionModel().isEmpty() && minutes.getSelectionModel().isEmpty()) {
                 hours.requestFocus();
             } else {
+                // TODO: делать тут
                 Event newEvent;
-                if (eventNameField.getText().isEmpty()) {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
-                            getEventMinutes());
+                if (eventTextField.getText().isEmpty()) {
+                    if (Arrays.asList(EventTypes.values()).contains(categoryComboBox.getValue())) {
+                        newEvent = new Event(categoryComboBox.getValue(), chosenDateString, eventNameField.getText(),
+                                getEventHours(), getEventMinutes());
+                    } else {
+                        newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
+                                getEventMinutes());
+                    }
                 } else {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
-                            getEventHours(), getEventMinutes());
+                    if (Arrays.asList(EventTypes.values()).contains(categoryComboBox.getValue())) {
+                        newEvent = new Event(categoryComboBox.getValue(), chosenDateString, eventNameField.getText(),
+                                eventTextField.getText(), getEventHours(), getEventMinutes());
+                    } else {
+                        newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
+                                getEventHours(), getEventMinutes());
+                    }
                 }
                 int keyEvent = getKeyForChosenDate(chosenDateString) + numberEvent;
                 numberEvent++;
@@ -132,7 +149,6 @@ public class EventController extends Controller {
         int chosenDay = Integer.parseInt(chosenDayInString);
         int chosenMonth = Integer.parseInt(chosenMonthInString);
         int chosenYear = Integer.parseInt(chosenYearInString);
-        int KEY_GENERATION_COEFF = 100;
         return chosenDay * chosenMonth * chosenYear * KEY_GENERATION_COEFF;
     }
 
@@ -177,11 +193,11 @@ public class EventController extends Controller {
             int sum = getKeyForChosenDate(getChosenDateString(0, gridPane, currentDate)) + count;
             if (sum == key) {
                 eventNames.add(eventMemory.get(sum).getEventTitle());
-                eventListView.setItems(eventNames);
                 numberEvent++;
                 count++;
             }
         }
+        eventListView.setItems(eventNames);
     }
 
     /**
@@ -190,7 +206,7 @@ public class EventController extends Controller {
     private void sortEventsForChosenDay() {
         int dayFirstKey = getKeyForChosenDate(getChosenDateString(0, gridPane, currentDate));
 
-        quickSort = new QuickSort();
+        QuickSort quickSort = new QuickSort();
         quickSort.quickSortTreeMap(eventMemory, dayFirstKey, dayFirstKey + eventListView.getItems().size() - 1);
     }
 
@@ -208,7 +224,7 @@ public class EventController extends Controller {
     }
 
     /**
-     * Удаление события в мапе и смещения всех остальных событий "влево"
+     * Удаление события в мапе и смещение всех остальных событий "влево"
      */
     private void deleteHandler(int key) {
         deleteChooseNoteButton.setOnMouseClicked(event -> {
@@ -242,6 +258,8 @@ public class EventController extends Controller {
         eventTextField.clear();
         hours.setValue("");
         minutes.setValue("");
+        categoryComboBox.getSelectionModel().clearSelection();
+        categoryComboBox.setDisable(true);
     }
 
     /**
@@ -257,18 +275,30 @@ public class EventController extends Controller {
                 eventTextField.deselect();
                 deleteChooseNoteButton.setDisable(true);
                 addNewNoteButton.setDisable(true);
+                categoryComboBox.setDisable(true);
                 switchEditToSaveButton = true;
             } else {
                 int selectedIndex = eventListView.getSelectionModel().getSelectedIndex();
                 eventNames.set(selectedIndex, eventNameField.getText());
                 Event newEvent;
-                if (eventNameField.getText().isEmpty()) {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
-                            getEventMinutes());
+                if (eventTextField.getText().isEmpty()) {
+                    if (Arrays.asList(EventTypes.values()).contains(categoryComboBox.getValue())) {
+                        newEvent = new Event(categoryComboBox.getValue(), chosenDateString, eventNameField.getText(),
+                                getEventHours(), getEventMinutes());
+                    } else {
+                        newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
+                                getEventMinutes());
+                    }
                 } else {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
-                            getEventHours(), getEventMinutes());
+                    if (Arrays.asList(EventTypes.values()).contains(categoryComboBox.getValue())) {
+                        newEvent = new Event(categoryComboBox.getValue(), chosenDateString, eventNameField.getText(),
+                                eventTextField.getText(), getEventHours(), getEventMinutes());
+                    } else {
+                        newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
+                                getEventHours(), getEventMinutes());
+                    }
                 }
+
                 eventMemory.put(key, newEvent);
                 switchEditToSaveButton = false;
                 editChooseNoteButton.setText(EDIT);
@@ -343,6 +373,7 @@ public class EventController extends Controller {
 
     public void eventNameFieldHandlersControl() {
         eventNameField.setOnMouseClicked(event -> {
+            categoryComboBox.setDisable(false);
             deleteChooseNoteButton.setDisable(true);
             editChooseNoteButton.setDisable(true);
             if (eventNameField.getText().trim().isEmpty()) {
