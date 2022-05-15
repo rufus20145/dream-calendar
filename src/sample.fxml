@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -624,12 +623,12 @@
             <Font name="Impact" size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="6.0" layoutY="375.0" onMouseClicked="#reduceMonth" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <ImageView fx:id="backArrow" fitHeight="35.0" fitWidth="35.0" layoutX="6.0" layoutY="375.0" onMouseClicked="#reduceMonth" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@icons/back_arrow.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="800.0" layoutY="375.0" onMouseClicked="#increaseMonth" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <ImageView fx:id="forwardArrow" fitHeight="35.0" fitWidth="35.0" layoutX="800.0" layoutY="375.0" onMouseClicked="#increaseMonth" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@icons/forward_arrow.png" />
          </image>
@@ -645,28 +644,25 @@
          </font>
       </Text>
       <ListView fx:id="eventListView" layoutX="839.0" layoutY="134.0" prefHeight="364.0" prefWidth="290.0" AnchorPane.leftAnchor="839.0" AnchorPane.rightAnchor="15.0" />
-      <TextField fx:id="eventNameField" layoutX="839.0" layoutY="60.0" prefHeight="26.0" prefWidth="155.0" promptText="Название" />
-      <Button fx:id="addNewNoteButton" disable="true" layoutX="999.0" layoutY="60.0" mnemonicParsing="false" onAction="#addNewNote" prefHeight="2.0" prefWidth="35.0" text="+" />
-      <Button fx:id="deleteChooseNoteButton" disable="true" layoutX="1039.0" layoutY="60.0" mnemonicParsing="false" prefHeight="2.0" prefWidth="35.0" text="-" />
-      <Button fx:id="editChooseNoteButton" disable="true" layoutX="1075.0" layoutY="60.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" text="edit" AnchorPane.rightAnchor="15.400000000000091" />
+      <TextField fx:id="eventNameField" disable="true" layoutX="839.0" layoutY="60.0" prefHeight="26.0" prefWidth="155.0" promptText="Название" />
       <Text fx:id="currentDayConst" fill="BLUE" layoutX="37.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="138.13665008544922">
          <font>
             <Font name="Impact" size="21.0" />
          </font>
       </Text>
-      <ComboBox fx:id="hours" layoutX="927.0" layoutY="95.0" onMouseClicked="#showAllHours" prefHeight="30.0" prefWidth="88.0" />
-      <ComboBox fx:id="minutes" layoutX="1027.0" layoutY="95.0" onMouseClicked="#showAllMinutes" prefHeight="30.0" prefWidth="88.0" />
-      <Text layoutX="839.0" layoutY="116.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Время:" wrappingWidth="88.0">
+      <ComboBox fx:id="hours" layoutX="956.0" layoutY="97.0" onMouseClicked="#showAllHours" prefHeight="30.0" prefWidth="64.0" />
+      <ComboBox fx:id="minutes" layoutX="1037.0" layoutY="97.0" onMouseClicked="#showAllMinutes" prefHeight="30.0" prefWidth="64.0" />
+      <Text layoutX="868.0" layoutY="119.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Время:" wrappingWidth="88.0">
          <font>
             <Font name="Arial" size="23.0" />
          </font>
       </Text>
-      <Text layoutX="1017.0" layoutY="118.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="9.5999755859375">
+      <Text layoutX="1023.0" layoutY="122.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="9.5999755859375">
          <font>
-            <Font name="Gigi" size="39.0" />
+            <Font name="Impact" size="39.0" />
          </font>
       </Text>
-      <TextArea fx:id="eventTextField" editable="false" layoutX="839.0" layoutY="511.0" prefHeight="138.0" prefWidth="290.0" promptText="Текст" />
+      <TextArea fx:id="eventTextField" editable="false" layoutX="839.0" layoutY="511.0" prefHeight="138.0" prefWidth="290.0" promptText="Описание" />
       <Label fx:id="currentTime" layoutX="37.0" layoutY="14.0" prefHeight="35.0" prefWidth="138.0">
          <font>
             <Font name="Impact" size="30.0" />
@@ -675,7 +671,7 @@
       <Pane fx:id="quickDatePane" layoutX="602.0" layoutY="40.0" prefHeight="54.0" prefWidth="205.0" style="-fx-background-color: #c8c8c8;" visible="false">
          <children>
             <ComboBox fx:id="monthOfQuickDate" focusTraversable="false" layoutX="4.0" layoutY="22.0" onMouseClicked="#showMonth" prefHeight="28.0" prefWidth="118.0" visibleRowCount="6" />
-            <ComboBox fx:id="yearOfQuickDate" focusTraversable="false" layoutX="123.0" layoutY="22.0" onMouseClicked="#showYear" prefHeight="28.0" prefWidth="80.0" visibleRowCount="6" />
+            <ComboBox fx:id="yearOfQuickDate" focusTraversable="false" layoutX="123.0" layoutY="22.0" onMouseClicked="#showYear" prefHeight="28.0" prefWidth="80.0" visibleRowCount="5" />
             <Text layoutX="35.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Месяц" wrappingWidth="70.39998779296866">
                <font>
                   <Font name="Alef Regular" size="18.0" />
@@ -688,5 +684,20 @@
             </Text>
          </children>
       </Pane>
+      <ImageView fx:id="addNewNoteButton" disable="true" fitHeight="30.0" fitWidth="30.0" layoutX="1011.0" layoutY="58.0" onMouseClicked="#addNewNote" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+         <image>
+            <Image url="@icons/add_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="deleteChooseNoteButton" disable="true" fitHeight="31.0" fitWidth="31.0" layoutX="1055.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+         <image>
+            <Image url="@icons/delete_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="editChooseNoteButton" disable="true" fitHeight="36.0" fitWidth="36.0" layoutX="1098.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+         <image>
+            <Image url="@icons/edit_icon.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
