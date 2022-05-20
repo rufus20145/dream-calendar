@@ -2,13 +2,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.skin.ComboBoxListViewSkin;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -49,8 +49,7 @@ public class Controller implements Initializable {
     public boolean cellSelected = false;
     private boolean dateIsQuick = false;
     private boolean checkNotes = false;
-    private static HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на
-                                                                                    // выбранный месяц
+    private static HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на выбранный месяц
     private Node cellElementCurrentDay; // Ячейка текущего дня для выделения ее "синим" цветом
     public LocalDate currentDateLD; // Дата текущего дня в LD
     public LocalDate currentDate;
@@ -62,7 +61,7 @@ public class Controller implements Initializable {
     private EventController eventController;
 
     @FXML
-    public Button addNewNoteButton;
+    public ImageView addNewNoteButton;
 
     @FXML
     public Label currentTime;
@@ -77,10 +76,16 @@ public class Controller implements Initializable {
     public Text currentMonthText;
 
     @FXML
-    private Button deleteChooseNoteButton;
+    private ImageView deleteChooseNoteButton;
 
     @FXML
-    public Button editChooseNoteButton;
+    public ImageView editChooseNoteButton;
+
+    @FXML
+    private ImageView backArrow;
+
+    @FXML
+    private ImageView forwardArrow;
 
     @FXML
     public GridPane gridPane;
@@ -174,8 +179,8 @@ public class Controller implements Initializable {
                 && currentDateLD.getYear() == currentDate.minusYears(1).getYear()
                 && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
                 || (currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue()
-                        && currentDateLD.getYear() == currentDate.getYear()
-                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))));
+                && currentDateLD.getYear() == currentDate.getYear()
+                && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))));
     }
 
     /**
@@ -197,8 +202,8 @@ public class Controller implements Initializable {
                 && currentDateLD.getYear() == currentDate.plusYears(1).getYear()
                 && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
                 || ((currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue()
-                        && currentDateLD.getYear() == currentDate.getYear()
-                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))));
+                && currentDateLD.getYear() == currentDate.getYear()
+                && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))));
     }
 
     /**
@@ -242,12 +247,12 @@ public class Controller implements Initializable {
             month = currentDate.getMonthValue() + 1;
             year = currentDate.getYear();
             return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного
-                                                            // месяца
+            // месяца
         } else if (monthReduce) {
             month = currentDate.getMonthValue() - 1;
             year = currentDate.getYear();
             return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного
-                                                            // месяца
+            // месяца
         } else if (dateIsQuick) {
             resetStylesBorder();
             resetStylesFont();
@@ -276,29 +281,64 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Делать все ячейки кликабельными
+     */
+    private void setCellsDisableFalse() {
+        for (Node pane : listOfPane) {
+            pane.setDisable(false);
+        }
+    }
+
+    /**
+     * Делать стрелки кликабельными
+     */
+    private void setArrowsDisableFalse() {
+        backArrow.setDisable(false);
+        forwardArrow.setDisable(false);
+    }
+
+    /**
      * Расстановка чисел в предыдущем и следующем календарных месяцах
      */
     private void createPassiveCalendar(int firstActiveCell) {
+        setCellsDisableFalse();
+        setArrowsDisableFalse();
+
         firstActiveCell -= 2;
 
         int numDaysLastMonth = currentDate.minusMonths(1).lengthOfMonth();
-        for (int i = firstActiveCell; i >= 0; --i) {
-            Object text = listOfTexts.get(i);
-            if (text instanceof Text) {
-                ((Text) text).setText(Integer.toString(numDaysLastMonth));
-                ((Text) text).setStyle("-fx-opacity: 0.25");
-                memoryNumbersByCells.put(i + 1, ((Text) text).getText());
-                numDaysLastMonth--;
+        if (currentDate.getYear() != 1922 || currentDate.getMonthValue() != 1) {
+            for (int i = firstActiveCell; i >= 0; --i) {
+                Object text = listOfTexts.get(i);
+                if (text instanceof Text) {
+                    ((Text) text).setText(Integer.toString(numDaysLastMonth));
+                    ((Text) text).setStyle("-fx-opacity: 0.25");
+                    memoryNumbersByCells.put(i + 1, ((Text) text).getText());
+                    numDaysLastMonth--;
+                }
+            }
+        } else {
+            for (int i = firstActiveCell; i >= 0; --i) {
+                listOfPane.get(i).setDisable(true);
+                backArrow.setDisable(true);
             }
         }
+
         int numOfDay = 1;
-        for (int i = currentDate.lengthOfMonth() + firstActiveCell + 1; i < NUM_OF_ALL_CELLS; ++i) {
-            Object text = listOfTexts.get(i);
-            if (text instanceof Text) {
-                ((Text) text).setText(Integer.toString(numOfDay));
-                ((Text) text).setStyle("-fx-opacity: 0.25");
-                memoryNumbersByCells.put(i + 1, ((Text) text).getText());
-                numOfDay++;
+        if (currentDate.getYear() != 2122 || currentDate.getMonthValue() != 12) {
+            for (int i = currentDate.lengthOfMonth() + firstActiveCell + 1; i < NUM_OF_ALL_CELLS; ++i) {
+                Object text = listOfTexts.get(i);
+                if (text instanceof Text) {
+                    ((Text) text).setText(Integer.toString(numOfDay));
+                    ((Text) text).setStyle("-fx-opacity: 0.25");
+                    memoryNumbersByCells.put(i + 1, ((Text) text).getText());
+                    numOfDay++;
+                }
+            }
+        } else {
+            for (int i = currentDate.lengthOfMonth() + firstActiveCell + 1; i < NUM_OF_ALL_CELLS; ++i) {
+                listOfPane.get(i).setDisable(true);
+                forwardArrow.setDisable(true);
             }
         }
     }
@@ -458,6 +498,7 @@ public class Controller implements Initializable {
         for (Node element : gridPane.getChildren()) {
             Object object = listOfTexts.get(count);
             element.setOnMouseClicked(e -> {
+                eventNameField.setDisable(false);
                 if (object instanceof Text) {
                     resetStylesBorder();
                     element.setStyle(CHOSEN_CELL_STYLE);
@@ -474,11 +515,10 @@ public class Controller implements Initializable {
                     eventController.clearListView();
                     eventController.clearNameAndTextEventField();
                     eventController.fillListView();
-                    eventController.eventUpdateHandlers(); // Вывод в TextField описания выбранного события и заполнение
-                                                           // времени
+                    eventController.eventUpdateHandlers(); // Вывод в TextField описания выбранного события и заполнение времени
                     deleteChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setDisable(true);
-                    editChooseNoteButton.setText("edit");
+                    editChooseNoteButton.setImage(eventController.EDIT_IMAGE);
                 }
             });
             count++;
