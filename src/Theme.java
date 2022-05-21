@@ -1,13 +1,6 @@
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,9 +11,18 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Logger;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 public class Theme {
     private static final Image sunImage = new Image("/icons/sun.png");
@@ -30,7 +32,6 @@ public class Theme {
     private static final String FOLDERNAME = "\\dream-calendar\\";
     private static final String DEFAULT_FILENAME = "settings.xml";
     private static final String DEFAULT_FILEPATH = System.getenv("APPDATA") + "\\dream-calendar\\settings.xml";
-    private static File folder;
     private static Document doc;
 
     private ImageView themeMod;
@@ -43,8 +44,9 @@ public class Theme {
     private Text currentMonthText;
     private Text colon;
 
-    public Theme(ImageView themeMod, AnchorPane mainAnchorPane, AnchorPane anchorPane, GridPane gridPane, Label currentTime,
-                 Text choseTimeText, Text chosenDateText, Text currentMonthText, Text colon) {
+    public Theme(ImageView themeMod, AnchorPane mainAnchorPane, AnchorPane anchorPane, GridPane gridPane,
+            Label currentTime,
+            Text choseTimeText, Text chosenDateText, Text currentMonthText, Text colon) {
         this.themeMod = themeMod;
         this.mainAnchorPane = mainAnchorPane;
         this.anchorPane = anchorPane;
@@ -104,13 +106,17 @@ public class Theme {
             if (element instanceof Text) {
                 if (element.getStyle().equals("-fx-fill: #296cff")) {
                     element.setStyle("-fx-fill: #296cff");
-                } else if (GridPane.getColumnIndex(gridPane.getChildren().get(count)) == null && (element.getStyle().equals("-fx-opacity: 0.25") || element.getStyle().equals("-fx-fill: #000000; -fx-opacity: 0.25"))
-                        || (element.getStyle().equals("-fx-opacity: 0.25") || element.getStyle().equals("-fx-fill: #000000; -fx-opacity: 0.25")) && (GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 5
-                        && GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 6)) {
+                } else if (GridPane.getColumnIndex(gridPane.getChildren().get(count)) == null
+                        && (element.getStyle().equals("-fx-opacity: 0.25")
+                                || element.getStyle().equals("-fx-fill: #000000; -fx-opacity: 0.25"))
+                        || (element.getStyle().equals("-fx-opacity: 0.25")
+                                || element.getStyle().equals("-fx-fill: #000000; -fx-opacity: 0.25"))
+                                && (GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 5
+                                        && GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 6)) {
                     element.setStyle("-fx-fill: #ffffff; -fx-opacity: 0.25");
                 } else if (GridPane.getColumnIndex(gridPane.getChildren().get(count)) == null
                         || GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 5
-                        && GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 6) {
+                                && GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 6) {
                     element.setStyle(darkFill);
                 }
                 count++;
@@ -127,13 +133,17 @@ public class Theme {
             if (element instanceof Text) {
                 if (element.getStyle().equals("-fx-fill: #296cff")) {
                     element.setStyle("-fx-fill: #296cff");
-                } else if (GridPane.getColumnIndex(gridPane.getChildren().get(count)) == null && (element.getStyle().equals("-fx-opacity: 0.25") || element.getStyle().equals("-fx-fill: #ffffff; -fx-opacity: 0.25"))
-                        || (element.getStyle().equals("-fx-opacity: 0.25") || element.getStyle().equals("-fx-fill: #ffffff; -fx-opacity: 0.25")) && (GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 5
-                        && GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 6)) {
+                } else if (GridPane.getColumnIndex(gridPane.getChildren().get(count)) == null
+                        && (element.getStyle().equals("-fx-opacity: 0.25")
+                                || element.getStyle().equals("-fx-fill: #ffffff; -fx-opacity: 0.25"))
+                        || (element.getStyle().equals("-fx-opacity: 0.25")
+                                || element.getStyle().equals("-fx-fill: #ffffff; -fx-opacity: 0.25"))
+                                && (GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 5
+                                        && GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 6)) {
                     element.setStyle("-fx-fill: #000000; -fx-opacity: 0.25");
                 } else if (GridPane.getColumnIndex(gridPane.getChildren().get(count)) == null
                         || GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 5
-                        && GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 6) {
+                                && GridPane.getColumnIndex(gridPane.getChildren().get(count)) != 6) {
                     element.setStyle(lightFill);
                 }
                 count++;
@@ -146,7 +156,7 @@ public class Theme {
      */
     public static void saveThemeMod() {
         String appDataPath = System.getenv("APPDATA") + FOLDERNAME;
-        folder = new File(appDataPath);
+        File folder = new File(appDataPath);
         folder.mkdir();
         File file = new File(appDataPath + DEFAULT_FILENAME);
         try {
