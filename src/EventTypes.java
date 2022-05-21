@@ -1,8 +1,9 @@
 public enum EventTypes {
-    NOTIFICATION(0, "Уведомление"),
-    BIRTHDAY(1, "День рождения"),
-    HOLIDAY(2, "Праздник"),
-    MEETEING(3, "Встреча");
+    DEFAULT(0, "Без категории"),
+    NOTIFICATION(1, "Заметка"),
+    BIRTHDAY(2, "День рождения"),
+    HOLIDAY(3, "Праздник"),
+    MEETEING(4, "Встреча");
 
     private int type;
     private String title;

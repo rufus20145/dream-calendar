@@ -19,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainAnchorPane" focusTraversable="true" maxHeight="680.0" maxWidth="1144.0" minHeight="680.0" minWidth="1140.0" prefHeight="680.0" prefWidth="1144.0" style="-fx-background-color: white;" stylesheets="@css/font.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane fx:id="mainAnchorPane" focusTraversable="true" maxHeight="680.0" maxWidth="1144.0" minHeight="680.0" minWidth="1140.0" prefHeight="680.0" prefWidth="1144.0" style="-fx-background-color: white;" stylesheets="@css/font.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <AnchorPane fx:id="anchorPane" layoutX="38.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="764.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a; -fx-background-color: #dff5f8;">
          <children>
@@ -689,7 +689,7 @@
       <Pane fx:id="quickDatePane" layoutX="597.0" layoutY="33.0" prefHeight="59.0" prefWidth="205.0" style="-fx-background-color: #181818; -fx-border-width: 1; -fx-border-color: #76787a;" visible="false">
          <children>
             <ComboBox fx:id="monthOfQuickDate" focusTraversable="false" layoutX="5.0" layoutY="22.0" onMouseClicked="#showMonth" prefHeight="30.0" prefWidth="110.0" visibleRowCount="6" />
-            <ComboBox fx:id="yearOfQuickDate" focusTraversable="false" layoutX="121.0" layoutY="22.0" onMouseClicked="#showYear" prefHeight="28.0" prefWidth="80.0" visibleRowCount="5" />
+            <ComboBox fx:id="yearOfQuickDate" focusTraversable="false" layoutX="121.0" layoutY="22.0" onMouseClicked="#showYear" prefHeight="30.0" prefWidth="80.0" visibleRowCount="5" />
             <Text fill="WHITE" layoutX="33.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Месяц" textAlignment="CENTER" wrappingWidth="55.0">
                <font>
                   <Font name="Alef Regular" size="18.0" />
@@ -702,7 +702,7 @@
             </Text>
          </children>
       </Pane>
-      <ComboBox fx:id="categoryComboBox" disable="true" layoutX="839.0" layoutY="20.0" prefWidth="155.0" />
+      <ComboBox fx:id="categoryComboBox" disable="true" layoutX="839.0" layoutY="25.0" prefWidth="155.0" promptText="Без категории" />
       <ImageView fx:id="addNewNoteButton" disable="true" fitHeight="30.0" fitWidth="30.0" layoutX="1011.0" layoutY="58.0" onMouseClicked="#addNewNote" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@icons/add_icon.png" />

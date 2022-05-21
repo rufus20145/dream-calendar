@@ -16,8 +16,6 @@ import javafx.scene.layout.Pane;
 
 public class EventController extends Controller {
     private static final int KEY_GENERATION_COEFF = 100;
-    private static final String EDIT = "edit";
-    private static final String SAVE = "save";
     private ListView<String> eventListView;
     private boolean editingIsActive = false;
     private int numberEvent = 0; // Номер события для каждого отдельного дня
@@ -103,11 +101,11 @@ public class EventController extends Controller {
                 Event newEvent;
                 if (eventTextField.getText().isBlank()) {
                     EventTypes type;
-                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
+                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.DEFAULT,
                             chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
                 } else {
                     EventTypes type;
-                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
+                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.DEFAULT,
                             chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(),
                             getEventMinutes());
                 }
@@ -131,12 +129,6 @@ public class EventController extends Controller {
             }
         }
 
-    }
-
-    public void clickOnEventNameFieldHandler2() {
-        if (eventNameField.isFocused()) {
-            categoryComboBox.setDisable(false);
-        }
     }
 
     /**
@@ -233,11 +225,14 @@ public class EventController extends Controller {
                 .setDisable(!cellSelected || eventNameField.getText().isBlank()));
         eventNameField.textProperty().addListener((observable, oldValue, newValue) -> editChooseNoteButton
                 .setDisable(eventNameField.getText().isBlank() || !editingIsActive));
-        }
+        eventNameField.textProperty().addListener((observable, oldValue, newValue) -> hours
+                .setDisable(!cellSelected || eventNameField.getText().isBlank()));
+        eventNameField.textProperty().addListener((observable, oldValue, newValue) -> minutes
+                .setDisable(!cellSelected || eventNameField.getText().isBlank()));
+    }
 
     /**
      * Удаление события в мапе и смещение всех остальных событий "влево"
-     * 
      * @param key номер события на удаление
      */
     private void deleteHandler(int key) {
@@ -256,10 +251,10 @@ public class EventController extends Controller {
             if (numberEvent == 0) {
                 ((Pane) Controller.chosenCell).getChildren().get(0).setVisible(false);
             }
-
             clearNameAndTextEventField();
             editChooseNoteButton.setDisable(true);
             deleteChooseNoteButton.setDisable(true);
+            categoryComboBox.setValue(EventTypes.DEFAULT);
         });
     }
 
@@ -268,10 +263,12 @@ public class EventController extends Controller {
      */
     void clearNameAndTextEventField() {
         editChooseNoteButton.setImage(EDIT_IMAGE);
+        categoryComboBox.setValue(EventTypes.DEFAULT);
         eventNameField.clear();
         eventTextField.clear();
         hours.setValue("");
         minutes.setValue("");
+        categoryComboBox.setValue(EventTypes.DEFAULT);
         categoryComboBox.getSelectionModel().clearSelection();
         categoryComboBox.setDisable(true);
         hours.setDisable(true);
@@ -294,7 +291,6 @@ public class EventController extends Controller {
                 switchEditToSaveButton = true;
                 categoryComboBox.setDisable(false);
             } else {
-
                 int selectedIndex = eventListView.getSelectionModel().getSelectedIndex();
                 eventNames.set(selectedIndex, eventNameField.getText());
                 Event newEvent;
@@ -318,6 +314,7 @@ public class EventController extends Controller {
                 hours.setValue("");
                 minutes.setValue("");
                 categoryComboBox.setDisable(true);
+                categoryComboBox.setValue(EventTypes.DEFAULT);
             }
             hours.setDisable(false);
             minutes.setDisable(false);
@@ -373,7 +370,6 @@ public class EventController extends Controller {
 
     /**
      * Получение часов времени события
-     * 
      * @return часы
      */
     private String getEventHours() {
@@ -386,7 +382,6 @@ public class EventController extends Controller {
 
     /**
      * Получение минут времени события
-     * 
      * @return минуты
      */
     private String getEventMinutes() {
@@ -395,14 +390,5 @@ public class EventController extends Controller {
         } else {
             return (minutes.getSelectionModel().getSelectedItem());
         }
-    }
-
-    /**
-     * Изменение свойств и полей при нажатии на область ввода названия события
-     */
-    public void eventNameFieldHandlersControl() {
-        // eventNameField.setOnMouseClicked(event -> {
-
-        // });
     }
 }

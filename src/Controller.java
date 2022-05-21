@@ -9,7 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.skin.ComboBoxListViewSkin;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -174,6 +173,12 @@ public class Controller implements Initializable {
         categoryComboBox.setItems(FXCollections.observableArrayList(EventTypes.values()));
         setNotesIcons();
         changeThemeMethod();
+        eventListView.requestFocus();
+        categoryComboBox.setStyle("-fx-opacity: 1.0");
+    }
+
+    private void setFieldsDisable() {
+
     }
 
     /**
@@ -243,10 +248,10 @@ public class Controller implements Initializable {
         setNotesIcons();
     }
 
-    @FXML
-    public void clickOnEventNameFieldHandler() {
-        eventController.clickOnEventNameFieldHandler2();
-    }
+//    @FXML
+//    public void clickOnEventNameFieldHandler() {
+//        eventController.clickOnEventNameFieldHandler2();
+//    }
 
     /**
      * Получение даты первого дня текущего месяца вместе с годом для дальнейшего
@@ -565,11 +570,12 @@ public class Controller implements Initializable {
                     eventController.clearListView();
                     eventController.clearNameAndTextEventField();
                     eventController.fillListView();
-                    eventController.eventUpdateHandlers(); // Вывод в TextField описания выбранного события и заполнение
-                                                           // времени
+                    eventController.eventUpdateHandlers(); // Вывод в TextField описания выбранного события и заполнени времени
                     deleteChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setImage(eventController.EDIT_IMAGE);
+                    eventListView.requestFocus();
+                    categoryComboBox.setValue(EventTypes.DEFAULT);
                 }
             });
             count++;
@@ -695,8 +701,6 @@ public class Controller implements Initializable {
     public void eventNameFieldHandlers() {
         eventNameField.setOnMouseClicked(event -> {
             categoryComboBox.setDisable(false);
-            hours.setDisable(false);
-            minutes.setDisable(false);
             deleteChooseNoteButton.setDisable(true);
             editChooseNoteButton.setDisable(true);
             if (eventNameField.getText().trim().isEmpty()) {
