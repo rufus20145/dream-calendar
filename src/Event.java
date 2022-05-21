@@ -1,12 +1,15 @@
-public class Event{
+public class Event {
 
+    private EventTypes type;
     private String eventDate;
     private String eventTitle;
     private String eventText;
     private String eventHours;
     private String eventMinutes;
 
-    public Event(String eventDate, String eventTitle, String eventText, String eventHours, String eventMinutes) {
+    public Event(EventTypes type, String eventDate, String eventTitle, String eventText, String eventHours,
+            String eventMinutes) {
+        this.setType(type);
         this.eventDate = eventDate;
         this.eventTitle = eventTitle;
         this.eventText = eventText;
@@ -14,8 +17,8 @@ public class Event{
         this.eventMinutes = eventMinutes;
     }
 
-    public Event(String eventDate, String eventTitle, String eventHours, String eventMinutes) {
-        this(eventDate, eventTitle, "", eventHours, eventMinutes);
+    public Event(EventTypes type, String eventDate, String eventTitle, String eventHours, String eventMinutes) {
+        this(type, eventDate, eventTitle, "", eventHours, eventMinutes);
     }
 
     public String getEventDate() {
@@ -37,4 +40,13 @@ public class Event{
     public String getEventMinutes() {
         return eventMinutes;
     }
+
+    public EventTypes getType() {
+        return type;
+    }
+
+    private void setType(EventTypes type) {
+        this.type = type;
+    }
+
 }

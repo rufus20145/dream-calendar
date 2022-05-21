@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,9 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-import javax.net.ssl.HostnameVerifier;
-
 public class EventController extends Controller {
+    private static final int KEY_GENERATION_COEFF = 100;
+    private static final String EDIT = "edit";
+    private static final String SAVE = "save";
     private ListView<String> eventListView;
     private boolean editingIsActive = false;
     private int numberEvent = 0; // Номер события для каждого отдельного дня
@@ -28,12 +30,12 @@ public class EventController extends Controller {
     private TextArea eventTextField;
     private ImageView deleteChooseNoteButton;
     private ComboBox<String> hours;
+    private ComboBox<EventTypes> categoryComboBox;
     private ComboBox<String> minutes;
     private LocalDate currentDate;
     private TextField eventNameField;
     private GridPane gridPane;
     private String chosenDateString;
-    public QuickSort quickSort;
 
     public final Image EDIT_IMAGE = new Image("/icons/edit_icon.png");
     public final Image SAVE_IMAGE = new Image("/icons/save_icon.png");
@@ -66,6 +68,10 @@ public class EventController extends Controller {
         this.hours = hours;
     }
 
+    public void setCategoryComboBox(ComboBox<EventTypes> categoryComboBox) {
+        this.categoryComboBox = categoryComboBox;
+    }
+
     public void setMinutes(ComboBox<String> minutes) {
         this.minutes = minutes;
     }
@@ -96,11 +102,14 @@ public class EventController extends Controller {
             } else {
                 Event newEvent;
                 if (eventTextField.getText().isBlank()) {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
-                            getEventMinutes());
+                    EventTypes type;
+                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
+                            chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
                 } else {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
-                            getEventHours(), getEventMinutes());
+                    EventTypes type;
+                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
+                            chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(),
+                            getEventMinutes());
                 }
                 int keyEvent = getKeyForChosenDate(chosenDateString) + numberEvent;
                 numberEvent++;
@@ -121,12 +130,13 @@ public class EventController extends Controller {
                 fillListView();
             }
         }
+
     }
 
     /**
      * Генерация ключа для первого события выбранного дня
      */
-    Integer getKeyForChosenDate(String chosenDateString) {
+    protected Integer getKeyForChosenDate(String chosenDateString) {
         char[] chosenDateInChar = chosenDateString.toCharArray();
         String chosenDayInString = "" + chosenDateInChar[0] + chosenDateInChar[1];
         String chosenMonthInString = "" + chosenDateInChar[3] + chosenDateInChar[4];
@@ -135,14 +145,13 @@ public class EventController extends Controller {
         int chosenDay = Integer.parseInt(chosenDayInString);
         int chosenMonth = Integer.parseInt(chosenMonthInString);
         int chosenYear = Integer.parseInt(chosenYearInString);
-        int KEY_GENERATION_COEFF = 100;
         return chosenDay * chosenMonth * chosenYear * KEY_GENERATION_COEFF;
     }
 
     /**
      * Вывод в TextField описания выбранного события и заполнение времени
      */
-    void eventUpdateHandlers() {
+    protected void eventUpdateHandlers() {
         if (!eventNames.isEmpty()) {
             eventListView.setOnMouseClicked(event -> {
                 hours.setDisable(true);
@@ -155,6 +164,12 @@ public class EventController extends Controller {
                 if (eventListView.getSelectionModel().isSelected(selectedIndex)) {
                     int key = getKeyForChosenEvent();
                     eventTextField.setText(eventMemory.get(key).getEventText());
+                    if (eventMemory.get(key).getType() != null) {
+                        categoryComboBox.getSelectionModel().select(eventMemory.get(key).getType().getType());
+                    } else {
+                        Logger.getLogger(EventController.class.getName()).warning(
+                                "Обанружено событие без установленной категории. Рекомендуется отредактировать событие или полностью удалить файл с локальным хранилищем.");
+                    }
                     hours.setValue(eventMemory.get(key).getEventHours());
                     minutes.setValue(eventMemory.get(key).getEventMinutes());
                     deleteChooseNoteButton.setDisable(false);
@@ -169,7 +184,7 @@ public class EventController extends Controller {
     /**
      * Очистка полей eventTextField и eventListView
      */
-    public void clearListView() {
+    protected void clearListView() {
         eventListView.getItems().clear();
         numberEvent = 0;
         eventTextField.clear();
@@ -184,11 +199,11 @@ public class EventController extends Controller {
             int sum = getKeyForChosenDate(getChosenDateString(0, gridPane, currentDate)) + count;
             if (sum == key) {
                 eventNames.add(eventMemory.get(sum).getEventTitle());
-                eventListView.setItems(eventNames);
                 numberEvent++;
                 count++;
             }
         }
+        eventListView.setItems(eventNames);
     }
 
     /**
@@ -197,7 +212,7 @@ public class EventController extends Controller {
     private void sortEventsForChosenDay() {
         int dayFirstKey = getKeyForChosenDate(getChosenDateString(0, gridPane, currentDate));
 
-        quickSort = new QuickSort();
+        QuickSort quickSort = new QuickSort();
         quickSort.quickSortTreeMap(eventMemory, dayFirstKey, dayFirstKey + eventListView.getItems().size() - 1);
     }
 
@@ -215,7 +230,9 @@ public class EventController extends Controller {
     }
 
     /**
-     * Удаление события в мапе и смещения всех остальных событий "влево"
+     * Удаление события в мапе и смещение всех остальных событий "влево"
+     * 
+     * @param key номер события на удаление
      */
     private void deleteHandler(int key) {
         deleteChooseNoteButton.setOnMouseClicked(event -> {
@@ -249,6 +266,8 @@ public class EventController extends Controller {
         eventTextField.clear();
         hours.setValue("");
         minutes.setValue("");
+        categoryComboBox.getSelectionModel().clearSelection();
+        categoryComboBox.setDisable(true);
     }
 
     /**
@@ -263,18 +282,23 @@ public class EventController extends Controller {
                 eventTextField.deselect();
                 deleteChooseNoteButton.setDisable(true);
                 addNewNoteButton.setDisable(true);
+                categoryComboBox.setDisable(true);
                 switchEditToSaveButton = true;
+                categoryComboBox.setDisable(false);
             } else {
 
                 int selectedIndex = eventListView.getSelectionModel().getSelectedIndex();
                 eventNames.set(selectedIndex, eventNameField.getText());
                 Event newEvent;
-                if (eventNameField.getText().isBlank()) {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
-                            getEventMinutes());
+                if (eventTextField.getText().isBlank()) {
+                    EventTypes type;
+                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
+                            chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
                 } else {
-                    newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
-                            getEventHours(), getEventMinutes());
+                    EventTypes type;
+                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
+                            chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(),
+                            getEventMinutes());
                 }
                 eventMemory.put(key, newEvent);
                 switchEditToSaveButton = false;
@@ -285,6 +309,7 @@ public class EventController extends Controller {
                 eventTextField.clear();
                 hours.setValue("");
                 minutes.setValue("");
+                categoryComboBox.setDisable(true);
             }
             hours.setDisable(false);
             minutes.setDisable(false);
@@ -312,15 +337,15 @@ public class EventController extends Controller {
      * Отобразить все часы в выпадающем списке
      */
     public void showAllHoursMethod() {
-            ObservableList<String> hoursList = FXCollections.observableArrayList();
-            for (int i = 0; i <= 23; ++i) {
-                if (i <= 9) {
-                    hoursList.add("0" + i);
-                } else {
-                    hoursList.add(Integer.toString(i));
-                }
+        ObservableList<String> hoursList = FXCollections.observableArrayList();
+        for (int i = 0; i <= 23; ++i) {
+            if (i <= 9) {
+                hoursList.add("0" + i);
+            } else {
+                hoursList.add(Integer.toString(i));
             }
-            hours.setItems(hoursList);
+        }
+        hours.setItems(hoursList);
     }
 
     /**
@@ -340,6 +365,7 @@ public class EventController extends Controller {
 
     /**
      * Получение часов времени события
+     * 
      * @return часы
      */
     private String getEventHours() {
@@ -352,6 +378,7 @@ public class EventController extends Controller {
 
     /**
      * Получение минут времени события
+     * 
      * @return минуты
      */
     private String getEventMinutes() {
@@ -367,6 +394,7 @@ public class EventController extends Controller {
      */
     public void eventNameFieldHandlersControl() {
         eventNameField.setOnMouseClicked(event -> {
+            categoryComboBox.setDisable(false);
             hours.setDisable(false);
             minutes.setDisable(false);
             deleteChooseNoteButton.setDisable(true);

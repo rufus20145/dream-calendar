@@ -702,6 +702,7 @@
             </Text>
          </children>
       </Pane>
+      <ComboBox fx:id="categoryComboBox" disable="true" layoutX="839.0" layoutY="20.0" prefWidth="155.0" />
       <ImageView fx:id="addNewNoteButton" disable="true" fitHeight="30.0" fitWidth="30.0" layoutX="1011.0" layoutY="58.0" onMouseClicked="#addNewNote" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
          <image>
             <Image url="@icons/add_icon.png" />
