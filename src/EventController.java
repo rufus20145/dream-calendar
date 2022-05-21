@@ -1,7 +1,7 @@
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -99,21 +99,14 @@ public class EventController extends Controller {
             } else {
                 Event newEvent;
                 if (eventTextField.getText().isEmpty()) {
-                    if (Arrays.asList(EventTypes.values()).contains(categoryComboBox.getValue())) {
-                        newEvent = new Event(categoryComboBox.getValue(), chosenDateString, eventNameField.getText(),
-                                getEventHours(), getEventMinutes());
-                    } else {
-                        newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
-                                getEventMinutes());
-                    }
+                    EventTypes type;
+                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
+                            chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
                 } else {
-                    if (Arrays.asList(EventTypes.values()).contains(categoryComboBox.getValue())) {
-                        newEvent = new Event(categoryComboBox.getValue(), chosenDateString, eventNameField.getText(),
-                                eventTextField.getText(), getEventHours(), getEventMinutes());
-                    } else {
-                        newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
-                                getEventHours(), getEventMinutes());
-                    }
+                    EventTypes type;
+                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
+                            chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(),
+                            getEventMinutes());
                 }
                 int keyEvent = getKeyForChosenDate(chosenDateString) + numberEvent;
                 numberEvent++;
@@ -134,6 +127,7 @@ public class EventController extends Controller {
                 fillListView();
             }
         }
+
     }
 
     /**
@@ -163,7 +157,12 @@ public class EventController extends Controller {
                 if (eventListView.getSelectionModel().isSelected(selectedIndex)) {
                     int key = getKeyForChosenEvent();
                     eventTextField.setText(eventMemory.get(key).getEventText());
-                    categoryComboBox.getSelectionModel().select(eventMemory.get(key).getType().getType());
+                    if (eventMemory.get(key).getType() != null) {
+                        categoryComboBox.getSelectionModel().select(eventMemory.get(key).getType().getType());
+                    } else {
+                        Logger.getLogger(EventController.class.getName()).warning(
+                                "Обанружено событие без установленной категории. Рекомендуется отредактировать событие или полностью удалить файл с локальным хранилищем.");
+                    }
                     hours.setValue(eventMemory.get(key).getEventHours());
                     minutes.setValue(eventMemory.get(key).getEventMinutes());
                     deleteChooseNoteButton.setDisable(false);
@@ -223,10 +222,11 @@ public class EventController extends Controller {
                 .setDisable(eventNameField.getText().isEmpty() || !editingIsActive));
     }
 
-/**
- *  Удаление события в мапе и смещение всех остальных событий "влево"
- * @param key номер события на удаление
- */
+    /**
+     * Удаление события в мапе и смещение всех остальных событий "влево"
+     * 
+     * @param key номер события на удаление
+     */
     private void deleteHandler(int key) {
         deleteChooseNoteButton.setOnMouseClicked(event -> {
             eventNames.remove(eventListView.getSelectionModel().getSelectedIndex());
@@ -278,33 +278,27 @@ public class EventController extends Controller {
                 addNewNoteButton.setDisable(true);
                 categoryComboBox.setDisable(true);
                 switchEditToSaveButton = true;
+                categoryComboBox.setDisable(false);
             } else {
                 int selectedIndex = eventListView.getSelectionModel().getSelectedIndex();
                 eventNames.set(selectedIndex, eventNameField.getText());
                 Event newEvent;
                 if (eventTextField.getText().isEmpty()) {
-                    if (Arrays.asList(EventTypes.values()).contains(categoryComboBox.getValue())) {
-                        newEvent = new Event(categoryComboBox.getValue(), chosenDateString, eventNameField.getText(),
-                                getEventHours(), getEventMinutes());
-                    } else {
-                        newEvent = new Event(chosenDateString, eventNameField.getText(), getEventHours(),
-                                getEventMinutes());
-                    }
+                    EventTypes type;
+                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
+                            chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
                 } else {
-                    if (Arrays.asList(EventTypes.values()).contains(categoryComboBox.getValue())) {
-                        newEvent = new Event(categoryComboBox.getValue(), chosenDateString, eventNameField.getText(),
-                                eventTextField.getText(), getEventHours(), getEventMinutes());
-                    } else {
-                        newEvent = new Event(chosenDateString, eventNameField.getText(), eventTextField.getText(),
-                                getEventHours(), getEventMinutes());
-                    }
+                    EventTypes type;
+                    newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
+                            chosenDateString, eventNameField.getText(), eventTextField.getText(), getEventHours(),
+                            getEventMinutes());
                 }
-
                 eventMemory.put(key, newEvent);
                 switchEditToSaveButton = false;
                 editChooseNoteButton.setText(EDIT);
                 eventListView.getSelectionModel().select(selectedIndex);
                 deleteChooseNoteButton.setDisable(false);
+                categoryComboBox.setDisable(true);
             }
         });
         editingIsActive = false;

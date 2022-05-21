@@ -17,14 +17,6 @@ public class Event {
         this.eventMinutes = eventMinutes;
     }
 
-    public Event(String eventDate, String eventTitle, String eventText, String eventHours, String eventMinutes) {
-        this(EventTypes.NOTIFICATION, eventDate, eventTitle, eventText, eventHours, eventMinutes);
-    }
-
-    public Event(String eventDate, String eventTitle, String eventHours, String eventMinutes) {
-        this(eventDate, eventTitle, "", eventHours, eventMinutes);
-    }
-
     public Event(EventTypes type, String eventDate, String eventTitle, String eventHours, String eventMinutes) {
         this(type, eventDate, eventTitle, "", eventHours, eventMinutes);
     }
