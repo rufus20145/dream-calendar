@@ -97,7 +97,6 @@ public class EventController extends Controller {
             if (hours.getSelectionModel().isEmpty() && minutes.getSelectionModel().isEmpty()) {
                 hours.requestFocus();
             } else {
-                // TODO: делать тут
                 Event newEvent;
                 if (eventTextField.getText().isEmpty()) {
                     if (Arrays.asList(EventTypes.values()).contains(categoryComboBox.getValue())) {
@@ -140,7 +139,7 @@ public class EventController extends Controller {
     /**
      * Генерация ключа для первого события выбранного дня
      */
-    Integer getKeyForChosenDate(String chosenDateString) {
+    protected Integer getKeyForChosenDate(String chosenDateString) {
         char[] chosenDateInChar = chosenDateString.toCharArray();
         String chosenDayInString = "" + chosenDateInChar[0] + chosenDateInChar[1];
         String chosenMonthInString = "" + chosenDateInChar[3] + chosenDateInChar[4];
@@ -155,7 +154,7 @@ public class EventController extends Controller {
     /**
      * Вывод в TextField описания выбранного события и заполнение времени
      */
-    void eventUpdateHandlers() {
+    protected void eventUpdateHandlers() {
         if (!eventNames.isEmpty()) {
             eventListView.setOnMouseClicked(event -> {
                 clearNameAndTextEventField();
@@ -164,6 +163,7 @@ public class EventController extends Controller {
                 if (eventListView.getSelectionModel().isSelected(selectedIndex)) {
                     int key = getKeyForChosenEvent();
                     eventTextField.setText(eventMemory.get(key).getEventText());
+                    categoryComboBox.getSelectionModel().select(eventMemory.get(key).getType().getType());
                     hours.setValue(eventMemory.get(key).getEventHours());
                     minutes.setValue(eventMemory.get(key).getEventMinutes());
                     deleteChooseNoteButton.setDisable(false);
@@ -178,7 +178,7 @@ public class EventController extends Controller {
     /**
      * Очистка полей eventTextField и eventListView
      */
-    public void clearListView() {
+    protected void clearListView() {
         eventListView.getItems().clear();
         numberEvent = 0;
         eventTextField.clear();
@@ -223,9 +223,10 @@ public class EventController extends Controller {
                 .setDisable(eventNameField.getText().isEmpty() || !editingIsActive));
     }
 
-    /**
-     * Удаление события в мапе и смещение всех остальных событий "влево"
-     */
+/**
+ *  Удаление события в мапе и смещение всех остальных событий "влево"
+ * @param key номер события на удаление
+ */
     private void deleteHandler(int key) {
         deleteChooseNoteButton.setOnMouseClicked(event -> {
             eventNames.remove(eventListView.getSelectionModel().getSelectedIndex());
