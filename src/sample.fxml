@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,224 +15,225 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="680.0" maxWidth="1144.0" minHeight="680.0" minWidth="1140.0" prefHeight="680.0" prefWidth="1144.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane fx:id="mainAnchorPane" focusTraversable="true" maxHeight="680.0" maxWidth="1144.0" minHeight="680.0" minWidth="1140.0" prefHeight="680.0" prefWidth="1144.0" style="-fx-background-color: white;" stylesheets="@css/font.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <AnchorPane fx:id="anchorPane" layoutX="38.0" layoutY="120.0" prefHeight="543.0" prefWidth="760.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a; -fx-background-color: #dff5f8;">
+      <AnchorPane fx:id="anchorPane" layoutX="38.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="764.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a; -fx-background-color: #dff5f8;">
          <children>
-            <Text layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="6.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="114.5" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="116.0" layoutY="31.0" stroke="BLACK" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="224.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="226.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="333.5" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="336.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="443.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="444.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="550.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text fill="RED" layoutX="553.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="659.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="38.936737060546875">
+            <Text fill="RED" layoutX="661.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="5.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="6.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="114.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="116.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="223.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="226.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="332.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="336.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="441.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="444.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="550.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text fill="RED" layoutX="553.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="659.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="38.936737060546875">
+            <Text fill="RED" layoutX="661.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="5.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="6.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="114.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="116.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="223.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="226.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="332.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="336.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="441.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="444.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="550.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text fill="RED" layoutX="553.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="659.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="38.936737060546875">
+            <Text fill="RED" layoutX="661.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="5.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="6.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="114.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="116.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="223.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="226.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="332.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="336.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="441.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="444.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="550.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text fill="RED" layoutX="553.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="659.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="38.936737060546875">
+            <Text fill="RED" layoutX="661.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="5.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="6.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="114.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="116.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="223.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="226.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="332.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="336.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="441.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="444.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="550.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text fill="RED" layoutX="553.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="659.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="38.936737060546875">
+            <Text fill="RED" layoutX="661.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="5.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="6.0" layoutY="483.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="114.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="116.0" layoutY="483.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="223.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="226.0" layoutY="483.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="332.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="336.0" layoutY="483.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text layoutX="441.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text layoutX="444.0" layoutY="483.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="550.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.93673706054688">
+            <Text fill="RED" layoutX="553.0" layoutY="483.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <Text fill="RED" layoutX="659.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="38.936737060546875">
+            <Text fill="RED" layoutX="661.0" layoutY="483.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="number" wrappingWidth="60.0">
                <font>
-                  <Font name="Impact" size="25.0" />
+                  <Font name="Impact" size="33.0" />
                </font>
             </Text>
-            <GridPane fx:id="gridPane" layoutY="1.0" prefHeight="539.0" prefWidth="764.0">
+            <GridPane fx:id="gridPane" layoutY="1.0" prefHeight="543.2" prefWidth="764.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -248,7 +252,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -256,7 +260,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -264,7 +268,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -272,7 +276,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -280,7 +284,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -288,7 +292,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -296,7 +300,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane fx:id="id6" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -304,7 +308,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="1">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -312,7 +316,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -320,7 +324,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -328,7 +332,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -336,7 +340,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -344,7 +348,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -352,7 +356,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -360,7 +364,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="2">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -368,7 +372,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -376,7 +380,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -384,7 +388,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -392,7 +396,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -400,7 +404,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -408,7 +412,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -416,7 +420,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="3">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -424,7 +428,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -432,7 +436,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -440,7 +444,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -448,7 +452,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -456,7 +460,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -464,7 +468,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -472,7 +476,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="4">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -480,7 +484,16 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/note_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -488,7 +501,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -496,7 +509,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -504,7 +517,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -512,7 +525,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -520,7 +533,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -528,7 +541,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.rowIndex="5">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -536,7 +549,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -544,7 +557,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -552,7 +565,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -560,7 +573,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -568,15 +581,7 @@
                            </image>
                         </ImageView>
                      </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="5" GridPane.rowIndex="5">
-                     <children>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                           <image>
-                              <Image url="@icons/note_icon.png" />
-                           </image>
-                        </ImageView>
-                     </children></Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #76787a; -fx-border-width: 0.5;" GridPane.columnIndex="6" GridPane.rowIndex="5">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -587,40 +592,50 @@
                </children>
             </GridPane>
          </children>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" height="40.0" radius="19.5" width="40.0">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
       </AnchorPane>
-      <Text fill="#6e6d6d" layoutX="148.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВТ" wrappingWidth="109.60000000000002">
+      <Text fill="#6e6d6d" layoutX="148.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="ВТ" wrappingWidth="109.60000000000002">
          <font>
-            <Font name="Impact" size="19.0" />
+            <Font name="Impact" size="20.0" />
          </font>
       </Text>
-      <Text fill="#6e6d6d" layoutX="257.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="СР" wrappingWidth="109.60000000000002">
+      <Text fill="#6e6d6d" layoutX="257.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="СР" wrappingWidth="109.60000000000002">
          <font>
-            <Font name="Impact" size="19.0" />
+            <Font name="Impact" size="20.0" />
          </font>
       </Text>
-      <Text fill="#6e6d6d" layoutX="365.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ЧТ" wrappingWidth="109.60000000000002">
+      <Text fill="#6e6d6d" layoutX="365.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="ЧТ" wrappingWidth="109.60000000000002">
          <font>
-            <Font name="Impact" size="19.0" />
+            <Font name="Impact" size="20.0" />
          </font>
       </Text>
-      <Text fill="#6e6d6d" layoutX="474.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ПТ" wrappingWidth="109.60000000000002">
+      <Text fill="#6e6d6d" layoutX="474.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="ПТ" wrappingWidth="109.60000000000002">
          <font>
-            <Font name="Impact" size="19.0" />
+            <Font name="Impact" size="20.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="584.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="СБ" wrappingWidth="109.60000000000002">
+      <Text fill="RED" layoutX="584.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="СБ" wrappingWidth="109.60000000000002">
          <font>
-            <Font name="Impact" size="19.0" />
+            <Font name="Impact" size="20.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="693.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ВС" wrappingWidth="109.60000000000002">
+      <Text fill="RED" layoutX="693.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="ВС" wrappingWidth="109.60000000000002">
          <font>
-            <Font name="Impact" size="19.0" />
+            <Font name="Impact" size="20.0" />
          </font>
       </Text>
-      <Text fill="#6e6d6d" layoutX="37.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ПН" wrappingWidth="38.936737060546875">
+      <Text fill="#6e6d6d" layoutX="37.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content" text="ПН" wrappingWidth="38.936737060546875">
          <font>
-            <Font name="Impact" size="18.0" />
+            <Font name="Impact" size="20.0" />
          </font>
       </Text>
       <ImageView fx:id="backArrow" fitHeight="35.0" fitWidth="35.0" layoutX="6.0" layoutY="375.0" onMouseClicked="#reduceMonth" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
@@ -633,51 +648,54 @@
             <Image url="@icons/forward_arrow.png" />
          </image>
       </ImageView>
-      <Text fx:id="chosenDateText" fill="#ff5e5e" layoutX="254.0" layoutY="62.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="332.53680419921864">
+      <Text fx:id="chosenDateText" layoutX="295.0" layoutY="83.0" stroke="BLACK" strokeWidth="0.0" styleClass="text" textAlignment="CENTER" wrappingWidth="249.60000000000014">
          <font>
             <Font name="Impact" size="39.0" />
          </font>
       </Text>
-      <Text fx:id="currentMonthText" fill="#434242" layoutX="648.0" layoutY="78.0" onMouseClicked="#quickJumpToDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" textAlignment="RIGHT" wrappingWidth="155.20000000000005">
+      <Text fx:id="currentMonthText" fill="#434242" layoutX="592.0" layoutY="85.0" onMouseClicked="#quickJumpToDate" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" styleClass="content" textAlignment="RIGHT" underline="true" wrappingWidth="210.0">
          <font>
-            <Font name="Impact" size="24.0" />
+            <Font name="Impact" size="26.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
-      <ListView fx:id="eventListView" layoutX="839.0" layoutY="134.0" prefHeight="364.0" prefWidth="290.0" AnchorPane.leftAnchor="839.0" AnchorPane.rightAnchor="15.0" />
+      <ListView fx:id="eventListView" layoutX="839.0" layoutY="134.0" prefHeight="364.0" prefWidth="290.0" style="-fx-border-width: 1; -fx-border-color: #76787a;" AnchorPane.leftAnchor="839.0" AnchorPane.rightAnchor="15.0" />
       <TextField fx:id="eventNameField" disable="true" layoutX="839.0" layoutY="60.0" prefHeight="26.0" prefWidth="155.0" promptText="Название" />
-      <Text fx:id="currentDayConst" fill="BLUE" layoutX="37.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="138.13665008544922">
+      <Text fx:id="currentDayConst" fill="#3373ff" layoutX="37.0" layoutY="82.0" stroke="#3373ff" strokeLineCap="BUTT" strokeWidth="0.0" styleClass="text" wrappingWidth="138.13665008544922">
          <font>
             <Font name="Impact" size="21.0" />
          </font>
       </Text>
-      <ComboBox fx:id="hours" layoutX="956.0" layoutY="97.0" onMouseClicked="#showAllHours" prefHeight="30.0" prefWidth="64.0" />
-      <ComboBox fx:id="minutes" layoutX="1037.0" layoutY="97.0" onMouseClicked="#showAllMinutes" prefHeight="30.0" prefWidth="64.0" />
-      <Text layoutX="868.0" layoutY="119.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Время:" wrappingWidth="88.0">
+      <ComboBox fx:id="hours" layoutX="948.0" layoutY="97.0" onMouseClicked="#showAllHours" prefHeight="30.0" prefWidth="64.0" />
+      <ComboBox fx:id="minutes" layoutX="1029.0" layoutY="97.0" onMouseClicked="#showAllMinutes" prefHeight="30.0" prefWidth="64.0" />
+      <Text fx:id="choseTimeText" layoutX="869.0" layoutY="119.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Время:" wrappingWidth="80.0">
          <font>
-            <Font name="Arial" size="23.0" />
+            <Font name="Arial" size="25.0" />
          </font>
       </Text>
-      <Text layoutX="1023.0" layoutY="122.0" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="9.5999755859375">
+      <Text fx:id="colon" layoutX="1014.0" layoutY="121.5" smooth="false" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="9.5999755859375">
          <font>
-            <Font name="Impact" size="39.0" />
+            <Font name="Clarendon BT Bold" size="40.0" />
          </font>
       </Text>
-      <TextArea fx:id="eventTextField" editable="false" layoutX="839.0" layoutY="511.0" prefHeight="138.0" prefWidth="290.0" promptText="Описание" />
-      <Label fx:id="currentTime" layoutX="37.0" layoutY="14.0" prefHeight="35.0" prefWidth="138.0">
+      <TextArea fx:id="eventTextField" editable="false" layoutX="839.0" layoutY="511.0" prefHeight="138.0" prefWidth="290.0" promptText="Описание" style="-fx-border-width: 1; -fx-border-color: #76787a;" />
+      <Label fx:id="currentTime" layoutX="37.0" layoutY="14.0" prefHeight="35.0" prefWidth="138.0" styleClass="text" textFill="#878887">
          <font>
             <Font name="Impact" size="30.0" />
          </font>
       </Label>
-      <Pane fx:id="quickDatePane" layoutX="602.0" layoutY="40.0" prefHeight="54.0" prefWidth="205.0" style="-fx-background-color: #c8c8c8;" visible="false">
+      <Pane fx:id="quickDatePane" layoutX="597.0" layoutY="33.0" prefHeight="59.0" prefWidth="205.0" style="-fx-background-color: #181818; -fx-border-width: 1; -fx-border-color: #76787a;" visible="false">
          <children>
-            <ComboBox fx:id="monthOfQuickDate" focusTraversable="false" layoutX="4.0" layoutY="22.0" onMouseClicked="#showMonth" prefHeight="28.0" prefWidth="118.0" visibleRowCount="6" />
-            <ComboBox fx:id="yearOfQuickDate" focusTraversable="false" layoutX="123.0" layoutY="22.0" onMouseClicked="#showYear" prefHeight="28.0" prefWidth="80.0" visibleRowCount="5" />
-            <Text layoutX="35.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Месяц" wrappingWidth="70.39998779296866">
+            <ComboBox fx:id="monthOfQuickDate" focusTraversable="false" layoutX="5.0" layoutY="22.0" onMouseClicked="#showMonth" prefHeight="30.0" prefWidth="110.0" visibleRowCount="6" />
+            <ComboBox fx:id="yearOfQuickDate" focusTraversable="false" layoutX="121.0" layoutY="22.0" onMouseClicked="#showYear" prefHeight="28.0" prefWidth="80.0" visibleRowCount="5" />
+            <Text fill="WHITE" layoutX="33.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Месяц" textAlignment="CENTER" wrappingWidth="55.0">
                <font>
                   <Font name="Alef Regular" size="18.0" />
                </font>
             </Text>
-            <Text layoutX="147.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Год" wrappingWidth="30.61908721923828">
+            <Text fill="WHITE" layoutX="146.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Год" textAlignment="CENTER" wrappingWidth="30.0">
                <font>
                   <Font name="Alef Regular" size="18.0" />
                </font>
@@ -699,6 +717,14 @@
          <image>
             <Image url="@icons/edit_icon.png" />
          </image>
+      </ImageView>
+      <ImageView fx:id="themeMod" fitHeight="40.0" fitWidth="40.0" layoutX="400.0" layoutY="4.0" onMouseClicked="#changeTheme" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/moon.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
    </children>
 </AnchorPane>

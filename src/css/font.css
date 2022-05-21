@@ -1,0 +1,11 @@
+.text {
+   -fx-font-family: "DlgGeo";
+}
+
+.number {
+   -fx-font-family: "Bellerose";
+}
+
+.content {
+   -fx-font-family: "MuseoSansCyrl-900";
+}

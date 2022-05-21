@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.Objects;
@@ -12,6 +13,10 @@ public class FxmlLoader extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            Font.loadFont(getClass().getResourceAsStream("/fonts/DlgGeo.ttf"), 14);
+            Font.loadFont(getClass().getResourceAsStream("/fonts/Bellerose.ttf"), 14);
+            Font.loadFont(getClass().getResourceAsStream("/fonts/MuseoSansCyrl.ttf"), 14);
+            Controller.setThemeMod(SettingsLoader.loadSettingsFromFile());
             Controller.setEvents(EventLoader.loadEventsFromFile());
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
             Scene mainScene = new Scene(root);
@@ -35,6 +40,7 @@ public class FxmlLoader extends Application {
     public void stop() {
         EventSaver eSaver = new EventSaver(Controller.getEvents());
         eSaver.saveEvents();
+        Theme.saveThemeMod();
         Notificator.removeTrayIcon();
     }
 
