@@ -49,7 +49,6 @@ public class Notificator {
                     todayEventsTitles.add(entryElem.getValue().getEventTitle());
                 }
             }
-            // StringBuilder title = new StringBuilder();
             String titleString = "Ваши события на сегодня";
             StringBuilder messageText = new StringBuilder("Общее количество событий: ");
             messageText.append(todayEventsTitles.size()).append("\n");

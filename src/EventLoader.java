@@ -21,6 +21,11 @@ public class EventLoader {
         return loadEventsFromFile(DEFAULT_FILEPATH);
     }
 
+    /**
+     * Получение объекта SortedMap, содержащего события из файла
+     * @param filePath путь к json-файлу
+     * @return объект с событиями
+     */
     public static SortedMap<Integer, Event> loadEventsFromFile(String filePath) {
         File file = new File(filePath);
         SortedMap<Integer, Event> eventsFromFile = null;

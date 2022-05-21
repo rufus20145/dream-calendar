@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.skin.ComboBoxListViewSkin;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -31,7 +32,8 @@ public class Controller implements Initializable {
      * Объявление констант
      */
     private static final int NUM_OF_ALL_CELLS = 42;
-    public static final String CHOSEN_CELL_STYLE = "-fx-border-width: 2.5; -fx-border-color: #000000";
+    public static final String CHOSEN_CELL_STYLE_FOR_LIGHT = "-fx-border-width: 3; -fx-border-color: #000000";
+    public static final String CHOSEN_CELL_STYLE_FOR_DARK = "-fx-border-width: 3; -fx-border-color: #ffd600";
 
     /**
      * Объявление переменных
@@ -49,8 +51,9 @@ public class Controller implements Initializable {
     public boolean cellSelected = false;
     private boolean dateIsQuick = false;
     private boolean checkNotes = false;
+    public static boolean isDarkTheme;
     private static HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на выбранный месяц
-    private Node cellElementCurrentDay; // Ячейка текущего дня для выделения ее "синим" цветом
+    public static Node textElementCurrentDay; // Ячейка текущего дня для выделения ее "синим" цветом
     public LocalDate currentDateLD; // Дата текущего дня в LD
     public LocalDate currentDate;
     private ObservableList<Node> listOfTexts;
@@ -59,6 +62,8 @@ public class Controller implements Initializable {
     public ChosenDateController chosenDate;
     private QuickDateController quickDate;
     private EventController eventController;
+    public static Node chosenCell;
+    private static Theme theme;
 
     @FXML
     public ImageView addNewNoteButton;
@@ -74,6 +79,9 @@ public class Controller implements Initializable {
 
     @FXML
     public Text currentMonthText;
+
+    @FXML
+    private Text colon;
 
     @FXML
     private ImageView deleteChooseNoteButton;
@@ -118,6 +126,15 @@ public class Controller implements Initializable {
     public ComboBox<Integer> yearOfQuickDate;
 
     @FXML
+    public ImageView themeMod;
+
+    @FXML
+    public AnchorPane mainAnchorPane;
+
+    @FXML
+    public Text choseTimeText;
+
+    @FXML
     private void showCalendar() {
         currentDate = getCurrentDate();
         eventController.setCurrentDate(currentDate);
@@ -139,7 +156,7 @@ public class Controller implements Initializable {
 
         chosenDate = new ChosenDateController(chosenDateText, currentDate, anchorPane, gridPane);
         chosenDate.showCurrentDate();
-        cellElementCurrentDay = chosenDate.getCellElementCurrentDay();
+        textElementCurrentDay = chosenDate.getCellElementCurrentDay();
 
         monthReduce = false;
         monthIncrease = false;
@@ -150,6 +167,7 @@ public class Controller implements Initializable {
             showChosenDay(firstActiveCell);
         }
         setNotesIcons();
+        changeThemeMethod();
     }
 
     /**
@@ -161,9 +179,12 @@ public class Controller implements Initializable {
         for (int i = 0; i < NUM_OF_ALL_CELLS; ++i) {
             Object text = listOfTexts.get(i);
             if (text instanceof Text) {
-                if (cellBeforeCurrMonth(firstActiveCell, i, text) || cellOfCurrMonth(firstActiveCell, i, text)
-                        || cellAfterCurrMonth(firstActiveCell, i, text)) {
-                    listOfPane.get(i).setStyle(CHOSEN_CELL_STYLE);
+                if (cellBeforeCurrMonth(firstActiveCell, i, text) || cellOfCurrMonth(firstActiveCell, i, text) || cellAfterCurrMonth(firstActiveCell, i, text)) {
+                    if (isDarkTheme) {
+                        listOfPane.get(i).setStyle(CHOSEN_CELL_STYLE_FOR_DARK);
+                    } else {
+                        listOfPane.get(i).setStyle(CHOSEN_CELL_STYLE_FOR_LIGHT);
+                    }
                     break;
                 }
             }
@@ -246,13 +267,11 @@ public class Controller implements Initializable {
         if (monthIncrease) {
             month = currentDate.getMonthValue() + 1;
             year = currentDate.getYear();
-            return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного
-            // месяца
+            return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного месяца
         } else if (monthReduce) {
             month = currentDate.getMonthValue() - 1;
             year = currentDate.getYear();
-            return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного
-            // месяца
+            return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного месяца
         } else if (dateIsQuick) {
             resetStylesBorder();
             resetStylesFont();
@@ -376,8 +395,21 @@ public class Controller implements Initializable {
      * Установка стиля выбранной ячейки по умолчанию
      */
     private void resetStylesBorder() {
+//        changeChosenCellStyle();
         for (Node element : gridPane.getChildren()) {
-            element.setStyle("-fx-border-width: 0.5; -fx-border-color: #76787a");
+            if (isDarkTheme) {
+                if (!element.getStyle().equals("-fx-border-width: 3; -fx-border-color: #000000")) {
+                    element.setStyle("-fx-border-width: 0.5; -fx-border-color: #ffffff");
+                } else {
+                    element.setStyle("-fx-border-width: 3; -fx-border-color: #ffd600");
+                }
+            } else {
+                if (!element.getStyle().equals("-fx-border-width: 3; -fx-border-color: #ffd600")) {
+                    element.setStyle("-fx-border-width: 0.5; -fx-border-color: #76787a");
+                } else {
+                    element.setStyle("-fx-border-width: 3; -fx-border-color: #000000");
+                }
+            }
         }
     }
 
@@ -430,10 +462,10 @@ public class Controller implements Initializable {
     /**
      * Выделение сегодняшнего числа в ячейке цветом
      */
-    private void highlightToday() {
-        if (currentDate.getMonthValue() == LocalDate.now().getMonthValue()
-                && currentDate.getYear() == LocalDate.now().getYear())
-            cellElementCurrentDay.setStyle(("-fx-fill: #0000ff"));
+    public void highlightToday() {
+        if (currentDate.getMonthValue() == LocalDate.now().getMonthValue() && currentDate.getYear() == LocalDate.now().getYear()) {
+            textElementCurrentDay.setStyle(("-fx-fill: #296cff"));
+        }
     }
 
     /**
@@ -443,7 +475,7 @@ public class Controller implements Initializable {
         if (!checkNotes) {
             int count1 = 1;
             for (Node node : gridPane.getChildren()) {
-                if (!node.getStyle().equals(CHOSEN_CELL_STYLE)) {
+                if (!node.getStyle().equals(CHOSEN_CELL_STYLE_FOR_LIGHT) && !node.getStyle().equals(CHOSEN_CELL_STYLE_FOR_DARK)) {
                     count1++;
                 } else {
                     numbOfCell = count1;
@@ -487,8 +519,6 @@ public class Controller implements Initializable {
         }
     }
 
-    public static Node chosenCell;
-
     /**
      * "Навешивание" обработчиков событий (кликов мыши) на ячейки для стилизации
      * этих ячеек и не только
@@ -501,7 +531,11 @@ public class Controller implements Initializable {
                 eventNameField.setDisable(false);
                 if (object instanceof Text) {
                     resetStylesBorder();
-                    element.setStyle(CHOSEN_CELL_STYLE);
+                    if (isDarkTheme) {
+                        element.setStyle(CHOSEN_CELL_STYLE_FOR_DARK);
+                    } else {
+                        element.setStyle(CHOSEN_CELL_STYLE_FOR_LIGHT);
+                    }
                     chosenCell = element;
                     changeText();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
@@ -560,7 +594,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Вставка в monthOfQuickDate и yearOfQuickDate месяца и года текущей рахвертки
+     * Вставка в monthOfQuickDate и yearOfQuickDate месяца и года текущей развертки
      * календаря соответственно при нажатии на currentMonthText
      */
     @FXML
@@ -655,13 +689,38 @@ public class Controller implements Initializable {
         EventController.eventMemory = (eventsFromFile != null) ? eventsFromFile : new TreeMap<>();
     }
 
+    @FXML
+    private void changeTheme(MouseEvent event) {
+        isDarkTheme = !isDarkTheme;
+        changeThemeMethod();
+        resetStylesBorder();
+        highlightToday();
+    }
+
     /**
-     * Метод, вызываемый автоматически при запуске программы
+     * Метод, изменяющий тему в зависимости от выбора пользователя
+     */
+    private void changeThemeMethod() {
+        if (isDarkTheme) {
+            theme.setDarkTheme();
+        } else {
+            theme.setLightTheme();
+        }
+    }
+
+    public static void setThemeMod(boolean isDarkTheme) {
+        Controller.isDarkTheme = isDarkTheme;
+    }
+
+    /**
+     * Метод, вызываемый автоматически при запуске программы для инициализации
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        theme = new Theme(themeMod, mainAnchorPane, anchorPane, gridPane, currentTime, choseTimeText, chosenDateText, currentMonthText, colon);
         eventController = new EventController();
         showCalendar();
+        resetStylesBorder();
         quickDate.fillAllMonth();
         quickDate.fillAllYears(currentDate);
         addMonthComboBoxListener();

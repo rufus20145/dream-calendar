@@ -17,6 +17,9 @@ public class EventSaver {
         this.events = events;
     }
 
+    /**
+     * Создание и запись json-файла для хранения событий
+     */
     public void saveEvents() {
         String appDataPath = System.getenv("APPDATA") + FOLDERNAME;
         File folder = new File(appDataPath);
