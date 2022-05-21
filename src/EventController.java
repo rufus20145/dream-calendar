@@ -5,11 +5,12 @@ import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -17,18 +18,17 @@ public class EventController extends Controller {
     private static final int KEY_GENERATION_COEFF = 100;
     private static final String EDIT = "edit";
     private static final String SAVE = "save";
-
     private ListView<String> eventListView;
     private boolean editingIsActive = false;
     private int numberEvent = 0; // Номер события для каждого отдельного дня
     public static SortedMap<Integer, Event> eventMemory = new TreeMap<>();
     private boolean switchEditToSaveButton = false; // Сменить кнопку edit на save
     private boolean cellSelected;
-    private Button addNewNoteButton;
-    private Button editChooseNoteButton;
+    private ImageView addNewNoteButton;
+    private ImageView editChooseNoteButton;
     private ObservableList<String> eventNames = FXCollections.observableArrayList();
     private TextArea eventTextField;
-    private Button deleteChooseNoteButton;
+    private ImageView deleteChooseNoteButton;
     private ComboBox<String> hours;
     private ComboBox<EventTypes> categoryComboBox;
     private ComboBox<String> minutes;
@@ -37,15 +37,18 @@ public class EventController extends Controller {
     private GridPane gridPane;
     private String chosenDateString;
 
+    public final Image EDIT_IMAGE = new Image("/icons/edit_icon.png");
+    public final Image SAVE_IMAGE = new Image("/icons/save_icon.png");
+
     public void setEventListView(ListView<String> eventListView) {
         this.eventListView = eventListView;
     }
 
-    public void setAddNewNoteButton(Button addNewNoteButton) {
+    public void setAddNewNoteButton(ImageView addNewNoteButton) {
         this.addNewNoteButton = addNewNoteButton;
     }
 
-    public void setEditChooseNoteButton(Button editChooseNoteButton) {
+    public void setEditChooseNoteButton(ImageView editChooseNoteButton) {
         this.editChooseNoteButton = editChooseNoteButton;
     }
 
@@ -73,7 +76,7 @@ public class EventController extends Controller {
         this.minutes = minutes;
     }
 
-    public void setDeleteChooseNoteButton(Button deleteChooseNoteButton) {
+    public void setDeleteChooseNoteButton(ImageView deleteChooseNoteButton) {
         this.deleteChooseNoteButton = deleteChooseNoteButton;
     }
 
@@ -98,7 +101,7 @@ public class EventController extends Controller {
                 hours.requestFocus();
             } else {
                 Event newEvent;
-                if (eventTextField.getText().isEmpty()) {
+                if (eventTextField.getText().isBlank()) {
                     EventTypes type;
                     newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
                             chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
@@ -118,7 +121,7 @@ public class EventController extends Controller {
                 eventUpdateHandlers();
 
                 switchEditToSaveButton = false;
-                editChooseNoteButton.setText(EDIT);
+                editChooseNoteButton.setImage(EDIT_IMAGE);
 
                 // Очистка полей после создания нового события
                 clearNameAndTextEventField();
@@ -151,6 +154,10 @@ public class EventController extends Controller {
     protected void eventUpdateHandlers() {
         if (!eventNames.isEmpty()) {
             eventListView.setOnMouseClicked(event -> {
+                hours.setDisable(true);
+                hours.setStyle("-fx-opacity: 1.0");
+                minutes.setDisable(true);
+                minutes.setStyle("-fx-opacity: 1.0");
                 clearNameAndTextEventField();
                 switchEditToSaveButton = false;
                 int selectedIndex = eventListView.getSelectionModel().getSelectedIndex();
@@ -217,9 +224,9 @@ public class EventController extends Controller {
      */
     public void addEventNameFieldListener() {
         eventNameField.textProperty().addListener((observable, oldValue, newValue) -> addNewNoteButton
-                .setDisable(!cellSelected || eventNameField.getText().isEmpty()));
+                .setDisable(!cellSelected || eventNameField.getText().isBlank()));
         eventNameField.textProperty().addListener((observable, oldValue, newValue) -> editChooseNoteButton
-                .setDisable(eventNameField.getText().isEmpty() || !editingIsActive));
+                .setDisable(eventNameField.getText().isBlank() || !editingIsActive));
     }
 
     /**
@@ -254,7 +261,7 @@ public class EventController extends Controller {
      * Очистка полей eventNameField и eventTextField
      */
     void clearNameAndTextEventField() {
-        editChooseNoteButton.setText(EDIT);
+        editChooseNoteButton.setImage(EDIT_IMAGE);
         eventNameField.clear();
         eventTextField.clear();
         hours.setValue("");
@@ -271,8 +278,7 @@ public class EventController extends Controller {
             editingIsActive = true;
             if (!switchEditToSaveButton) {
                 eventNameField.setText(eventMemory.get(key).getEventTitle());
-                editChooseNoteButton.setText(SAVE);
-                eventTextField.requestFocus();
+                editChooseNoteButton.setImage(SAVE_IMAGE);
                 eventTextField.deselect();
                 deleteChooseNoteButton.setDisable(true);
                 addNewNoteButton.setDisable(true);
@@ -280,10 +286,11 @@ public class EventController extends Controller {
                 switchEditToSaveButton = true;
                 categoryComboBox.setDisable(false);
             } else {
+
                 int selectedIndex = eventListView.getSelectionModel().getSelectedIndex();
                 eventNames.set(selectedIndex, eventNameField.getText());
                 Event newEvent;
-                if (eventTextField.getText().isEmpty()) {
+                if (eventTextField.getText().isBlank()) {
                     EventTypes type;
                     newEvent = new Event((type = categoryComboBox.getValue()) != null ? type : EventTypes.NOTIFICATION,
                             chosenDateString, eventNameField.getText(), getEventHours(), getEventMinutes());
@@ -295,11 +302,17 @@ public class EventController extends Controller {
                 }
                 eventMemory.put(key, newEvent);
                 switchEditToSaveButton = false;
-                editChooseNoteButton.setText(EDIT);
+                editChooseNoteButton.setImage(EDIT_IMAGE);
                 eventListView.getSelectionModel().select(selectedIndex);
                 deleteChooseNoteButton.setDisable(false);
+                eventNameField.clear();
+                eventTextField.clear();
+                hours.setValue("");
+                minutes.setValue("");
                 categoryComboBox.setDisable(true);
             }
+            hours.setDisable(false);
+            minutes.setDisable(false);
         });
         editingIsActive = false;
     }
@@ -317,9 +330,12 @@ public class EventController extends Controller {
      */
     public void textFieldListener() {
         eventNameField.textProperty().addListener(
-                (observable, oldValue, newValue) -> eventTextField.setEditable(!eventNameField.getText().isEmpty()));
+                (observable, oldValue, newValue) -> eventTextField.setEditable(!eventNameField.getText().isBlank()));
     }
 
+    /**
+     * Отобразить все часы в выпадающем списке
+     */
     public void showAllHoursMethod() {
         ObservableList<String> hoursList = FXCollections.observableArrayList();
         for (int i = 0; i <= 23; ++i) {
@@ -332,6 +348,9 @@ public class EventController extends Controller {
         hours.setItems(hoursList);
     }
 
+    /**
+     * Отобразить все минуты в выпадающем списке
+     */
     public void showAllMinutesMethod() {
         ObservableList<String> minutesList = FXCollections.observableArrayList();
         for (int i = 0; i <= 59; ++i) {
@@ -346,6 +365,8 @@ public class EventController extends Controller {
 
     /**
      * Получение часов времени события
+     * 
+     * @return часы
      */
     private String getEventHours() {
         if (hours.getSelectionModel().getSelectedItem().isEmpty()) {
@@ -357,6 +378,8 @@ public class EventController extends Controller {
 
     /**
      * Получение минут времени события
+     * 
+     * @return минуты
      */
     private String getEventMinutes() {
         if (minutes.getSelectionModel().getSelectedItem().isEmpty()) {
@@ -366,17 +389,20 @@ public class EventController extends Controller {
         }
     }
 
+    /**
+     * Изменение свойств и полей при нажатии на область ввода названия события
+     */
     public void eventNameFieldHandlersControl() {
         eventNameField.setOnMouseClicked(event -> {
             categoryComboBox.setDisable(false);
+            hours.setDisable(false);
+            minutes.setDisable(false);
             deleteChooseNoteButton.setDisable(true);
             editChooseNoteButton.setDisable(true);
             if (eventNameField.getText().trim().isEmpty()) {
                 eventTextField.clear();
                 hours.setValue("");
                 minutes.setValue("");
-            } else {
-                editChooseNoteButton.setDisable(false);
             }
         });
     }

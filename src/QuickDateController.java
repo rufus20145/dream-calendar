@@ -32,7 +32,7 @@ public class QuickDateController extends Controller {
     }
 
     /**
-     * Заполнение выпадающего списка yearOfQuickDate годами диапозоном [текущий год - 100; текущий год - 100]
+     * Заполнение выпадающего списка yearOfQuickDate годами диапозоном [текущий год - 100; текущий год + 100]
      */
     public void fillAllYears(LocalDate currentDate) {
         ObservableList<Integer> yearsList = FXCollections.observableArrayList();
