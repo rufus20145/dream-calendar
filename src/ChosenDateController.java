@@ -1,12 +1,14 @@
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.time.LocalDate;
 
 public class ChosenDateController extends Controller {
-    private Node cellElementCurrentDay;
+    private Node textElementCurrentDay;
+    public static Pane cellElementCurrentDate;
 
     public ChosenDateController(Text chosenDateText, LocalDate currentDate, AnchorPane anchorPane, GridPane gridPane) {
         this.chosenDateText = chosenDateText;
@@ -22,9 +24,9 @@ public class ChosenDateController extends Controller {
         if (LocalDate.now().getMonthValue() == currentDate.getMonthValue() && LocalDate.now().getYear() == currentDate.getYear()) {
             for (Node element : anchorPane.getChildren()) {
                 if (element instanceof Text && !(((Text) element).getText()).isEmpty() && Integer.parseInt(((Text) element).getText()) == LocalDate.now().getDayOfMonth()) {
-                    cellElementCurrentDay = element;
+                    textElementCurrentDay = element;
                     for (Node node : gridPane.getChildren()) {
-                        if (node.getStyle().equals(CHOSEN_CELL_STYLE)) {
+                        if (node.getStyle().equals(CHOSEN_CELL_STYLE_FOR_LIGHT) && node.getStyle().equals(CHOSEN_CELL_STYLE_FOR_DARK)) {
                             cellSelected = true;
                         }
                     }
@@ -50,6 +52,6 @@ public class ChosenDateController extends Controller {
     }
 
     public Node getCellElementCurrentDay() {
-        return cellElementCurrentDay;
+        return textElementCurrentDay;
     }
 }
