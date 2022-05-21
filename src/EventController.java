@@ -133,6 +133,12 @@ public class EventController extends Controller {
 
     }
 
+    public void clickOnEventNameFieldHandler2() {
+        if (eventNameField.isFocused()) {
+            categoryComboBox.setDisable(false);
+        }
+    }
+
     /**
      * Генерация ключа для первого события выбранного дня
      */
@@ -227,7 +233,7 @@ public class EventController extends Controller {
                 .setDisable(!cellSelected || eventNameField.getText().isBlank()));
         eventNameField.textProperty().addListener((observable, oldValue, newValue) -> editChooseNoteButton
                 .setDisable(eventNameField.getText().isBlank() || !editingIsActive));
-    }
+        }
 
     /**
      * Удаление события в мапе и смещение всех остальных событий "влево"
@@ -268,6 +274,8 @@ public class EventController extends Controller {
         minutes.setValue("");
         categoryComboBox.getSelectionModel().clearSelection();
         categoryComboBox.setDisable(true);
+        hours.setDisable(true);
+        minutes.setDisable(true);
     }
 
     /**
@@ -393,17 +401,8 @@ public class EventController extends Controller {
      * Изменение свойств и полей при нажатии на область ввода названия события
      */
     public void eventNameFieldHandlersControl() {
-        eventNameField.setOnMouseClicked(event -> {
-            categoryComboBox.setDisable(false);
-            hours.setDisable(false);
-            minutes.setDisable(false);
-            deleteChooseNoteButton.setDisable(true);
-            editChooseNoteButton.setDisable(true);
-            if (eventNameField.getText().trim().isEmpty()) {
-                eventTextField.clear();
-                hours.setValue("");
-                minutes.setValue("");
-            }
-        });
+        // eventNameField.setOnMouseClicked(event -> {
+
+        // });
     }
 }
