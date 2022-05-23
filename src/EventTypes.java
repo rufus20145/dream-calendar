@@ -3,7 +3,7 @@ public enum EventTypes {
     NOTIFICATION(1, "Заметка"),
     BIRTHDAY(2, "День рождения"),
     HOLIDAY(3, "Праздник"),
-    MEETEING(4, "Встреча");
+    MEETING(4, "Встреча");
 
     private int type;
     private String title;

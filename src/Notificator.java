@@ -34,40 +34,42 @@ public class Notificator {
         if (!SystemTray.isSupported()) {
             Logger.getLogger(Notificator.class.getName())
                     .warning("Системный трей не поддерживается. Уведомление не было выведено.");
-        }
-        try {
-            trayIcon = initTrayIcon();
-            tray.add(trayIcon);
-            Set<Entry<Integer, Event>> set = Controller.getEvents().entrySet();
-            List<String> todayEventsTitles = new ArrayList<>();
-            EventController ec = new EventController();
-            Calendar currDate = new GregorianCalendar();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-            for (Entry<Integer, Event> entryElem : set) {
-                if (Objects.equals(entryElem.getKey() / 100,
-                        ec.getKeyForChosenDate(sdf.format(currDate.getTime())) / 100)) {
-                    todayEventsTitles.add(entryElem.getValue().getEventTitle());
+        } else {
+            try {
+                trayIcon = initTrayIcon();
+                tray.add(trayIcon);
+                Set<Entry<Integer, Event>> set = Controller.getEvents().entrySet();
+                List<String> todayEventsTitles = new ArrayList<>();
+                EventController ec = new EventController();
+                Calendar currDate = new GregorianCalendar();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                for (Entry<Integer, Event> entryElem : set) {
+                    if (Objects.equals(entryElem.getKey() / 100,
+                            ec.getKeyForChosenDate(sdf.format(currDate.getTime())) / 100)) {
+                        todayEventsTitles.add(entryElem.getValue().getEventTitle());
+                    }
                 }
-            }
-            String titleString = "Ваши события на сегодня";
-            StringBuilder messageText = new StringBuilder("Общее количество событий: ");
-            messageText.append(todayEventsTitles.size()).append("\n");
-            if (todayEventsTitles.isEmpty()) {
-                messageText.append("Событий нет. \nМожно отдыхать!\n");
-            } else if (todayEventsTitles.size() < 4) {
-                for (int index = 0; index < todayEventsTitles.size(); index++) {
-                    messageText.append(todayEventsTitles.get(index)).append("\n");
+                String titleString = "Ваши события на сегодня";
+                StringBuilder messageText = new StringBuilder("Общее количество событий: ");
+                messageText.append(todayEventsTitles.size()).append("\n");
+                if (todayEventsTitles.isEmpty()) {
+                    messageText.append("Событий нет. \nМожно отдыхать!\n");
+                } else if (todayEventsTitles.size() < 4) {
+                    for (int index = 0; index < todayEventsTitles.size(); index++) {
+                        messageText.append(todayEventsTitles.get(index)).append("\n");
+                    }
+                } else {
+                    messageText.append(todayEventsTitles.get(0)).append("\n").append(todayEventsTitles.get(1))
+                            .append("\n")
+                            .append("и другие события\n");
                 }
-            } else {
-                messageText.append(todayEventsTitles.get(0)).append("\n").append(todayEventsTitles.get(1)).append("\n")
-                        .append("и другие события\n");
-            }
 
-            trayIcon.displayMessage(titleString, messageText.toString().substring(0, messageText.length() - 1),
-                    MessageType.INFO);
-        } catch (AWTException e) {
-            Logger.getLogger(Notificator.class.getName())
-                    .warning("При добавлении иконки в трей произошла ошибка. " + e.getMessage());
+                trayIcon.displayMessage(titleString, messageText.toString().substring(0, messageText.length() - 1),
+                        MessageType.INFO);
+            } catch (AWTException e) {
+                Logger.getLogger(Notificator.class.getName())
+                        .warning("При добавлении иконки в трей произошла ошибка. " + e.getMessage());
+            }
         }
     }
 

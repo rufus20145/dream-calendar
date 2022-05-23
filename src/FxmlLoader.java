@@ -26,11 +26,12 @@ public class FxmlLoader extends Application {
             primaryStage.show();
             primaryStage.setResizable(false);
             primaryStage.setOnCloseRequest(windowEvent -> Controller.stopShowTime = true);
+            Notificator notificator = new Notificator("src\\icons\\icon_128.png");
+            notificator.sendDailyNotification();
         } catch (Exception e) {
             System.out.println("Произошла ошибка " + e.getMessage());
         }
-        Notificator notificator = new Notificator("src\\icons\\icon_128.png");
-        notificator.sendDailyNotification();
+
     }
 
     /**
