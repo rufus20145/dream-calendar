@@ -16,7 +16,7 @@ public class FxmlLoader extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Font.loadFont(getClass().getResourceAsStream("/fonts/DlgGeo.ttf"), 14);
+            Font.loadFont(getClass().getResourceAsStream("/fonts/OpenSans.ttf"), 14);
             Font.loadFont(getClass().getResourceAsStream("/fonts/Bellerose.ttf"), 14);
             Font.loadFont(getClass().getResourceAsStream("/fonts/MuseoSansCyrl.ttf"), 14);
             Controller.setThemeMod(SettingsLoader.loadSettingsFromFile());
@@ -24,7 +24,7 @@ public class FxmlLoader extends Application {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sample.fxml")));
             Scene mainScene = new Scene(root);
             primaryStage.getIcons().add(new Image("icons/icon_128.png"));
-            primaryStage.setTitle("Календарь");
+            primaryStage.setTitle("Дрим Календарь");
             primaryStage.setScene(mainScene);
             primaryStage.show();
             primaryStage.setResizable(false);
