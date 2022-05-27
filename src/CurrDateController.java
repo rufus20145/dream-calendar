@@ -2,9 +2,9 @@ import javafx.scene.text.Text;
 
 import java.time.LocalDate;
 
-public class CurrMonthAndYear extends Controller {
+public class CurrDateController extends Controller {
 
-    public CurrMonthAndYear(Text currentMonthText, LocalDate currentDate) {
+    public CurrDateController(Text currentMonthText, LocalDate currentDate) {
         this.currentMonthText = currentMonthText;
         this.currentDate = currentDate;
     }

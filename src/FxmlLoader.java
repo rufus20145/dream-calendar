@@ -5,6 +5,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import loaders.EventLoader;
+import loaders.SettingsLoader;
+import savers.EventSaver;
 
 import java.util.Objects;
 

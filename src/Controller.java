@@ -27,6 +27,9 @@ import java.util.ResourceBundle;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import events.Event;
+import events.EventTypes;
+
 public class Controller implements Initializable {
     /**
      * Объявление констант
@@ -59,7 +62,7 @@ public class Controller implements Initializable {
     public LocalDate currentDate;
     private ObservableList<Node> listOfTexts;
     private ObservableList<Node> listOfPane;
-    public CurrMonthAndYear currMonthAndYear;
+    public CurrDateController currMonthAndYear;
     public ChosenDateController chosenDate;
     private QuickDateController quickDate;
     private EventController eventController;
@@ -141,7 +144,7 @@ public class Controller implements Initializable {
     private void showCalendar() {
         currentDate = getCurrentDate();
         eventController.setCurrentDate(currentDate);
-        currMonthAndYear = new CurrMonthAndYear(currentMonthText, currentDate);
+        currMonthAndYear = new CurrDateController(currentMonthText, currentDate);
         currMonthAndYear.setCurrentMonthText();
         quickDate = new QuickDateController(monthOfQuickDate, yearOfQuickDate, currMonthAndYear, gridPane, anchorPane,
                 currentMonthText, quickDatePane, currentDate);
@@ -248,10 +251,10 @@ public class Controller implements Initializable {
         setNotesIcons();
     }
 
-//    @FXML
-//    public void clickOnEventNameFieldHandler() {
-//        eventController.clickOnEventNameFieldHandler2();
-//    }
+    // @FXML
+    // public void clickOnEventNameFieldHandler() {
+    // eventController.clickOnEventNameFieldHandler2();
+    // }
 
     /**
      * Получение даты первого дня текущего месяца вместе с годом для дальнейшего
@@ -570,7 +573,8 @@ public class Controller implements Initializable {
                     eventController.clearListView();
                     eventController.clearNameAndTextEventField();
                     eventController.fillListView();
-                    eventController.eventUpdateHandlers(); // Вывод в TextField описания выбранного события и заполнени времени
+                    eventController.eventUpdateHandlers(); // Вывод в TextField описания выбранного события и заполнени
+                                                           // времени
                     deleteChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setImage(eventController.EDIT_IMAGE);
@@ -747,7 +751,7 @@ public class Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        theme = new Theme(themeMod, mainAnchorPane, anchorPane, gridPane, currentTime, choseTimeText, chosenDateText,
+        theme = new Theme(themeMod, mainAnchorPane, anchorPane, gridPane, choseTimeText, chosenDateText,
                 currentMonthText, colon);
         eventController = new EventController();
         showCalendar();
@@ -770,7 +774,7 @@ public class Controller implements Initializable {
         eventController.setDeleteChooseNoteButton(deleteChooseNoteButton);
         eventController.textFieldListener();
         eventController.setCategoryComboBox(categoryComboBox);
-        Time time = new Time(currentTime);
+        CurrentTimeController time = new CurrentTimeController(currentTime);
         time.printTimeNow();
         ConstCurrentDate constCurrentDate = new ConstCurrentDate(currentDayConst, currentDate);
         constCurrentDate.printCurrentDayLeftTopTitle();

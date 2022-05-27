@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 import java.time.LocalDate;
 
 public class QuickDateController extends Controller {
-    public QuickDateController(ComboBox<String> monthOfQuickDate, ComboBox<Integer> yearOfQuickDate, CurrMonthAndYear currMonthAndYear, GridPane gridPane, AnchorPane anchorPane, Text currentMonthText, Pane quickDatePane, LocalDate currentDate) {
+    public QuickDateController(ComboBox<String> monthOfQuickDate, ComboBox<Integer> yearOfQuickDate, CurrDateController currMonthAndYear, GridPane gridPane, AnchorPane anchorPane, Text currentMonthText, Pane quickDatePane, LocalDate currentDate) {
         this.monthOfQuickDate = monthOfQuickDate;
         this.yearOfQuickDate = yearOfQuickDate;
         this.currMonthAndYear = currMonthAndYear;

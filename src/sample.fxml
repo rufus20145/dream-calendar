@@ -259,7 +259,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -267,7 +268,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -275,7 +277,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -283,7 +286,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -291,7 +295,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -299,7 +304,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -307,7 +313,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -315,7 +322,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -323,7 +331,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -331,7 +340,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -339,7 +349,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -347,7 +358,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -355,7 +367,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -363,7 +376,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -371,7 +385,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -379,7 +394,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -387,7 +403,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -395,7 +412,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -403,7 +421,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -411,7 +430,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -419,7 +439,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -427,7 +448,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -435,7 +457,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -443,7 +466,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -451,7 +475,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -459,7 +484,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -467,7 +493,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6" GridPane.rowIndex="3">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -475,7 +502,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -483,7 +511,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -500,7 +529,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -508,7 +538,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -516,7 +547,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -524,7 +556,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6" GridPane.rowIndex="4">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -532,7 +565,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -540,7 +574,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -548,7 +583,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -556,7 +592,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="3" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -564,7 +601,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" GridPane.columnIndex="4" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -572,7 +610,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="5" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -580,7 +619,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: #76787a;" translateX="-1.0" GridPane.columnIndex="6" GridPane.rowIndex="5">
                      <children>
                         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -588,7 +628,8 @@
                               <Image url="@icons/note_icon.png" />
                            </image>
                         </ImageView>
-                     </children></Pane>
+                     </children>
+                  </Pane>
                </children>
             </GridPane>
          </children>

@@ -1,6 +1,7 @@
+package events;
 import java.util.Map;
 
-public class QuickSort extends EventController {
+public class QuickSort {
     private static final int COEFF_RATE_IN_MINUTES = 60;
 
     public void quickSortTreeMap(Map<Integer, Event> eventMemory, int lowKey, int highKey) {

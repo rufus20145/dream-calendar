@@ -1,3 +1,4 @@
+package savers;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -6,6 +7,8 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import com.google.gson.Gson;
+
+import events.Event;
 
 public class EventSaver {
 

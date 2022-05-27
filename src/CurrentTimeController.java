@@ -4,10 +4,10 @@ import javafx.scene.control.Label;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Time extends Controller {
+public class CurrentTimeController extends Controller {
     private static final int MILLIS_OF_SLEEP = 1000;
 
-    public Time(Label currentTime) {
+    public CurrentTimeController(Label currentTime) {
         this.currentTime = currentTime;
     }
 

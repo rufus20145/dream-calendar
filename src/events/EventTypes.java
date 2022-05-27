@@ -1,3 +1,4 @@
+package events;
 public enum EventTypes {
     DEFAULT(0, "Без категории"),
     NOTIFICATION(1, "Заметка"),

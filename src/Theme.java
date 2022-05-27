@@ -17,7 +17,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -38,20 +37,17 @@ public class Theme {
     private AnchorPane mainAnchorPane;
     private AnchorPane anchorPane;
     private GridPane gridPane;
-    private Label currentTime;
     private Text choseTimeText;
     private Text chosenDateText;
     private Text currentMonthText;
     private Text colon;
 
     public Theme(ImageView themeMod, AnchorPane mainAnchorPane, AnchorPane anchorPane, GridPane gridPane,
-            Label currentTime,
             Text choseTimeText, Text chosenDateText, Text currentMonthText, Text colon) {
         this.themeMod = themeMod;
         this.mainAnchorPane = mainAnchorPane;
         this.anchorPane = anchorPane;
         this.gridPane = gridPane;
-        this.currentTime = currentTime;
         this.choseTimeText = choseTimeText;
         this.chosenDateText = chosenDateText;
         this.currentMonthText = currentMonthText;

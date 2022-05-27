@@ -14,6 +14,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import events.Event;
+
 /**
  * Класс, реализующий функциональность получения уведомлений
  */

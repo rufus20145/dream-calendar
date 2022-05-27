@@ -1,3 +1,5 @@
+package events;
+
 public class Event {
 
     private EventTypes type;
