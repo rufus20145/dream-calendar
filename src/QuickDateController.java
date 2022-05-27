@@ -61,6 +61,7 @@ public class QuickDateController extends Controller {
 
     public void showMonthControl() {
         int count = 0;
+
         for (String month : monthOfQuickDate.getItems()) {
             if (month.equals(monthOfQuickDate.getValue())) {
                 monthOfQuickDate.getSelectionModel().select(count);

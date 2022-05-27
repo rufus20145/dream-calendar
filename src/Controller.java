@@ -56,7 +56,7 @@ public class Controller implements Initializable {
     private boolean checkNotes = false;
     public static boolean isDarkTheme;
     private static HashMap<Integer, String> memoryNumbersByCells = new HashMap<>(); // Числа по номерам ячеек на
-                                                                                    // выбранный месяц
+    // выбранный месяц
     public static Node textElementCurrentDay; // Ячейка текущего дня для выделения ее "синим" цветом
     public LocalDate currentDateLD; // Дата текущего дня в LD
     public LocalDate currentDate;
@@ -146,8 +146,7 @@ public class Controller implements Initializable {
         eventController.setCurrentDate(currentDate);
         currMonthAndYear = new CurrDateController(currentMonthText, currentDate);
         currMonthAndYear.setCurrentMonthText();
-        quickDate = new QuickDateController(monthOfQuickDate, yearOfQuickDate, currMonthAndYear, gridPane, anchorPane,
-                currentMonthText, quickDatePane, currentDate);
+        quickDate = new QuickDateController(monthOfQuickDate, yearOfQuickDate, currMonthAndYear, gridPane, anchorPane, currentMonthText, quickDatePane, currentDate);
 
         int firstActiveCell = getCellNumberFirstDayMonth(currentDate);
 
@@ -193,8 +192,7 @@ public class Controller implements Initializable {
         for (int i = 0; i < NUM_OF_ALL_CELLS; ++i) {
             Object text = listOfTexts.get(i);
             if (text instanceof Text) {
-                if (cellBeforeCurrMonth(firstActiveCell, i, text) || cellOfCurrMonth(firstActiveCell, i, text)
-                        || cellAfterCurrMonth(firstActiveCell, i, text)) {
+                if (cellBeforeCurrMonth(firstActiveCell, i, text) || cellOfCurrMonth(firstActiveCell, i, text) || cellAfterCurrMonth(firstActiveCell, i, text)) {
                     if (isDarkTheme) {
                         listOfPane.get(i).setStyle(CHOSEN_CELL_STYLE_FOR_DARK);
                     } else {
@@ -210,36 +208,21 @@ public class Controller implements Initializable {
      * Проверка расположения ячейки до выбранного месяца
      */
     private boolean cellBeforeCurrMonth(int firstActiveCell, int numOfCell, Object text) {
-        return numOfCell < firstActiveCell && ((currentDate.getMonthValue() == 1
-                && currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue()
-                && currentDateLD.getYear() == currentDate.minusYears(1).getYear()
-                && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
-                || (currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue()
-                        && currentDateLD.getYear() == currentDate.getYear()
-                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))));
+        return numOfCell < firstActiveCell && ((currentDate.getMonthValue() == 1 && currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.minusYears(1).getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))) || (currentDateLD.getMonthValue() == currentDate.minusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))));
     }
 
     /**
      * Проверка расположения ячейки на выбранном месяце
      */
     private boolean cellOfCurrMonth(int firstActiveCell, int numOfCell, Object text) {
-        return numOfCell >= firstActiveCell && numOfCell < firstActiveCell + currentDate.lengthOfMonth()
-                && currentDateLD.getMonthValue() == currentDate.getMonthValue()
-                && currentDateLD.getYear() == currentDate.getYear()
-                && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()));
+        return numOfCell >= firstActiveCell && numOfCell < firstActiveCell + currentDate.lengthOfMonth() && currentDateLD.getMonthValue() == currentDate.getMonthValue() && currentDateLD.getYear() == currentDate.getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()));
     }
 
     /**
      * Проверка расположения ячейки после выбранного месяца
      */
     private boolean cellAfterCurrMonth(int firstActiveCell, int numOfCell, Object text) {
-        return numOfCell >= firstActiveCell + currentDate.lengthOfMonth() && ((currentDate.getMonthValue() == 12
-                && currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue()
-                && currentDateLD.getYear() == currentDate.plusYears(1).getYear()
-                && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))
-                || ((currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue()
-                        && currentDateLD.getYear() == currentDate.getYear()
-                        && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))));
+        return numOfCell >= firstActiveCell + currentDate.lengthOfMonth() && ((currentDate.getMonthValue() == 12 && currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.plusYears(1).getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth()))) || ((currentDateLD.getMonthValue() == currentDate.plusMonths(1).getMonthValue() && currentDateLD.getYear() == currentDate.getYear() && Objects.equals(((Text) text).getText(), Integer.toString(currentDateLD.getDayOfMonth())))));
     }
 
     /**
@@ -288,12 +271,12 @@ public class Controller implements Initializable {
             month = currentDate.getMonthValue() + 1;
             year = currentDate.getYear();
             return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного
-                                                            // месяца
+            // месяца
         } else if (monthReduce) {
             month = currentDate.getMonthValue() - 1;
             year = currentDate.getYear();
             return getCurrentDateWithFirstDay(month, year); // Получение новой даты с учетом изменения календарного
-                                                            // месяца
+            // месяца
         } else if (dateIsQuick) {
             resetStylesBorder();
             resetStylesFont();
@@ -407,9 +390,7 @@ public class Controller implements Initializable {
         } else {
             correctMonth = "" + date.getMonthValue();
         }
-        DayOfWeek dow = LocalDate
-                .parse("01-" + correctMonth + "-" + date.getYear(), DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                .getDayOfWeek();
+        DayOfWeek dow = LocalDate.parse("01-" + correctMonth + "-" + date.getYear(), DateTimeFormatter.ofPattern("dd-MM-yyyy")).getDayOfWeek();
         return dow.getValue();
     }
 
@@ -485,8 +466,7 @@ public class Controller implements Initializable {
      * Выделение сегодняшнего числа в ячейке цветом
      */
     public void highlightToday() {
-        if (currentDate.getMonthValue() == LocalDate.now().getMonthValue()
-                && currentDate.getYear() == LocalDate.now().getYear()) {
+        if (currentDate.getMonthValue() == LocalDate.now().getMonthValue() && currentDate.getYear() == LocalDate.now().getYear()) {
             textElementCurrentDay.setStyle(("-fx-fill: #296cff"));
         }
     }
@@ -498,8 +478,7 @@ public class Controller implements Initializable {
         if (!checkNotes) {
             int count1 = 1;
             for (Node node : gridPane.getChildren()) {
-                if (!node.getStyle().equals(CHOSEN_CELL_STYLE_FOR_LIGHT)
-                        && !node.getStyle().equals(CHOSEN_CELL_STYLE_FOR_DARK)) {
+                if (!node.getStyle().equals(CHOSEN_CELL_STYLE_FOR_LIGHT) && !node.getStyle().equals(CHOSEN_CELL_STYLE_FOR_DARK)) {
                     count1++;
                 } else {
                     numbOfCell = count1;
@@ -574,7 +553,7 @@ public class Controller implements Initializable {
                     eventController.clearNameAndTextEventField();
                     eventController.fillListView();
                     eventController.eventUpdateHandlers(); // Вывод в TextField описания выбранного события и заполнени
-                                                           // времени
+                    // времени
                     deleteChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setImage(eventController.EDIT_IMAGE);
@@ -606,7 +585,7 @@ public class Controller implements Initializable {
     /**
      * Удаление иконок событий у всех ячеек
      */
-    private void resetNotesIcons() {
+    public void resetNotesIcons() {
         for (Node node : listOfPane) {
             ((Pane) node).getChildren().get(0).setVisible(false);
         }
@@ -672,7 +651,9 @@ public class Controller implements Initializable {
             quickYear = currentDate.getYear();
             dateIsQuick = true;
             if (quickDatePane.isVisible()) {
+                resetNotesIcons();
                 showCalendar();
+                setNotesIcons();
             }
             quickDatePane.setVisible(false);
         });
@@ -688,7 +669,9 @@ public class Controller implements Initializable {
             quickMonth = currentDate.getMonthValue();
             dateIsQuick = true;
             if (quickDatePane.isVisible()) {
+                resetNotesIcons();
                 showCalendar();
+                setNotesIcons();
             }
             quickDatePane.setVisible(false);
         });
@@ -751,8 +734,7 @@ public class Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        theme = new Theme(themeMod, mainAnchorPane, anchorPane, gridPane, choseTimeText, chosenDateText,
-                currentMonthText, colon);
+        theme = new Theme(themeMod, mainAnchorPane, anchorPane, gridPane, choseTimeText, chosenDateText, currentMonthText, colon);
         eventController = new EventController();
         showCalendar();
         resetStylesBorder();
