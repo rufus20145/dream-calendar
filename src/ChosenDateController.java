@@ -24,7 +24,6 @@ public class ChosenDateController extends Controller {
         if (LocalDate.now().getMonthValue() == currentDate.getMonthValue() && LocalDate.now().getYear() == currentDate.getYear()) {
             for (Node element : anchorPane.getChildren()) {
                 if (element instanceof Text && !(((Text) element).getText()).isEmpty() && Integer.parseInt(((Text) element).getText()) == LocalDate.now().getDayOfMonth()) {
-                    textElementCurrentDay = element;
                     for (Node node : gridPane.getChildren()) {
                         if (node.getStyle().equals(CHOSEN_CELL_STYLE_FOR_LIGHT) && node.getStyle().equals(CHOSEN_CELL_STYLE_FOR_DARK)) {
                             cellSelected = true;
@@ -45,7 +44,10 @@ public class ChosenDateController extends Controller {
                         currentDateString = getDayValueWithZero + "." + getMonthValueWithZero + "." + currentDateLD.getYear() + " г.";
                         chosenDateText.setText(currentDateString);
                     }
-                    break; // Выход из цикла, если ячейка найдена
+                    if (!element.getStyle().equalsIgnoreCase("-fx-opacity: 0.25")) {
+                        textElementCurrentDay = element;
+                        break; // Выход из цикла, если ячейка найдена
+                    }
                 }
             }
         }
