@@ -179,10 +179,6 @@ public class Controller implements Initializable {
         categoryComboBox.setStyle("-fx-opacity: 1.0");
     }
 
-    private void setFieldsDisable() {
-
-    }
-
     /**
      * Выделение ячейки с ранее выбранным днем, если таковой есть на текущей
      * развертке календаря
@@ -233,11 +229,6 @@ public class Controller implements Initializable {
         eventController.addNewNoteMethod(chosenDateString, chosenDayDetected);
         setNotesIcons();
     }
-
-    // @FXML
-    // public void clickOnEventNameFieldHandler() {
-    // eventController.clickOnEventNameFieldHandler2();
-    // }
 
     /**
      * Получение даты первого дня текущего месяца вместе с годом для дальнейшего
@@ -552,8 +543,7 @@ public class Controller implements Initializable {
                     eventController.clearListView();
                     eventController.clearNameAndTextEventField();
                     eventController.fillListView();
-                    eventController.eventUpdateHandlers(); // Вывод в TextField описания выбранного события и заполнени
-                    // времени
+                    eventController.eventUpdateHandlers(); // Вывод в TextField описания выбранного события и заполнение времени
                     deleteChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setDisable(true);
                     editChooseNoteButton.setImage(eventController.EDIT_IMAGE);
