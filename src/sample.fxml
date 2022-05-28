@@ -734,12 +734,12 @@
          <children>
             <ComboBox fx:id="monthOfQuickDate" focusTraversable="false" layoutX="5.0" layoutY="22.0" onMouseClicked="#showMonth" prefHeight="30.0" prefWidth="110.0" visibleRowCount="6" />
             <ComboBox fx:id="yearOfQuickDate" focusTraversable="false" layoutX="121.0" layoutY="22.0" onMouseClicked="#showYear" prefHeight="30.0" prefWidth="80.0" visibleRowCount="5" />
-            <Text fill="WHITE" layoutX="33.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Месяц" textAlignment="CENTER" wrappingWidth="55.0">
+            <Text fill="WHITE" layoutX="28.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Месяц" textAlignment="CENTER" wrappingWidth="65.0">
                <font>
                   <Font name="Alef Regular" size="18.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="146.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Год" textAlignment="CENTER" wrappingWidth="30.0">
+            <Text fill="WHITE" layoutX="143.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Год" textAlignment="CENTER" wrappingWidth="36.0">
                <font>
                   <Font name="Alef Regular" size="18.0" />
                </font>
